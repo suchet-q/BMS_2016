@@ -2,11 +2,13 @@
 
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Unity;
 
 namespace BMSModule
 {
     public class BMSModule : IModule
     {
+
         private readonly IRegionViewRegistry regionViewRegistry;
 
         public BMSModule(IRegionViewRegistry registry)

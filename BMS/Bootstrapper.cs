@@ -4,6 +4,7 @@ using System.Windows;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.UnityExtensions;
+using System.IO;
 
 namespace BMS
 {
@@ -13,7 +14,7 @@ namespace BMS
         {
             return this.Container.Resolve<Shell>();
         }
-
+        
         protected override void InitializeShell()
         {
             base.InitializeShell();
@@ -22,14 +23,10 @@ namespace BMS
             App.Current.MainWindow.Show();
         }
 
-        protected override void ConfigureModuleCatalog()
+        protected override IModuleCatalog CreateModuleCatalog()
         {
-            base.ConfigureModuleCatalog();
-
-            ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
-            moduleCatalog.AddModule(typeof(BMSModule.BMSModule));
+            DynamicDirectoryModuleCatalog moduleCatalog = new DynamicDirectoryModuleCatalog(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Modules"));
+            return moduleCatalog;
         }
-
-
     }
 }
