@@ -96,6 +96,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModel\BMSViewModel.cs" />
     <Compile Include="View\BMSView.xaml.cs">
       <DependentUpon>BMSView.xaml</DependentUpon>
     </Compile>
@@ -116,6 +117,9 @@
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetDir)BMSModule.dll"  "$(SolutionDir)BMS\bin\Release\Modules" /Y</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
