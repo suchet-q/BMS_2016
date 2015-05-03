@@ -29,7 +29,7 @@ namespace BMSModule
 
 
             var view  = _container.Resolve<View.BMSView>();
-            _manager.Regions["MainContentRegion"].Add(view);
+           // _manager.Regions["MainContentRegion"].Add(view);
         }
     }
 }

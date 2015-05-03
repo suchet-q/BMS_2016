@@ -22,8 +22,8 @@ namespace ModuleList
         public void Initialize()
          {
              _container.RegisterType<ViewModel.IModuleListViewModel, ViewModel.ModuleListViewModel>();
-             var view = _container.Resolve<View.ModuleListView>();
-             _manager.Regions["MainNavigationRegion"].Add(view);
+             //var view = _container.Resolve<View.ModuleListView>();
+            // _manager.Regions["MainNavigationRegion"].Add(view);
 
          }
     }
