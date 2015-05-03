@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModuleList.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BMSModule.View
+namespace ModuleList.View
 {
     /// <summary>
-    /// Interaction logic for BMSView.xaml
+    /// Interaction logic for ModuleListView.xaml
     /// </summary>
-    public partial class BMSView : UserControl
+    public partial class ModuleListView : UserControl
     {
-        public BMSView()
+        public ModuleListView(IModuleListViewModel viewModel)
         {
+            this.DataContext = viewModel;
             InitializeComponent();
         }
     }

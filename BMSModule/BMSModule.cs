@@ -1,8 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved. See License.txt in the project root for license information.
-
-using Microsoft.Practices.Prism.Modularity;
+﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
+using System;
 
 namespace BMSModule
 {
@@ -30,7 +29,7 @@ namespace BMSModule
 
 
             var view  = _container.Resolve<View.BMSView>();
-            _manager.Regions["MainRegion"].Add(view);
+            _manager.Regions["MainContentRegion"].Add(view);
         }
     }
 }

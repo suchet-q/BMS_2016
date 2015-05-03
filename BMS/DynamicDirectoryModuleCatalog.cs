@@ -15,6 +15,7 @@ namespace BMS
 {
     class DynamicDirectoryModuleCatalog : ModuleCatalog
     {
+
         SynchronizationContext _context;
 
         // Path to the directory where the modules are
@@ -117,6 +118,7 @@ namespace BMS
                 foreach (var module in modules)
                 {
                      manager.LoadModule(module.ModuleName);
+                     System.Console.Error.WriteLine("AJOUT MODULE MAGGLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
                 }
             }), null);
         }

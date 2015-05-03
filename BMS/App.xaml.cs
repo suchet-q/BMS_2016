@@ -13,6 +13,8 @@ namespace BMS
             ConsoleManager.Show();
             base.OnStartup(e);
             Bootstrapper bootstrapper = new Bootstrapper();
+            System.Console.Error.WriteLine("GOGOGOGOGOGOGOGOOOOOOOOOOOOOOOOOOOOOO");
+
             bootstrapper.Run();
         }
     }

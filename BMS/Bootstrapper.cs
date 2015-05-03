@@ -28,5 +28,11 @@ namespace BMS
             DynamicDirectoryModuleCatalog moduleCatalog = new DynamicDirectoryModuleCatalog(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Modules"));
             return moduleCatalog;
         }
+
+        protected override void ConfigureContainer()
+        {
+ 	        base.ConfigureContainer();
+            this.Container.RegisterInstance<IModuleCatalog>(this.ModuleCatalog);
+         }
     }
 }
