@@ -15,9 +15,28 @@ namespace BMS.ViewModel
         private readonly IModuleCatalog _catalog;
         private readonly IRegionManager _manager;
 
-        
-        protected List<String> _moduleListString;
-        public List<String> ModuleListString
+        private string _selectedModuleInTheList;
+        public string SelectedModuleInTheList
+        {
+            get { return _selectedModuleInTheList; }
+            // ce setter est appelé quand le focus change dans la listBox, on peut donc trigger la navigation
+            set
+            {
+                if (_selectedModuleInTheList == value)
+                    return;
+                _selectedModuleInTheList = value;
+                System.Console.Error.WriteLine("Module séléctionné : " + value);
+                string moduleHomeView = value + "View";
+                if (value == "BMSModule") // Sera retiré par la suite, on met ca en attendant car le nom de sa "home" view n'est pas composé comme ceci : NomDuModuleView
+                   moduleHomeView = "BMSView";
+                Uri destination = new Uri(moduleHomeView, UriKind.Relative);
+                IRegion regionToNavigate = this._manager.Regions["MainContentRegion"];
+                regionToNavigate.RequestNavigate(destination, ListModuleViewModel.CheckForNavigationError); // TODO pour le futur : Implementer le IConfirmNavigation et ce genre de bordel
+            }
+        }
+
+        protected List<string> _moduleListString;
+        public List<string> ModuleListString
         {
             get
             {
@@ -26,16 +45,13 @@ namespace BMS.ViewModel
             set { this._moduleListString = value; }
         }
 
-        private readonly DelegateCommand<string> _clickCommand;
-        public DelegateCommand<string> ButtonClickCommand
-        {
-            get { return _clickCommand; }
-        }
 
         public ListModuleViewModel(IModuleCatalog moduleCatalog, IRegionManager manager) 
         {
             this._catalog = moduleCatalog;
             this._manager = manager;
+
+            // On recupere la liste des modules chargé et on les ajoute a la list qui sera display dans le menu de navigations
             IList<ModuleInfo> ListModule = this._catalog.Modules.ToList<ModuleInfo>();
             this._moduleListString = new List<String>();
             foreach (var elem in ListModule)
@@ -43,15 +59,17 @@ namespace BMS.ViewModel
                 this._moduleListString.Add(elem.ModuleName);
                 System.Console.Error.WriteLine("Le module se nomme : " + elem.ModuleName);
             }
+            // Permet qu'au lancement du soft, le premier module dans la list soit séléctionné et sa view display dans la MainContentRegion
+            this.SelectedModuleInTheList = this._moduleListString.First<string>();
 
-            _clickCommand = new DelegateCommand<string>(
-            (s) => { this.ClickCommand(); }, //Execute
-            (s) => { return true; } //CanExecute
-         );
         }
-        public void ClickCommand()
+
+        public static void CheckForNavigationError(NavigationResult result)
         {
-            System.Console.Error.WriteLine("Click fait maggle");
+            if (result.Result == false)
+            {
+                throw new Exception(result.Error.Message);
+            }
         }
     }
 }

@@ -7,7 +7,7 @@
       d:DesignHeight="300" d:DesignWidth="300">
 
     <Grid>
-        <ListBox Margin="20" ItemsSource="{Binding ModuleListString}">
+        <ListBox Margin="20" ItemsSource="{Binding ModuleListString}" SelectedItem="{Binding SelectedModuleInTheList}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

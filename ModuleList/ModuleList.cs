@@ -21,6 +21,8 @@ namespace ModuleList
 
         public void Initialize()
          {
+             TransientLifetimeManager tlm = new TransientLifetimeManager();
+             _container.RegisterType(typeof(object), typeof(View.ModuleListView), "ModuleListView", tlm);
              _container.RegisterType<ViewModel.IModuleListViewModel, ViewModel.ModuleListViewModel>();
              //var view = _container.Resolve<View.ModuleListView>();
             // _manager.Regions["MainNavigationRegion"].Add(view);

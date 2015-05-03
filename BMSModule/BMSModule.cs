@@ -27,9 +27,10 @@ namespace BMSModule
             //il faut d'abord les register dans le container (ce qui est normalement fait quand on ne decouvre pas les modules a la volé par le bootstrapper)
             //pour qu'il puisse faire les injections de dependance et que le ViewModel puisse etre "bindé" sur la view
 
-
-            var view  = _container.Resolve<View.BMSView>();
-           // _manager.Regions["MainContentRegion"].Add(view);
+            TransientLifetimeManager tlm = new TransientLifetimeManager();
+            _container.RegisterType(typeof(object), typeof(View.BMSView), "BMSView", tlm);
+            var view = _container.Resolve<View.BMSView>();
+            // _manager.Regions["MainContentRegion"].Add(view);
         }
     }
 }
