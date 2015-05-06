@@ -41,23 +41,10 @@ namespace BMS
         protected override void InitializeModules()
         {
             base.InitializeModules();
-
-
             IRegionManager manager = this.Container.Resolve<IRegionManager>();
-            DynamicDirectoryModuleCatalog catalog = null;
-
-            catalog = this.ModuleCatalog as DynamicDirectoryModuleCatalog;
-            ViewModel.ListModuleViewModel eventAddModuleCatcher = new ViewModel.ListModuleViewModel(this.ModuleCatalog, manager);
-            if (catalog != null)
-            {
-                catalog.EventModuleAdded += eventAddModuleCatcher.HandleNewModule;
-            }
-
-            this.Container.RegisterInstance(typeof(ViewModel.ListModuleViewModel), "ListModuleViewModel", eventAddModuleCatcher);
             this.Container.RegisterType<ViewModel.IListModuleViewModel, ViewModel.ListModuleViewModel>();
             var view = this.Container.Resolve<View.ListModuleView>();
             manager.Regions["MainNavigationRegion"].Add(view);
-
         }
     }
 }
