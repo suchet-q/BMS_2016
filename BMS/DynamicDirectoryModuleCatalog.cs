@@ -11,12 +11,23 @@ using System.Threading;
 using System.Windows.Threading;
 
 
+
 namespace BMS
 {
+    public delegate void AddModuleEventHandler(object sender, EventArgs e);
+    
     class DynamicDirectoryModuleCatalog : ModuleCatalog
     {
 
         SynchronizationContext _context;
+
+        public event AddModuleEventHandler EventModuleAdded;
+
+        public virtual void OnModuleAdded(EventArgs e)
+        {
+            if (this.EventModuleAdded != null)
+                this.EventModuleAdded(this, e);
+        }
 
         // Path to the directory where the modules are
         public String ModulePath { get; set; }
@@ -119,6 +130,7 @@ namespace BMS
                 {
                      manager.LoadModule(module.ModuleName);
                      System.Console.Error.WriteLine("AJOUT MODULE MAGGLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                     this.OnModuleAdded(EventArgs.Empty);
                 }
             }), null);
         }
