@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ModuleList.ViewModel
 {
     class ModuleListViewModel : BindableBase, IModuleListViewModel
@@ -26,7 +27,6 @@ namespace ModuleList.ViewModel
 
         public ModuleListViewModel(IModuleCatalog moduleCatalog)
         {
-
             _catalog = moduleCatalog;
             IList<ModuleInfo> toto = _catalog.Modules.ToList<ModuleInfo>();
             _moduleListString = new List<String>();
