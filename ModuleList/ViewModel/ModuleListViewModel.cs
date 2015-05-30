@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Diagnostics;
 
 namespace ModuleList.ViewModel
 {
@@ -25,15 +25,16 @@ namespace ModuleList.ViewModel
             set { return; }
         }
 
-        public ModuleListViewModel(IModuleCatalog moduleCatalog)
+        public ModuleListViewModel(IModuleCatalog moduleCatalog, List<Stock> _listStock)
         {
+            Debug.WriteLine("NANANANANA");
             _catalog = moduleCatalog;
             IList<ModuleInfo> toto = _catalog.Modules.ToList<ModuleInfo>();
             _moduleListString = new List<String>();
-            foreach (var elem in toto)
+            foreach (var elem in _listStock)
             {
-                _moduleListString.Add(elem.ModuleName);
-                System.Console.Error.WriteLine("Le module se nomme : " + elem.ModuleName);
+                _moduleListString.Add(elem.ToString());
+                System.Console.Error.WriteLine("Le module se nomme : " + elem.ToString());
             }
 //            _catalog = catalog;
         }
