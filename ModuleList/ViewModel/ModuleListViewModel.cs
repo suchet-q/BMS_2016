@@ -15,12 +15,21 @@ namespace ModuleList.ViewModel
     {
         private readonly IModuleCatalog _catalog;
         protected List<String> _moduleListString;
+        protected List<Stock> _moduleStockList;
 
         public List<String> ModuleListString
         {
             get
             {
                 return this._moduleListString;
+            }
+            set { return; }
+        }
+        public List<Stock> ModuleStockList
+        {
+            get
+            {
+                return this._moduleStockList;
             }
             set { return; }
         }
@@ -36,6 +45,7 @@ namespace ModuleList.ViewModel
                 _moduleListString.Add(elem.ToString());
                 System.Console.Error.WriteLine("Le module se nomme : " + elem.ToString());
             }
+            _moduleStockList = _listStock;
 //            _catalog = catalog;
         }
     }

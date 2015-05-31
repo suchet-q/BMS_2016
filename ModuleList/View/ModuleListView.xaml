@@ -7,12 +7,20 @@
     xmlns:prism="http://www.codeplex.com/prism"
     mc:Ignorable="d" >
     <Grid>
-        <ListBox Margin="20" ItemsSource="{Binding ModuleListString}">
+        <ListBox Margin="20" ItemsSource="{Binding ModuleStockList}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding}" />
-                    </StackPanel>
+                    <Grid VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{Binding Name}" />
+                        <TextBlock Grid.Column="1" Text="{Binding Quantity}" />
+                        <TextBlock Grid.Column="2" Text="{Binding Price}" />
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
