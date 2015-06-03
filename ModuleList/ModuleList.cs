@@ -32,7 +32,10 @@ namespace ModuleList
             {
                 //Process row
                 fields = parser.ReadFields();
-                _listStock.Add(new Stock(fields[0], fields[1], fields[2]));
+                if (fields.Length == 3)
+                    _listStock.Add(new Stock(fields[0], fields[1], fields[2]));
+                else
+                    _listStock.Add(new Stock(fields[0], fields[1], fields[2], fields[3], fields[4]));
                 //foreach (string field in fields)
                 //{
                 //    //TODO: Process field
