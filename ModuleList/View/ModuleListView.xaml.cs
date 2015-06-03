@@ -25,5 +25,11 @@ namespace ModuleList.View
             this.DataContext = viewModel;
             InitializeComponent();
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count == 1)
+            displayStock.Text = ((Stock)e.AddedItems[0]).ToString();
+        }
     }
 }

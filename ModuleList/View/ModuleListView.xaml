@@ -6,15 +6,15 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:prism="http://www.codeplex.com/prism"
     mc:Ignorable="d" >
-    <Grid>
-        <ListBox Margin="20" ItemsSource="{Binding ModuleStockList}">
+    <Grid Height="600" Width="500">
+        <ListBox Margin="20" Height="150" ItemsSource="{Binding ModuleStockList}" SelectionChanged="ListBox_SelectionChanged" VerticalAlignment="Top">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="{Binding Name}" />
@@ -24,5 +24,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <TextBlock x:Name="displayStock" HorizontalAlignment="Left" Margin="121,194,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="273"/>
     </Grid>
 </UserControl>
