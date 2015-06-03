@@ -4,6 +4,7 @@ using Microsoft.Practices.Unity;
 using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ModuleList
 {
@@ -22,7 +23,8 @@ namespace ModuleList
             _listStock = new List<Stock>();
             // Parsing CSV
             // TODO Change file path
-            TextFieldParser parser = new TextFieldParser(@"C:\Users\Naushi\Desktop\input.csv");
+            Debug.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory + @"..\..\input.csv");
+            TextFieldParser parser = new TextFieldParser(System.AppDomain.CurrentDomain.BaseDirectory + @"..\..\input.csv");       
             parser.TextFieldType = FieldType.Delimited;
             parser.SetDelimiters(";");
             string[] fields = parser.ReadFields();
