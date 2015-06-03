@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" >
     <Grid Height="600" Width="500">
-        <ListBox Margin="20" Height="150" ItemsSource="{Binding ModuleStockList}" VerticalAlignment="Top">
+        <ListBox Margin="20" Height="150" ItemsSource="{Binding OrderList}" VerticalAlignment="Top">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid VerticalAlignment="Center">
