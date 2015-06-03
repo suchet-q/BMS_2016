@@ -8,12 +8,12 @@ namespace OrderManager
 {
     class Order
     {
-        private string Date;
-        private string Client;
-        private string Ref;
-        private string Content;
-        private string Status;
-        private string Comment;
+        public string Date;
+        public string Client;
+        public string Ref;
+        public string Content;
+        public string Status;
+        public string Comment;
 
         public Order(string p1, string p2, string p3, string p4, string p5, string p6 = "")
         {
