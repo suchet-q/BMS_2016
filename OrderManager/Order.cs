@@ -8,32 +8,22 @@ namespace OrderManager
 {
     class Order
     {
-        private string p1;
-        private string p2;
-        private string p3;
-        private string p4;
-        private string p5;
-        private string p6;
+        private string Date;
+        private string Client;
+        private string Ref;
+        private string Content;
+        private string Status;
+        private string Comment;
 
-        public Order(string p1, string p2, string p3, string p4, string p5)
+        public Order(string p1, string p2, string p3, string p4, string p5, string p6 = "")
         {
             // TODO: Complete member initialization
-            this.p1 = p1;
-            this.p2 = p2;
-            this.p3 = p3;
-            this.p4 = p4;
-            this.p5 = p5;
-        }
-
-        public Order(string p1, string p2, string p3, string p4, string p5, string p6)
-        {
-            // TODO: Complete member initialization
-            this.p1 = p1;
-            this.p2 = p2;
-            this.p3 = p3;
-            this.p4 = p4;
-            this.p5 = p5;
-            this.p6 = p6;
+            this.Date = p1;
+            this.Client = p2;
+            this.Ref = p3;
+            this.Content = p4;
+            this.Status = p5;
+            this.Comment = p6;
         }
     }
 }

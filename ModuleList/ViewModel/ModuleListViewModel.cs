@@ -21,6 +21,7 @@ namespace ModuleList.ViewModel
         {
             get
             {
+
                 return this._moduleListString;
             }
             set { return; }
