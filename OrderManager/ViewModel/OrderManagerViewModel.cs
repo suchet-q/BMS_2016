@@ -13,7 +13,7 @@ namespace OrderManager.ViewModel
     {
         private readonly IModuleCatalog _catalog;
         protected List<String> _moduleListString;
-        protected List<Order> _moduleStockList;
+        protected List<Order> _orderList;
 
         public List<String> ModuleListString
         {
@@ -23,11 +23,11 @@ namespace OrderManager.ViewModel
             }
             set { return; }
         }
-        public List<Order> ModuleStockList
+        public List<Order> OrderList
         {
             get
             {
-                return this._moduleStockList;
+                return this._orderList;
             }
             set { return; }
         }
@@ -43,7 +43,7 @@ namespace OrderManager.ViewModel
                 _moduleListString.Add(elem.ToString());
                 System.Console.Error.WriteLine("Le module se nomme : " + elem.ToString());
             }
-            _moduleStockList = _listStock;
+            _orderList = _listStock;
             //            _catalog = catalog;
         }
     }
