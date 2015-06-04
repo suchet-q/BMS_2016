@@ -9,5 +9,9 @@ namespace BlankModule.ViewModel
 {
     public class BlankModuleViewModel : BindableBase, IBlankModuleViewModel
     {
+        public BlankModuleViewModel()
+        {
+
+        }
     }
 }
