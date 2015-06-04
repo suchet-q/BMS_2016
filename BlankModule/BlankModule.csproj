@@ -138,16 +138,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release (
-if not exist "$(SolutionDir)BMS\bin\Release\Modules" mkdir "$(SolutionDir)BMS\bin\Release\Modules"
-xcopy "$(TargetDir)BlankModule.dll"  "$(SolutionDir)BMS\bin\Release\Modules" /Y
-echo "RELEASE"
-)
-if $(ConfigurationName) == Debug (
-if not exist "$(SolutionDir)BMS\bin\Debug\Modules" mkdir "$(SolutionDir)BMS\bin\Debug\Modules"
-xcopy "$(TargetDir)BlankModule.dll"  "$(SolutionDir)BMS\bin\Debug\Modules" /Y
-echo "DEBUG"
-)</PostBuildEvent>
+    <PostBuildEvent>if not exist "$(SolutionDir)BMS\bin\$(ConfigurationName)\Modules" mkdir "$(SolutionDir)BMS\bin\$(ConfigurationName)\Modules"
+xcopy "$(TargetDir)$(TargetFileName)"  "$(SolutionDir)BMS\bin\$(ConfigurationName)\Modules" /Y
+echo "$(ConfigurationName)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
