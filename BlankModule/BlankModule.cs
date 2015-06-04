@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlankModule
 {
-    class BlankModule : IModule
+    public class BlankModule : IModule
     {
         private readonly IRegionManager _manager;
         private readonly IUnityContainer _container;

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BlankModule.ViewModel;
 
 namespace BlankModule.View
 {
@@ -20,7 +21,7 @@ namespace BlankModule.View
     /// </summary>
     public partial class BlankModuleView : UserControl
     {
-        public BlankModuleView()
+        public BlankModuleView(IBlankModuleViewModel viewModel)
         {
             InitializeComponent();
         }
