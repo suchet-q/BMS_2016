@@ -1,0 +1,39 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>BlankModuleNew</Name>
+    <Description>&lt;Aucune description disponible&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>BlankModule</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="$safeprojectname$.csproj" File="BlankModule.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.config">App.config</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.cs">BlankModule.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="packages.config">packages.config</ProjectItem>
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.resx">Resources.resx</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Settings.settings">Settings.settings</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Settings.Designer.cs">Settings.Designer.cs</ProjectItem>
+      </Folder>
+
+      <Folder Name="ViewModel" TargetFolderName="ViewModel">
+        <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$ViewModel.cs">BlankModuleViewModel.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="I$safeprojectname$ViewModel.cs">IBlankModuleViewModel.cs</ProjectItem>
+      </Folder>
+	        <Folder Name="View" TargetFolderName="View">
+        <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$View.xaml">BlankModuleView.xaml</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$View.xaml.cs">BlankModuleView.xaml.cs</ProjectItem>
+      </Folder>
+    </Project>
+  </TemplateContent>
+</VSTemplate>
