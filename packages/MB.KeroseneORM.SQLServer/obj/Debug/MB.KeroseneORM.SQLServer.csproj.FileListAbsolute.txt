@@ -1,0 +1,9 @@
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.SQLServer\bin\Debug\MB.KeroseneORM.SQLServer.dll
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.SQLServer\bin\Debug\MB.KeroseneORM.SQLServer.pdb
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.SQLServer\bin\Debug\MB.KeroseneORM.dll
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.SQLServer\bin\Debug\MB.Tools.dll
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.SQLServer\bin\Debug\MB.KeroseneORM.pdb
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.SQLServer\bin\Debug\MB.Tools.pdb
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.SQLServer\obj\Debug\MB.KeroseneORM.SQLServer.csprojResolveAssemblyReference.cache
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.SQLServer\obj\Debug\MB.KeroseneORM.SQLServer.dll
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.SQLServer\obj\Debug\MB.KeroseneORM.SQLServer.pdb

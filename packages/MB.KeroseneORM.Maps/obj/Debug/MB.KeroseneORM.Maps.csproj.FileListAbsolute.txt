@@ -1,0 +1,9 @@
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.Maps\bin\Debug\MB.KeroseneORM.Maps.dll
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.Maps\bin\Debug\MB.KeroseneORM.Maps.pdb
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.Maps\bin\Debug\MB.KeroseneORM.dll
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.Maps\bin\Debug\MB.Tools.dll
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.Maps\bin\Debug\MB.KeroseneORM.pdb
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.Maps\bin\Debug\MB.Tools.pdb
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.Maps\obj\Debug\MB.KeroseneORM.Maps.csprojResolveAssemblyReference.cache
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.Maps\obj\Debug\MB.KeroseneORM.Maps.dll
+F:\BMS Depot git\BMS_2016\packages\MB.KeroseneORM.Maps\obj\Debug\MB.KeroseneORM.Maps.pdb

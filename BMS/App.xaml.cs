@@ -1,4 +1,5 @@
 ﻿
+using MB.KeroseneORM.SQLServer.Direct;
 using System.Windows;
 
 namespace BMS
@@ -14,6 +15,11 @@ namespace BMS
             base.OnStartup(e);
             Bootstrapper bootstrapper = new Bootstrapper();
             System.Console.Error.WriteLine("GOGOGOGOGOGOGOGOOOOOOOOOOOOOOOOOOOOOO");
+
+            // On tente le kerosene, pour bien decoller
+
+
+            //var link = new KLinkDirectSQL("salut maman je pese");
 
             bootstrapper.Run();
         }

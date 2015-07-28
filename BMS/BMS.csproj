@@ -34,6 +34,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MB.KeroseneORM">
+      <HintPath>..\packages\MB.KeroseneORM\bin\Debug\MB.KeroseneORM.dll</HintPath>
+    </Reference>
+    <Reference Include="MB.KeroseneORM.Maps">
+      <HintPath>..\packages\MB.KeroseneORM.Maps\bin\Debug\MB.KeroseneORM.Maps.dll</HintPath>
+    </Reference>
+    <Reference Include="MB.KeroseneORM.SQLServer">
+      <HintPath>..\packages\MB.KeroseneORM.SQLServer\bin\Debug\MB.KeroseneORM.SQLServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MB.Tools">
+      <HintPath>..\packages\MB.KeroseneORM\bin\Debug\MB.Tools.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Composition">
       <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
     </Reference>
@@ -141,7 +153,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
