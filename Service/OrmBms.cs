@@ -96,7 +96,7 @@ namespace Service
         //      }
         // Les properties de la class Contact doivent avoir exactement les meme noms que les champs en table. La class Contact est la representation de la table Contact
         // Ces classes peuvent etre défini directement dans les modules.
-        public IEnumerable<T> ObjectQuery<T>(string query, IEnumerable<dynamic> queryParameter = null, bool letConnectionOpen = false)
+        public IEnumerable<T> ObjectQuery<T>(string query, object queryParameter = null, bool letConnectionOpen = false)
         {
             IEnumerable<T> res;
 
@@ -194,7 +194,7 @@ namespace Service
             return res;
         }
 
-        public int Insert(string query, IEnumerable<dynamic> parameter = null, bool letConnectionOpen = false)
+        public int Insert(string query, object parameter = null, bool letConnectionOpen = false)
         {
             int res;
 
@@ -263,7 +263,7 @@ namespace Service
         }
 
         // TODO : check qui update quoi
-        public int Update(string query, IEnumerable<dynamic> parameter, bool letConnectionOpen = false)
+        public int Update(string query, object parameter, bool letConnectionOpen = false)
         {
             int res;
 
@@ -289,7 +289,7 @@ namespace Service
         }
 
         // TODO : Check qui essaye de supprimer quoi.
-        public int Delete(string query, IEnumerable<dynamic> parameter = null, bool letConnectionOpen = false)
+        public int Delete(string query, object parameter = null, bool letConnectionOpen = false)
         {
             int res;
 
