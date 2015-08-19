@@ -34,18 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MB.KeroseneORM">
-      <HintPath>..\packages\MB.KeroseneORM\bin\Debug\MB.KeroseneORM.dll</HintPath>
-    </Reference>
-    <Reference Include="MB.KeroseneORM.Maps">
-      <HintPath>..\packages\MB.KeroseneORM.Maps\bin\Debug\MB.KeroseneORM.Maps.dll</HintPath>
-    </Reference>
-    <Reference Include="MB.KeroseneORM.SQLServer">
-      <HintPath>..\packages\MB.KeroseneORM.SQLServer\bin\Debug\MB.KeroseneORM.SQLServer.dll</HintPath>
-    </Reference>
-    <Reference Include="MB.Tools">
-      <HintPath>..\packages\MB.KeroseneORM\bin\Debug\MB.Tools.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Composition">
       <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
     </Reference>
