@@ -1,5 +1,0 @@
-F:\BMS Depot git\BMS_2016\packages\MB.Tools\bin\Debug\MB.Tools.dll
-F:\BMS Depot git\BMS_2016\packages\MB.Tools\bin\Debug\MB.Tools.pdb
-F:\BMS Depot git\BMS_2016\packages\MB.Tools\obj\Debug\MB.Tools.csprojResolveAssemblyReference.cache
-F:\BMS Depot git\BMS_2016\packages\MB.Tools\obj\Debug\MB.Tools.dll
-F:\BMS Depot git\BMS_2016\packages\MB.Tools\obj\Debug\MB.Tools.pdb
