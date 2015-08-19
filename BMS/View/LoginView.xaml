@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="BMS.View.LoginView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid>
+        <Button Command="{Binding LoginClickCommand, UpdateSourceTrigger=PropertyChanged}" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="173,165,0,0" Click="Button_Click"/>
+        <Button Command="{Binding ExitClickCommand, UpdateSourceTrigger=PropertyChanged}" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="54,165,0,0"/>
+        <TextBox  Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" x:Name="password" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="128,89,0,0" TextChanged="TextBox_TextChanged"/>
+        <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" x:Name="login"  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="128,30,0,0"/>
+        <Label Content="Password :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,89,0,0"/>
+        <Label Content="Login :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,31,0,0"/>
+        <TextBlock  Foreground="red" Name="ErrorMsg" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="54,220,0,0" Width="194"><Run Language="fr-fr"  Text="Wrong Mdp / Login"/></TextBlock>
+    </Grid>
+</UserControl>

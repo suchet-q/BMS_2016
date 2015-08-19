@@ -6,11 +6,14 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using System.IO;
 using Microsoft.Practices.Prism.Regions;
+using Service;
 
 namespace BMS
 {
     class Bootstrapper : UnityBootstrapper
     {
+        protected IAPI api;
+
         protected override DependencyObject CreateShell()
         {
             return this.Container.Resolve<Shell>();
@@ -37,14 +40,22 @@ namespace BMS
         {
  	        base.ConfigureContainer();
             this.Container.RegisterInstance<IModuleCatalog>(this.ModuleCatalog);
+            this.InitializeAPI();
          }
+        protected void InitializeAPI()
+        {
+            this.api = new API();
+            this.api.Initialize();
+            this.Container.RegisterInstance<IAPI>(this.api);
+        }
         protected override void InitializeModules()
         {
             base.InitializeModules();
             IRegionManager manager = this.Container.Resolve<IRegionManager>();
-            this.Container.RegisterType<ViewModel.IListModuleViewModel, ViewModel.ListModuleViewModel>();
-            var view = this.Container.Resolve<View.ListModuleView>();
-            manager.Regions["MainNavigationRegion"].Add(view);
+            this.Container.RegisterType<ViewModel.ILoginViewModel, ViewModel.LoginViewModel>(); // METTRE MON ILOGIN
+            this.Container.RegisterType<ViewModel.IMainViewModel, ViewModel.MainViewModel>(); // METTRE MON IMAIN
+            var view = this.Container.Resolve<View.LoginView>();
+            manager.Regions["MainContentRegion"].Add(view, "LoginView");
         }
     }
 }
