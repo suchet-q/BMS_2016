@@ -56,26 +56,29 @@ namespace BMS.ViewModel
             System.Console.Error.WriteLine(Login);
             System.Console.Error.WriteLine(Password);
             System.Console.Error.WriteLine("En attente de l ORM pour faire les reauetes en base et check si le log/mdp est ok");
-            var caca =          this._api.Orm.Query("SELECT LOGIN, PWD FROM user WHERE LOGIN = @login AND PWD = @pwd", new {login = Login, pwd = Password});
+            var caca = this._api.Orm.Query("SELECT LOGIN, PWD FROM user WHERE LOGIN = @login AND PWD = @pwd", new {login = Login, pwd = Password});
+
             int count = 0;
-            foreach (dynamic toto in caca)
+            if (caca != null)
             {
-                count++;
-                System.Console.Error.WriteLine(toto.LOGIN);
-                System.Console.Error.WriteLine(toto.PWD);
+                foreach (dynamic toto in caca)
+                {
+                    count++;
+                    System.Console.Error.WriteLine(toto.LOGIN);
+                    System.Console.Error.WriteLine(toto.PWD);
+                }
+                if (count > 0)
+                {
+                    var theView = this._manager.Regions["MainContentRegion"].GetView("LoginView");
+                    this._manager.Regions["MainContentRegion"].Remove(theView);
+                    var view = this._container.Resolve<View.MainView>();
+                    this._manager.Regions["MainContentRegion"].Add(view);
+                }
+                else
+                {
+                    System.Console.Error.WriteLine("Afficher un message d'erreur");
+                }
             }
-            if (count > 0)
-            {
-                var theView = this._manager.Regions["MainContentRegion"].GetView("LoginView");
-                this._manager.Regions["MainContentRegion"].Remove(theView);
-                var view = this._container.Resolve<View.MainView>();
-                this._manager.Regions["MainContentRegion"].Add(view);
-            }
-            else
-            {
-                System.Console.Error.WriteLine("Afficher un message d'erreur");
-            }
-            
               //  Login = string.Empty;
               //  _login = Login;
         }

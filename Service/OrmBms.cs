@@ -23,6 +23,7 @@ namespace Service
 
         }
 
+        // Appelé par l'API a l'initialisation, cette methode n'est pas censé etre appelé ailleurs
         public bool Initialize(string server, string database, string uid, string password)
         {
             _server = server;
@@ -82,9 +83,16 @@ namespace Service
             }
         }
 
+
+        // Pour chaque fonction de l'orm il y a un parametre optionnel (bool) qui par defaut est a false.
+        // Le mettre a true permet de laisser la connection ouverte : /!\ A n'utiliser que si vous plusieurs requetes tres rapidements (genre dans un while) /!\
+
+
         // Fait un select et popule une collection d'objet
         // La ligne suivante recupere toute les lignes de la table Contact et les store dans une collection d'objet Contact:
         // IEnumerable<Contact> contacts = Orm.ObjectQuery<Contact>("select * from Contact");
+        // La ligne suivante recupere toute les lignes de la table Contact ou le champ LastName = "Doe"
+        // IEnumerable<Contact> contacts = Orm.ObjectQuery<Contact>("select * from Contact where FirstName = @firstName", new { firstName = "doe" });
         // La classe Contact est definie comme ceci :
         //      class Contact
         //      {
@@ -120,6 +128,33 @@ namespace Service
             return res;
         }
 
+        // Sert a faire des selects paramétré 
+        // On utilisera cette methode principalement dans le cas ou on veut recuperer des champs en particulier et pas toute la table
+        // (contrairement a la methode ObjectQuery qui va recuperer tout les champs de l'objet)
+        // Exemple d'utilisation :
+        // var res = api.Orm.Query("SELECT LOGIN, PWD FROM user WHERE LOGIN = @login AND PWD = @pwd", new {login = "plaintext", pwd = PwdInVariable});
+        // int count = 0;
+        // if (caca != null)
+        // {
+        //     foreach (dynamic toto in caca)
+        //     {
+        //         count++;
+        //     }
+        //     if (count > 0)
+        //     {
+        //          // Y a des resultats !
+        //          foreach (dynamic row in res)
+        //          {
+        //               // On les affiches !
+        //               System.Console.Error.Writeline("Login recuperé = " + row.LOGIN);
+        //               System.Console.Error.Writeline("Pwd recupere = " + row.PWD);
+        //          }
+        //     }
+        //     else
+        //     {
+        //          // Il n'y a pas de resultat
+        //     }
+        // }
         public IEnumerable<dynamic> Query(string query, object queryParameter = null, bool letConnectionOpen = false)
         {
             IEnumerable<dynamic> res;
@@ -144,6 +179,8 @@ namespace Service
                 this.CloseConnection();
             return res;
         }
+
+
 
         public int InsertObject<T>(T toAdd, bool letConnectionOpen = false)
         {
@@ -189,6 +226,7 @@ namespace Service
                 System.Console.Error.WriteLine(e.Message);
                 return 0;
             }
+
             if (connection.State == ConnectionState.Open && !letConnectionOpen)
                 this.CloseConnection();
             return res;
