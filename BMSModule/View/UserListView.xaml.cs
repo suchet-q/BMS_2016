@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,11 +16,11 @@ using System.Windows.Shapes;
 namespace BMSModule.View
 {
     /// <summary>
-    /// Interaction logic for BMSView.xaml
+    /// Interaction logic for UserListView.xaml
     /// </summary>
-    public partial class BMSView : UserControl
+    public partial class UserListView : UserControl
     {
-        public BMSView()
+        public UserListView()
         {
             InitializeComponent();
         }

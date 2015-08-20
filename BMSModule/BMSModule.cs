@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using System;
+using Service;
 
 namespace BMSModule
 {
@@ -9,12 +10,14 @@ namespace BMSModule
     {
         private readonly IRegionManager _manager;
         private readonly IUnityContainer _container;
+        private readonly IAPI _api;
 
         //        private readonly IRegionViewRegistry regionViewRegistry;
 
         //       public BMSModule(IRegionViewRegistry registry)
-        public BMSModule(IUnityContainer container, IRegionManager manager)
+        public BMSModule(IUnityContainer container, IRegionManager manager, IAPI api)
         {
+            _api = api;
             _container = container;
             _manager = manager;
          // this.regionViewRegistry = registry;
@@ -27,9 +30,16 @@ namespace BMSModule
             //il faut d'abord les register dans le container (ce qui est normalement fait quand on ne decouvre pas les modules a la volé par le bootstrapper)
             //pour qu'il puisse faire les injections de dependance et que le ViewModel puisse etre "bindé" sur la view
 
+            var viewModel = new ViewModel.GModulesViewModel(_api);
+            var view = new View.MainGModulesView();
+            view.DataContext = viewModel;
+
             TransientLifetimeManager tlm = new TransientLifetimeManager();
-            _container.RegisterType(typeof(object), typeof(View.BMSView), "BMSView", tlm);
-            var view = _container.Resolve<View.BMSView>();
+            _container.RegisterInstance(typeof(object), "MainGModulesView", view);
+           
+            //TransientLifetimeManager tlm = new TransientLifetimeManager();
+            //_container.RegisterType(typeof(object), typeof(View.BMSView), "BMSView", tlm);
+            //var view = _container.Resolve<View.BMSView>();
             // _manager.Regions["MainContentRegion"].Add(view);
         }
     }

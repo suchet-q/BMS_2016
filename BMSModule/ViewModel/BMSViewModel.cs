@@ -11,6 +11,17 @@ namespace BMSModule.ViewModel
     class BMSViewModel : BindableBase
     {
         private readonly DelegateCommand<string> _clickCommand;
+        private readonly IModuleCatalog _catalog;
+        protected List<String> _moduleListString;
+        public List<String> ModuleListString
+        {
+            get
+            {
+                return this._moduleListString;
+            }
+            set { return; }
+        }
+
         public BMSViewModel()
         {
             _clickCommand = new DelegateCommand<string>(

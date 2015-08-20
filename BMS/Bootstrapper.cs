@@ -52,10 +52,10 @@ namespace BMS
         {
             base.InitializeModules();
             IRegionManager manager = this.Container.Resolve<IRegionManager>();
-            this.Container.RegisterType<ViewModel.ILoginViewModel, ViewModel.LoginViewModel>(); // METTRE MON ILOGIN
-            this.Container.RegisterType<ViewModel.IMainViewModel, ViewModel.MainViewModel>(); // METTRE MON IMAIN
-            var view = this.Container.Resolve<View.LoginView>();
-            manager.Regions["MainContentRegion"].Add(view, "LoginView");
+ /*           this.Container.RegisterType<ViewModel.ILoginViewModel, ViewModel.LoginViewModel>(); // METTRE MON ILOGIN
+            this.Container.RegisterType<ViewModel.IMainViewModel, ViewModel.MainViewModel>(); // METTRE MON IMAIN*/
+            var view = this.Container.Resolve(typeof(object), "MainGModulesView");
+            manager.Regions["MainContentRegion"].Add(view);
         }
     }
 }
