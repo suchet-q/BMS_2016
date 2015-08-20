@@ -1,5 +1,4 @@
-﻿using BMS.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,28 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BMS.View
+namespace BMS
 {
     /// <summary>
-    /// Interaction logic for MainView.xaml
+    /// Interaction logic for Banner.xaml
     /// </summary>
-    public partial class MainView : UserControl
+    public partial class Banner : UserControl
     {
-        public MainView(IMainViewModel viewModel)
+        public Banner()
         {
             InitializeComponent();
-            this.DataContext = viewModel;
         }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
     }
 }

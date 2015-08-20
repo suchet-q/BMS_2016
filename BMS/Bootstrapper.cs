@@ -23,11 +23,7 @@ namespace BMS
         {
             base.InitializeShell();
 
-            
-
             App.Current.MainWindow = (Window)this.Shell;
-            App.Current.MainWindow.Show();
-         
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
@@ -51,11 +47,21 @@ namespace BMS
         protected override void InitializeModules()
         {
             base.InitializeModules();
-            IRegionManager manager = this.Container.Resolve<IRegionManager>();
- /*           this.Container.RegisterType<ViewModel.ILoginViewModel, ViewModel.LoginViewModel>(); // METTRE MON ILOGIN
+            this.InitializeShellContext();
+            
+            /*           this.Container.RegisterType<ViewModel.ILoginViewModel, ViewModel.LoginViewModel>(); // METTRE MON ILOGIN
             this.Container.RegisterType<ViewModel.IMainViewModel, ViewModel.MainViewModel>(); // METTRE MON IMAIN*/
-            var view = this.Container.Resolve(typeof(object), "MainGModulesView");
-            manager.Regions["MainContentRegion"].Add(view);
+  /*          var view = this.Container.Resolve(typeof(object), "MainGModulesView");
+            manager.Regions["MainContentRegion"].Add(view);*/
+        }
+
+        private void InitializeShellContext()
+        {
+            IRegionManager manager = this.Container.Resolve<IRegionManager>();
+
+            var viewModel = new ViewModel.ShellViewModel(this.ModuleCatalog, this.Container, manager);
+            App.Current.MainWindow.DataContext = viewModel;
+            App.Current.MainWindow.Show();
         }
     }
 }

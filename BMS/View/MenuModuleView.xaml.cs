@@ -1,5 +1,4 @@
-﻿using BMS.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,13 @@ using System.Windows.Shapes;
 namespace BMS.View
 {
     /// <summary>
-    /// Interaction logic for ListModuleView.xaml
+    /// Interaction logic for MenuModuleView.xaml
     /// </summary>
-    public partial class ListModuleView : UserControl
+    public partial class MenuModuleView : UserControl
     {
-        public ListModuleView(IListModuleViewModel viewModel)
+        public MenuModuleView()
         {
             InitializeComponent();
-            this.DataContext = viewModel;
         }
     }
 }
