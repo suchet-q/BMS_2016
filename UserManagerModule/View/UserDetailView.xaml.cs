@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UserManagerModule
+namespace UserManagerModule.View
 {
     /// <summary>
-    /// Interaction logic for Banner.xaml
+    /// Interaction logic for UserDetailView.xaml
     /// </summary>
-    public partial class Banner : UserControl
+    public partial class UserDetailView : UserControl
     {
-        public Banner()
+        public UserDetailView()
         {
             InitializeComponent();
         }

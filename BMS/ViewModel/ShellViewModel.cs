@@ -10,13 +10,11 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.Regions;
 
-namespace BMS.ViewModel
+namespace UserManagerModule.ViewModel
 {
     class ShellViewModel : ViewModelBase
     {
         ObservableCollection<ViewModelBase> _viewModels;
-
-        ObservableCollection<ViewModelBase> _menuModule;
 
         readonly IModuleRepository          _moduleRepository;
 

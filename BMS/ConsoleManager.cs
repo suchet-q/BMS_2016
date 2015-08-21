@@ -8,7 +8,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BMS
+namespace UserManagerModule
 {
     [SuppressUnmanagedCodeSecurity]
     public static class ConsoleManager

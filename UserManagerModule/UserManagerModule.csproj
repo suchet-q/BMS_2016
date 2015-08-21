@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E919905B-CCC6-4371-9C38-3B1CAC80F33A}</ProjectGuid>
+    <ProjectGuid>{F2BB43C5-E66A-427F-A263-EAB7A0B549B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BMSModule</RootNamespace>
-    <AssemblyName>BMSModule</AssemblyName>
+    <RootNamespace>UserManagerModule</RootNamespace>
+    <AssemblyName>UserManagerModule</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -37,6 +37,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Composition">
       <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
     </Reference>
@@ -53,10 +56,13 @@
       <HintPath>..\packages\Prism.PubSubEvents.1.0.0\lib\portable-sl4+wp7+windows8+net40\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism.SharedInterfaces">
-      <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
+      <HintPath>..\packages\Prism.Mvvm.1.0.0\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism.UnityExtensions">
       <HintPath>..\packages\Prism.UnityExtensions.5.0.1\lib\NET45\Microsoft.Practices.Prism.UnityExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
@@ -66,6 +72,10 @@
     </Reference>
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MySql.Data\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -82,11 +92,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BMSModule.cs" />
-    <Compile Include="ConsoleManager.cs" />
-    <Compile Include="MainGModuleView.xaml.cs">
-      <DependentUpon>MainGModuleView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -100,51 +105,38 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModel\GModulesViewModel.cs" />
-    <Compile Include="ViewModel\MainGModulesViewModel.cs" />
-    <Compile Include="ViewModel\UserListViewModel.cs" />
-    <Compile Include="View\GModulesView.xaml.cs">
-      <DependentUpon>GModulesView.xaml</DependentUpon>
+    <Compile Include="UserManagerModule.cs" />
+    <Compile Include="ViewModel\UserManagerModuleViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
+    <Compile Include="View\UserDetailView.xaml.cs">
+      <DependentUpon>UserDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainGModulesView.xaml.cs">
-      <DependentUpon>MainGModulesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\UserListView.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>UserListView.xaml</DependentUpon>
+    <Compile Include="View\UserManagerModuleView.xaml.cs">
+      <DependentUpon>UserManagerModuleView.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{40009c9e-2f5a-4cc9-9abf-fd434d96ef37}</Project>
       <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Page Include="MainGModuleView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="View\UserDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\GModulesView.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainGModulesView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserListView.xaml">
+    <Page Include="View\UserManagerModuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,7 +144,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist "$(SolutionDir)BMS\bin\Release\Modules" mkdir "$(SolutionDir)BMS\bin\Release\Modules"
-xcopy "$(TargetDir)BMSModule.dll"  "$(SolutionDir)BMS\bin\Release\Modules" /Y</PostBuildEvent>
+xcopy "$(TargetDir)UserManagerModule.dll"  "$(SolutionDir)BMS\bin\Release\Modules" /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -8,8 +8,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:UserListViewModel}">
-            <v:UserListView />
+        <DataTemplate DataType="{x:Type vm:GModulesViewModel}">
+            <v:GModulesView />
         </DataTemplate>
     </UserControl.Resources>
     <Grid Margin="4">
