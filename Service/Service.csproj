@@ -68,6 +68,7 @@
     <Compile Include="DataAccess\IModuleRepository.cs" />
     <Compile Include="DataAccess\ModuleRepository.cs" />
     <Compile Include="IAPI.cs" />
+    <Compile Include="Model\AgendaEvent.cs" />
     <Compile Include="Model\Module.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="OrmBms.cs" />
