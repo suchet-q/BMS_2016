@@ -28,6 +28,14 @@ namespace ModuleAgenda.ViewModel
             _listEvent = listEvent;
         }
 
+        public string DateString
+        {
+            get
+            {
+                return this.Model.date.ToShortDateString();
+            }
+        }
+
         public int Id
         {
             get

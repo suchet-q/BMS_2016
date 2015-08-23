@@ -21,7 +21,7 @@
                 
                 <GridView>
                     <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Path=Title}"/>
-                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=Date}"/>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=DateString}"/>
                     <GridViewColumn Header="Debut" DisplayMemberBinding="{Binding Path=StartEvent}"/>
                     <GridViewColumn Header="Fin" DisplayMemberBinding="{Binding Path=EndEvent}"/>
                     <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Path=Description}"/>
