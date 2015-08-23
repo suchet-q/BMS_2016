@@ -14,8 +14,24 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Calendar Grid.Column="1" SelectedDate="{Binding CurrentDate}" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Grid.RowSpan="2" Height="168" Width="179"/>
-        <StackPanel Grid.Column="1" Margin="0" Grid.Row="1" Width="180"/>
+        <Calendar Grid.Column="1" Grid.Row="0" SelectedDate="{Binding CurrentDate}" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top"/>
+        <StackPanel Grid.Column="1" Margin="0" Grid.Row="1" Visibility="{Binding CreateEventPanelVisibility}">
+            <Button x:Name="CreateEvent" Content="Creer un évènement" Command="{Binding Path=CreateEvent}"/> 
+        </StackPanel>
+        <DataGrid VerticalAlignment="Top" Visibility="{Binding InfosEventPanelVisibility}">
+            <HeaderedContentControl>
+                <Button/>
+            </HeaderedContentControl>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Titre" Binding="{Binding Path=TitleAddEvent}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding Path=DateAddEvent}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Debut" Binding="{Binding Path=StartAddEvent}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fin" Binding="{Binding Path=EndAddEvent}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Binding="{Binding Path=DescriptionAddEvent}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Lieu" Binding="{Binding Path=LocationAddEvent}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Status" Binding="{Binding Path=StatusAddEvent}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <ListView Grid.RowSpan="2" ItemsSource="{Binding AllEvents}" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 
@@ -30,6 +46,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+       
 
     </Grid>
 </UserControl>
