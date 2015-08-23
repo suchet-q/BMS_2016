@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMS", "BMS\BMS.csproj", "{53F883CD-8CA5-4356-BDBE-C2A0977EA998}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleList", "ModuleList\ModuleList.csproj", "{1CC68C73-BD2E-425D-9D3C-9CE99310BE06}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{40009C9E-2F5A-4CC9-9ABF-FD434D96EF37}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleAgenda", "ModuleAgenda\ModuleAgenda.csproj", "{42229A5D-14F3-437C-9C79-A0D44A1474CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{40009C9E-2F5A-4CC9-9ABF-FD434D96EF37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40009C9E-2F5A-4CC9-9ABF-FD434D96EF37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40009C9E-2F5A-4CC9-9ABF-FD434D96EF37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42229A5D-14F3-437C-9C79-A0D44A1474CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42229A5D-14F3-437C-9C79-A0D44A1474CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42229A5D-14F3-437C-9C79-A0D44A1474CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42229A5D-14F3-437C-9C79-A0D44A1474CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
