@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UserManagerModule
+namespace BMSModule
 {
     /// <summary>
-    /// Interaction logic for Banner.xaml
+    /// Interaction logic for MainGModuleView.xaml
     /// </summary>
-    public partial class Banner : UserControl
+    public partial class MainGModuleView : UserControl
     {
-        public Banner()
+        public MainGModuleView()
         {
             InitializeComponent();
         }

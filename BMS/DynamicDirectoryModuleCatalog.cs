@@ -11,7 +11,7 @@ using System.Threading;
 using System.Windows.Threading;
 
 
-namespace BMS
+namespace UserManagerModule
 {
     class DynamicDirectoryModuleCatalog : ModuleCatalog
     {

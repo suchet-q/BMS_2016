@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 using Service.DataAccess;
 using Microsoft.Practices.Prism.Regions;
 
-namespace BMS.ViewModel
+namespace UserManagerModule.ViewModel
 {
     public class MenuModuleViewModel : ViewModelBase
     {

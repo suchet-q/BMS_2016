@@ -7,8 +7,9 @@ using Microsoft.Practices.Prism.UnityExtensions;
 using System.IO;
 using Microsoft.Practices.Prism.Regions;
 using Service;
+using Service.DataAccess;
 
-namespace BMS
+namespace UserManagerModule
 {
     class Bootstrapper : UnityBootstrapper
     {

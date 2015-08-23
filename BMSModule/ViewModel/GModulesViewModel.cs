@@ -3,34 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
 using Service;
+using System.Collections.ObjectModel;
 using Service.Model;
+using Service.DataAccess;
+using Microsoft.Practices.Prism.Modularity;
 
 namespace BMSModule.ViewModel
 {
     public class GModulesViewModel : ViewModelBase
     {
-        readonly IAPI _api;
-        ObservableCollection<ViewModelBase> _viewModels;
-
-        public GModulesViewModel(IAPI api)
+        public ObservableCollection<Module> GModules_ListModule
         {
-            this._api = api;
-            UserListViewModel viewModel = new UserListViewModel(api);
-            this.ViewModels.Add(viewModel);
+            get;
+            private set;
         }
 
-        public ObservableCollection<ViewModelBase> ViewModels
+        public GModulesViewModel(IModuleCatalog catalog)
         {
-            get
-            {
-                if (_viewModels == null)
-                {
-                    _viewModels = new ObservableCollection<ViewModelBase>();
-                }
-                return _viewModels;
-            }
+            ModuleRepository mR = new ModuleRepository(catalog);
+            System.Console.Error.WriteLine(mR.getListModule().Count());
+            this.GModules_ListModule = new ObservableCollection<Module>(mR.getListModule());
+        }
+
+        protected override void OnDispose()
+        {
+            this.GModules_ListModule.Clear();
         }
     }
 }
