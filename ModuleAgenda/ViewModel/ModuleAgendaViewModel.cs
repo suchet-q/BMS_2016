@@ -14,8 +14,6 @@ namespace ModuleAgenda.ViewModel
     {
         IAPI _api;
 
- 
-
         public ObservableCollection<AgendaEventViewModel> AllEvents { get; private set; }
 
         private ObservableCollection<AgendaEvent> _listAllEvents;
@@ -39,7 +37,6 @@ namespace ModuleAgenda.ViewModel
             {
                 return _currentDate;
             }
-
             set
             {
                 AllEvents.Clear();

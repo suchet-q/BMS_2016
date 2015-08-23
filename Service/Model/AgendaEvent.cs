@@ -10,8 +10,8 @@ namespace Service.Model
     {
         public int id { get; set; }
         public DateTime date { get; set; }
-        public DateTime startevent { get; set; }
-        public DateTime endevent { get; set; }
+        public string startevent { get; set; }
+        public string endevent { get; set; }
         public string title { get; set; }
         public string description { get; set; }
         public string location { get; set; }

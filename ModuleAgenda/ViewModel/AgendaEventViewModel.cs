@@ -57,7 +57,7 @@ namespace ModuleAgenda.ViewModel
             }
         }
 
-        public DateTime StartEvent
+        public string StartEvent
         {
             get
             {
@@ -72,7 +72,7 @@ namespace ModuleAgenda.ViewModel
             }
         }
 
-        public DateTime EndEvent
+        public string EndEvent
         {
             get
             {
