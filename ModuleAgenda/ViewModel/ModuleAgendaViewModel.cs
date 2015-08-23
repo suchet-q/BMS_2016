@@ -14,6 +14,8 @@ namespace ModuleAgenda.ViewModel
     {
         IAPI _api;
 
+ 
+
         public ObservableCollection<AgendaEventViewModel> AllEvents { get; private set; }
 
         private ObservableCollection<AgendaEvent> _listAllEvents;
@@ -26,9 +28,29 @@ namespace ModuleAgenda.ViewModel
             IEnumerable<AgendaEvent> listEvent = _api.Orm.ObjectQuery<AgendaEvent>("select * from agenda_event");
             _listAllEvents = new ObservableCollection<AgendaEvent>(listEvent);
             this.AllEvents = new ObservableCollection<AgendaEventViewModel>();
-            foreach (AgendaEvent evt in listEvent)
+
+        }
+
+        private DateTime _currentDate;
+
+        public DateTime CurrentDate
+        {
+            get
             {
-                this.AllEvents.Add(new AgendaEventViewModel(evt, _listAllEvents, _api));
+                return _currentDate;
+            }
+
+            set
+            {
+                AllEvents.Clear();
+                _currentDate = value;
+                foreach (AgendaEvent evt in _listAllEvents)
+                {
+                    if (evt.date == value)
+                        this.AllEvents.Add(new AgendaEventViewModel(evt, _listAllEvents, _api));
+                }
+                this.OnPropertyChanged("CurrentDate");
+                this.OnPropertyChanged("AllEvents");
             }
         }
     }
