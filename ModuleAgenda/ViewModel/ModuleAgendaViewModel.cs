@@ -14,8 +14,6 @@ namespace ModuleAgenda.ViewModel
     {
         IAPI _api;
 
- 
-
         public ObservableCollection<AgendaEventViewModel> AllEvents { get; private set; }
 
         private ObservableCollection<AgendaEvent> _listAllEvents;
@@ -28,9 +26,40 @@ namespace ModuleAgenda.ViewModel
             IEnumerable<AgendaEvent> listEvent = _api.Orm.ObjectQuery<AgendaEvent>("select * from agenda_event");
             _listAllEvents = new ObservableCollection<AgendaEvent>(listEvent);
             this.AllEvents = new ObservableCollection<AgendaEventViewModel>();
-
+            this.CreateEventPanelVisibility = System.Windows.Visibility.Hidden;
+            this.InfosEventPanelVisibility = System.Windows.Visibility.Hidden;
         }
 
+        private System.Windows.Visibility _infosEventPanelVisibility;
+
+        public System.Windows.Visibility InfosEventPanelVisibility
+        {
+            get
+            {
+                return this._infosEventPanelVisibility;
+            }
+            set 
+            {
+                this._createEventPanelVisibility = value;
+                this.OnPropertyChanged("InfosEventPanelVisibility");
+            }
+        }
+
+        private System.Windows.Visibility _createEventPanelVisibility;
+
+        public System.Windows.Visibility CreateEventPanelVisibility
+        {
+            get 
+            { 
+                return this._createEventPanelVisibility;
+            }
+            set 
+            { 
+                this._createEventPanelVisibility = value;
+                this.OnPropertyChanged("CreateEventPanelVisibility");
+
+            }
+        }
         private DateTime _currentDate;
 
         public DateTime CurrentDate
@@ -39,7 +68,6 @@ namespace ModuleAgenda.ViewModel
             {
                 return _currentDate;
             }
-
             set
             {
                 AllEvents.Clear();
@@ -51,7 +79,13 @@ namespace ModuleAgenda.ViewModel
                 }
                 this.OnPropertyChanged("CurrentDate");
                 this.OnPropertyChanged("AllEvents");
+                this.CreateEventPanelVisibility = System.Windows.Visibility.Visible;
             }
+        }
+
+        private void CreateEvent
+        {
+          this.InfosEventPanelVisibility = System.Windows.Visibility.Visible;
         }
     }
 }

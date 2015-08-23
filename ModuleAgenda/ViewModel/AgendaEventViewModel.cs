@@ -28,6 +28,14 @@ namespace ModuleAgenda.ViewModel
             _listEvent = listEvent;
         }
 
+        public string DateString
+        {
+            get
+            {
+                return this.Model.date.ToShortDateString();
+            }
+        }
+
         public int Id
         {
             get
@@ -57,7 +65,7 @@ namespace ModuleAgenda.ViewModel
             }
         }
 
-        public DateTime StartEvent
+        public string StartEvent
         {
             get
             {
@@ -72,7 +80,7 @@ namespace ModuleAgenda.ViewModel
             }
         }
 
-        public DateTime EndEvent
+        public string EndEvent
         {
             get
             {
@@ -191,6 +199,77 @@ namespace ModuleAgenda.ViewModel
                 _api.Orm.UpdateObject<AgendaEvent>(@"update agenda_event set participants = @participant where Id = @Id", Model);
             }
         }*/
+
+        
+        public string TitleAddEvent
+        {
+            get 
+            { 
+                return this.Title;
+            }
+            set 
+            {
+                this.OnPropertyChanged("TitleAddEvent");
+                _api.Orm.UpdateObject<AgendaEvent>(@"update agenda_event set title = @TitleAddEvent where Id = @Id", Model);
+            }
+        }
+
+        public DateTime DateAddEvent
+        {
+            get 
+            {
+                return this.Date;
+            }
+            set
+            {
+                ;
+            }
+        }
+
+        public string StartAddEvent
+        {
+            get
+            {
+                return this.StartEvent;
+            }
+            set { ;}
+        }
+
+        public string EndAddEvent
+        {
+            get
+            {
+                return this.EndEvent;
+            }
+            set { ;}
+        }
+
+        public string DescriptionAddEvent
+        {
+            get
+            {
+                return this.Description;
+            }
+            set { ;}
+        }
+
+        public string LocationAddEvent
+        {
+            get 
+            {
+                return this.Location;
+            }
+            set { ;}
+        }
+
+        public int StatusAddEvent
+        {
+            get 
+            {
+                return this.Status;
+            }
+            set { ;}
+        }
 
         /// <summary>
         /// Gets the text to display when referring to this Event
