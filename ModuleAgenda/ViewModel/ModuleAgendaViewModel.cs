@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ModuleAgenda.ViewModel
@@ -40,7 +41,7 @@ namespace ModuleAgenda.ViewModel
             }
             set 
             {
-                this._createEventPanelVisibility = value;
+                this._infosEventPanelVisibility = value;
                 this.OnPropertyChanged("InfosEventPanelVisibility");
             }
         }
@@ -83,9 +84,10 @@ namespace ModuleAgenda.ViewModel
             }
         }
 
-        private void CreateEvent
+        public void CreateEvent()
         {
           this.InfosEventPanelVisibility = System.Windows.Visibility.Visible;
+          Console.Error.WriteLine("CreateEvent");
         }
     }
 }
