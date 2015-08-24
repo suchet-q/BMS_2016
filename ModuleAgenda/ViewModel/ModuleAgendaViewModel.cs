@@ -28,7 +28,8 @@ namespace ModuleAgenda.ViewModel
             _listAllEvents = new ObservableCollection<AgendaEvent>(listEvent);
             this.AllEvents = new ObservableCollection<AgendaEventViewModel>();
             this.CreateEventPanelVisibility = System.Windows.Visibility.Hidden;
-            this.InfosEventPanelVisibility = System.Windows.Visibility.Hidden;
+            this.InfosEventPanelVisibility = System.Windows.Visibility.Collapsed;
+            this.CreateEventCommand = new DelegateCommand((o) => this.CreateEvent());
         }
 
         private System.Windows.Visibility _infosEventPanelVisibility;
@@ -86,8 +87,11 @@ namespace ModuleAgenda.ViewModel
 
         public void CreateEvent()
         {
-          this.InfosEventPanelVisibility = System.Windows.Visibility.Visible;
           Console.Error.WriteLine("CreateEvent");
+          this.InfosEventPanelVisibility = System.Windows.Visibility.Visible;
+         
         }
+
+        public ICommand CreateEventCommand { get; private set; }
     }
 }

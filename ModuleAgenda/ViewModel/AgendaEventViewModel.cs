@@ -17,7 +17,7 @@ namespace ModuleAgenda.ViewModel
         ObservableCollection<AgendaEvent> _listEvent;
         IAPI _api;
 
-        public AgendaEventViewModel( AgendaEvent user, ObservableCollection<AgendaEvent> listEvent, IAPI api)
+        public AgendaEventViewModel(AgendaEvent user, ObservableCollection<AgendaEvent> listEvent, IAPI api)
         {
             _api = api;
             if (user == null)

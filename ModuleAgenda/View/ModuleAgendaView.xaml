@@ -16,14 +16,9 @@
         </Grid.ColumnDefinitions>
         <Calendar Grid.Column="1" Grid.Row="0" SelectedDate="{Binding CurrentDate}" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top"/>
         <StackPanel Grid.Column="1" Margin="0" Grid.Row="1" Visibility="{Binding CreateEventPanelVisibility}">
-            <!--<Button x:Name="CreateEvent" Content="Creer un évènement" Click="{Binding Path=CreateEvent}"/>-->
-            <TextBlock>
-            <Hyperlink Command="{Binding Path=CreateEvent}">Add User</Hyperlink>
-            |
-            <!--<Hyperlink Command="{Binding Path=DeleteUserCommand}">Delete User</Hyperlink>-->
-            </TextBlock>
+            <Button x:Name="CreateEvent" Content="Creer un évènement" Command="{Binding Path=CreateEventCommand}"/>        
         </StackPanel>
-        <DataGrid VerticalAlignment="Top" Visibility="{Binding InfosEventPanelVisibility}">
+        <DataGrid VerticalAlignment="Top" Visibility="{Binding InfosEventPanelVisibility}" Focusable="False">
             <HeaderedContentControl>
                 <Button/>
             </HeaderedContentControl>
@@ -37,7 +32,7 @@
                 <DataGridTextColumn Header="Status" Binding="{Binding Path=StatusAddEvent}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <ListView Grid.RowSpan="2" ItemsSource="{Binding AllEvents}" SelectionChanged="ListView_SelectionChanged" Visibility="Hidden">
+        <ListView Grid.RowSpan="2" ItemsSource="{Binding AllEvents}" SelectionChanged="ListView_SelectionChanged" Grid.ColumnSpan="2" Margin="0,61,179,0">
             <ListView.View>
                 
                 <GridView>
