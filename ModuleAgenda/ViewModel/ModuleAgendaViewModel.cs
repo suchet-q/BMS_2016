@@ -19,6 +19,21 @@ namespace ModuleAgenda.ViewModel
 
         private ObservableCollection<AgendaEvent> _listAllEvents;
 
+        private AgendaEventViewModel _currentEvent;
+        public AgendaEventViewModel CurrentEvent
+        {
+            get
+            {
+                return _currentEvent;
+            }
+
+            set
+            {
+                _currentEvent = value;
+                this.OnPropertyChanged("CurrentEvent");
+            }
+        }
+
         public ModuleAgendaViewModel(IAPI api)
         {
             _api = api;
@@ -89,6 +104,7 @@ namespace ModuleAgenda.ViewModel
         {
           Console.Error.WriteLine("CreateEvent");
           this.InfosEventPanelVisibility = System.Windows.Visibility.Visible;
+          this.CurrentEvent = new AgendaEventViewModel(new AgendaEvent(), _listAllEvents, _api);
          
         }
 
