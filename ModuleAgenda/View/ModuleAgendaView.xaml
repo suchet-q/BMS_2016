@@ -96,7 +96,7 @@
             <HeaderedContentControl>
                 <StackPanel>
                     <Border Style="{StaticResource DetailBorder}"  Margin="5">
-                        <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentEvent}">
+                        <ContentControl HorizontalAlignment="Stretch" Content="{Binding Path=CurrentEvent}">
                             <ContentControl.Resources>
                                 <DataTemplate DataType="{x:Type vm:AgendaEventViewModel}">
                                     <v:EventDetailView />
