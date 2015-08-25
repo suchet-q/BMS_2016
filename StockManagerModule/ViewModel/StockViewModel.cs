@@ -72,6 +72,7 @@ namespace StockManagerModule.ViewModel
                 if (this.Model.nom == value) return;
                 this.Model.nom = value;
                 this.OnPropertyChanged("nom");
+                _api.Orm.UpdateObject<Stock>(@"update stock set nom = @nom where id = @id", Model);
             }
         }
         public string info
@@ -86,6 +87,7 @@ namespace StockManagerModule.ViewModel
                 if (this.Model.info == value) return;
                 this.Model.info = value;
                 this.OnPropertyChanged("info");
+                _api.Orm.UpdateObject<Stock>(@"update stock set info = @info where id = @id", Model);
             }
         }
 
@@ -100,6 +102,7 @@ namespace StockManagerModule.ViewModel
                 if (this.Model.achat == value) return;
                 this.Model.achat = value;
                 this.OnPropertyChanged("achat");
+                _api.Orm.UpdateObject<Stock>(@"update stock set achat = @achat where id = @id", Model);
             }
         }
         public float vente_ht
@@ -115,6 +118,7 @@ namespace StockManagerModule.ViewModel
                 this.Model.vente_ttc *= (1 + this.Model.tva.rate / 100);
                 this.OnPropertyChanged("vente_ht");
                 this.OnPropertyChanged("vente_ttc");
+                _api.Orm.UpdateObject<Stock>(@"update stock set vente_ht = @vente_ht where id = @id", Model);
             }
         }
         public float vente_ttc
@@ -130,6 +134,7 @@ namespace StockManagerModule.ViewModel
                 this.Model.vente_ht *= (1 - this.Model.tva.rate / 100);
                 this.OnPropertyChanged("vente_ttc");
                 this.OnPropertyChanged("vente_ht");
+                _api.Orm.UpdateObject<Stock>(@"update stock set vente_ttc = @vente_ttc where id = @id", Model);
             }
         }
         public int quantite
@@ -143,6 +148,7 @@ namespace StockManagerModule.ViewModel
                 if (this.Model.quantite == value) return;
                 this.Model.quantite = value;
                 this.OnPropertyChanged("quantite");
+                _api.Orm.UpdateObject<Stock>(@"update stock set quantite = @quantite where id = @id", Model);
             }
         }
         public string reference
@@ -156,6 +162,7 @@ namespace StockManagerModule.ViewModel
                 if (this.Model.reference == value) return;
                 this.Model.reference = value;
                 this.OnPropertyChanged("reference");
+                _api.Orm.UpdateObject<Stock>(@"update stock set reference = @reference where id = @id", Model);
             }
         }
         public Tva tvaRate
@@ -169,6 +176,7 @@ namespace StockManagerModule.ViewModel
                 if (this.Model.tva == value) return;
                 this.Model.tva = value;
                 this.OnPropertyChanged("tvaRate");
+                _api.Orm.Update(@"update stock set id_tva = @tva where id = @Id", new {tva = this.Model.tva.id, Id = this.Model.tva.id});
             }
         }
         public StockCategorie categorie
@@ -182,6 +190,7 @@ namespace StockManagerModule.ViewModel
                 if (this.Model.categorie == value) return;
                 this.Model.categorie = value;
                 this.OnPropertyChanged("categorie");
+                _api.Orm.UpdateObject<Stock>(@"update stock set id_categorie = @categorie.id where id = @id", Model);
             }
         }
 
