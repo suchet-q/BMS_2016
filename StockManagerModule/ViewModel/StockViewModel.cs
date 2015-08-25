@@ -25,18 +25,28 @@ namespace StockManagerModule.ViewModel
                 throw new ArgumentNullException("stock");
             }
             Model = stock;
-            this.tvaRate = this.Model.tva;
             _stockList = listStock;
             IEnumerable<Tva> tvaRes = _api.Orm.ObjectQuery<Tva>("select * from tva");
             this.AllTvaRate = new ObservableCollection<Tva>(tvaRes);
+            this.tvaRate = this.Model.tva;
             IEnumerable<StockCategorie> categorieRes = _api.Orm.ObjectQuery<StockCategorie>("select * from stock_categorie");
-            this.AllCategories = new ObservableCollection<StockCategorie>(categorieRes);
+            this._allCategories = new ObservableCollection<StockCategorie>(categorieRes);
+            this.categorie = this.Model.categorie;
         }
 
+        ObservableCollection<StockCategorie> _allCategories;
         public ObservableCollection<StockCategorie> AllCategories
         {
-            get;
-            set;
+            get
+            {
+                return _allCategories;
+            }
+            set
+            {
+                if (_allCategories == value) return;
+                _allCategories = value;
+                this.OnPropertyChanged("AllCategories");
+            }
         }
 
         public ObservableCollection<Tva> AllTvaRate
@@ -176,7 +186,7 @@ namespace StockManagerModule.ViewModel
                 if (this.Model.tva == value) return;
                 this.Model.tva = value;
                 this.OnPropertyChanged("tvaRate");
-                _api.Orm.Update(@"update stock set id_tva = @tva where id = @Id", new {tva = this.Model.tva.id, Id = this.Model.tva.id});
+                _api.Orm.Update(@"update stock set id_tva = @tva where id = @Id", new { tva = this.Model.tva.id, Id = this.Model.id });
             }
         }
         public StockCategorie categorie
@@ -190,9 +200,22 @@ namespace StockManagerModule.ViewModel
                 if (this.Model.categorie == value) return;
                 this.Model.categorie = value;
                 this.OnPropertyChanged("categorie");
-                _api.Orm.UpdateObject<Stock>(@"update stock set id_categorie = @categorie.id where id = @id", Model);
+                _api.Orm.Update(@"update stock set id_categorie = @categorie where id = @Id", new { categorie = this.Model.categorie.id, Id = this.Model.id });
             }
         }
+        //public Zone zone
+        //{
+        //    get
+        //    {
+        //        return this.Model.zone;
+        //    }
+        //    set
+        //    {
+        //        if (this.Model.zone == value) return;
+        //        this.Model.zone = value;
+        //        this.OnPropertyChanged("zone");
+        //    }
+        //}
 
     }
 }

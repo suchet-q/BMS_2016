@@ -5,9 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    
+
     <UserControl.Resources>
-      
+        <!--Subtle border used to seperate areas of a pane-->
+        <Style x:Key="DetailBorder" TargetType="{x:Type Border}">
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="2" />
+        </Style>
     </UserControl.Resources>
     <StackPanel>
         <Border Style="{StaticResource DetailBorder}"  Margin="5">
@@ -24,11 +31,11 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                
+
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Price Details :" />
 
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Purchase:" />
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=achat_ht}" Width="150" />
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=achat}" Width="150" />
 
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Price:" />
                 <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=vente_ht}" Width="150" TextChanged="TextBox_TextChanged" />
@@ -44,41 +51,73 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                
+
             </Grid>
         </Border>
-        
+
         <Border Style="{StaticResource DetailBorder}" Margin="5,0,5,5">
-            <!-- ON MET LA ZONE MAGGLE-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Storage :" />
+
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Zone:" />
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=zone.zone}" Width="150" />
+
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Subzone:" />
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=zone.sous_zone}" Width="150" TextChanged="TextBox_TextChanged" />
+
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Location:" />
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=zone.emplacement}" Width="150" />
+            </Grid>
         </Border>
-        
-            <Border Style="{StaticResource DetailBorder}"  Margin="5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+        <Border Style="{StaticResource DetailBorder}"  Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Category :" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Categories:" />
-                    <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding AllCategories}" SelectedItem="{Binding Path=categorie, Mode=TwoWay}" Width="150">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding categorie}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Category :" />
 
-                </Grid>
-            </Border>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Categories:" />
+                <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding AllCategories}" SelectedItem="{Binding Path=categorie, Mode=TwoWay}" Width="150" Height="20" VerticalAlignment="Top">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding categorie}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
+                <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="10,0,141,0">
+                    <Hyperlink Command="{Binding Path=AddCategorieCommand}">Add Category</Hyperlink>
+                </TextBlock>
 
-        </StackPanel>
+                <TextBlock Grid.Column="1" Grid.Row="2" Margin="29,0,-29,0">
+                    <Hyperlink Command="{Binding Path=DeleteCategorieCommand}">Delete selected Category</Hyperlink>
+                </TextBlock>
+            </Grid>
+        </Border>
+
+    </StackPanel>
 
 
 </UserControl>
