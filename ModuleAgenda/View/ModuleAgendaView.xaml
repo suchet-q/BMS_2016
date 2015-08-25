@@ -60,7 +60,7 @@
                             </TextBlock>
                         </StackPanel>
                     </HeaderedContentControl.Header>-->
-                    <ListView  ItemsSource="{Binding AllEvents}" SelectionChanged="ListView_SelectionChanged"  Margin="0">
+                    <ListView  ItemsSource="{Binding AllEvents}"  Margin="0">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Path=Title}"/>

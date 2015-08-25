@@ -53,6 +53,9 @@ namespace Service
                 //The two most common error numbers when connecting are as follows:
                 //0: Cannot connect to server.
                 //1045: Invalid user name and/or password.
+                System.Console.Error.WriteLine(ex.Message);
+                
+
                 switch (ex.Number)
                 {
                     case 0:
