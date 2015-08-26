@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignWidth="300" Height="500" MaxWidth="300">
 
     <UserControl.Resources>
         <!--Subtle border used to seperate areas of a pane-->
@@ -100,7 +99,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Category :" />
 
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Categories:" />
-                <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding AllCategories}" SelectedItem="{Binding Path=categorie, Mode=TwoWay}" Height="20" VerticalAlignment="Top" Margin="7,0" Width="150">
+                <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding AllCategories, Mode=TwoWay}" SelectedItem="{Binding Path=categorie, Mode=TwoWay}" Height="20" VerticalAlignment="Top" Margin="7,0" Width="150">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding categorie}"/>
@@ -115,10 +114,23 @@
                 <TextBlock Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="10,0,141,0">
                     <Hyperlink Command="{Binding Path=AddCategorieCommand}">Create Category:</Hyperlink>
                 </TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=newCategory}" Width="150" />
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=newCategory, Mode=TwoWay}" Width="150" />
             </Grid>
         </Border>
-
+        <TextBlock Foreground="Red" TextAlignment="Center" TextWrapping="Wrap" Text="You can't delete a Categorie if there is other Entry associated with it" Margin="10,0" Height="42">
+            <TextBlock.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding DisplayDeleteCategoryErrMsg}" Value="true">
+                            <Setter Property="UIElement.Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding DisplayDeleteCategoryErrMsg}" Value="false">
+                            <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
     </StackPanel>
 
 

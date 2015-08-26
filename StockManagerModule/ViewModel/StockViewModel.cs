@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace StockManagerModule.ViewModel
 {
@@ -32,6 +33,45 @@ namespace StockManagerModule.ViewModel
             IEnumerable<StockCategorie> categorieRes = _api.Orm.ObjectQuery<StockCategorie>("select * from stock_categorie");
             this._allCategories = new ObservableCollection<StockCategorie>(categorieRes);
             this.categorie = this.Model.categorie;
+            this.AddCategorieCommand = new DelegateCommand((o) => this.AddCategorie());
+            this.DeleteCategorieCommand = new DelegateCommand((o) => this.DeleteCategorie());
+            this.DisplayDeleteCategoryErrMsg = false;
+        }
+
+        private void    AddCategorie()
+        {
+            StockCategorie toInsert = new StockCategorie();
+
+            toInsert.categorie = this.newCategory;
+            this.newCategory = "";
+            _api.Orm.Insert("insert into stock_categorie(categorie) values (@NewCategorie)", new { NewCategorie = toInsert.categorie });
+            var res = _api.Orm.Query("select max(id) as maxId from stock_categorie");
+            toInsert.id = res.First().maxId;
+            System.Console.Error.WriteLine("nouvel ID de la nouvelle categorie : " + toInsert.id);
+            this.AllCategories.Add(toInsert);
+            this.categorie = toInsert;
+        }
+
+        private void    DeleteCategorie()
+        {
+            if (this.DisplayDeleteCategoryErrMsg)
+                this.DisplayDeleteCategoryErrMsg = !this.DisplayDeleteCategoryErrMsg;
+
+            int count = 0;
+            foreach (Stock elem in this._stockList)
+            {
+                if (elem.categorie.id == this.categorie.id)
+                    ++count;
+                if (count >= 2)
+                {
+                    this.DisplayDeleteCategoryErrMsg = true;
+                    return;
+                }
+            }
+            _api.Orm.Delete("delete from stock_categorie where id = @Id", new { Id = this.categorie.id });
+            var tmp = this.categorie;
+            this.AllCategories.Remove(tmp);
+            this.categorie = this.AllCategories.Count() > 0 ? this.AllCategories.First() : null;
         }
 
         ObservableCollection<StockCategorie> _allCategories;
@@ -200,7 +240,8 @@ namespace StockManagerModule.ViewModel
                 if (this.Model.categorie == value) return;
                 this.Model.categorie = value;
                 this.OnPropertyChanged("categorie");
-                _api.Orm.Update(@"update stock set id_categorie = @categorie where id = @Id", new { categorie = this.Model.categorie.id, Id = this.Model.id });
+                if (value != null)
+                    _api.Orm.Update(@"update stock set id_categorie = @categorie where id = @Id", new { categorie = this.Model.categorie.id, Id = this.Model.id });
             }
         }
         //public Zone zone
@@ -217,5 +258,38 @@ namespace StockManagerModule.ViewModel
         //    }
         //}
 
+
+        string _newCategorie;
+        public string newCategory
+        {
+            get
+            {
+                return _newCategorie;
+            }
+            set
+            {
+                if (_newCategorie == value) return;
+                _newCategorie = value;
+                this.OnPropertyChanged("newCategory");
+            }
+        }
+
+        bool _displayDeleteCategoryErrMsg;
+        public bool DisplayDeleteCategoryErrMsg
+        {
+            get
+            {
+                return _displayDeleteCategoryErrMsg;
+            }
+            set
+            {
+                if (_displayDeleteCategoryErrMsg == value) return;
+                _displayDeleteCategoryErrMsg = value;
+                this.OnPropertyChanged("DisplayDeleteCategoryErrMsg");
+            }
+        }
+
+        public ICommand AddCategorieCommand { get; set; }
+        public ICommand DeleteCategorieCommand { get; set; }
     }
 }
