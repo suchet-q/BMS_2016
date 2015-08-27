@@ -11,12 +11,17 @@ using System.Threading;
 using System.Windows.Threading;
 
 
-namespace UserManagerModule
+namespace BMS
 {
+
+    public delegate void AddedModuleHandler(object sender, EventArgs e);
+
     class DynamicDirectoryModuleCatalog : ModuleCatalog
     {
 
         SynchronizationContext _context;
+
+        public event AddedModuleHandler Added;
 
         // Path to the directory where the modules are
         public String ModulePath { get; set; }
@@ -32,6 +37,13 @@ namespace UserManagerModule
             fileWatcher.Created += this.fileWatcher_Created;
             fileWatcher.EnableRaisingEvents = true;
         }
+
+        protected virtual void OnAdded(EventArgs e)
+        {
+            if (Added != null)
+                Added(this, e);
+        }
+
 
         // Call when a new file is added to the ModulePath directory
         void fileWatcher_Created(object sender, FileSystemEventArgs e)
@@ -119,6 +131,7 @@ namespace UserManagerModule
                 {
                      manager.LoadModule(module.ModuleName);
                      System.Console.Error.WriteLine("AJOUT MODULE MAGGLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                     this.OnAdded(EventArgs.Empty);
                 }
             }), null);
         }

@@ -58,19 +58,24 @@
                     <HeaderedContentControl.Header>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Margin="2">
-<!--                                <Hyperlink Command="{Binding Path=AddEntryCommand}">Add Entry</Hyperlink>
-                                    <Hyperlink Command="{Binding Path=DeleteEntryCommand}">Delete Entry</Hyperlink> -->
+                                    <Hyperlink Command="{Binding Path=AddStockCommand}">Add Entry</Hyperlink>
+                                    <Hyperlink Command="{Binding Path=DeleteStockCommand}">Delete Entry</Hyperlink>
                             </TextBlock>
                         </StackPanel>
                     </HeaderedContentControl.Header>
 
-<!--                    <DataGrid SelectedItem="{Binding Path=CurrentEntry, Mode=TwoWay}" ItemsSource="{Binding Path=AllEntrys}" AutoGenerateColumns="False" >
+                    <DataGrid SelectedItem="{Binding Path=CurrentStock, Mode=TwoWay}" ItemsSource="{Binding Path=AllStocks}" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Path=name}" />
-                            <DataGridTextColumn Header="Last Name" Binding="{Binding Path=last_name}" />
-                            <DataGridTextColumn Header="Login" Binding="{Binding Path=login}" />
+                            <DataGridTextColumn Header="Name" Binding="{Binding Path=nom}" />
+                            <DataGridTextColumn Header="Info" Binding="{Binding Path=info}" />
+                            <DataGridTextColumn Header="Category" Binding="{Binding Path=categorie.categorie}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Price inc. VAT" Binding="{Binding Path=vente_ttc}" />
+                            <DataGridTextColumn Header="VAT" Binding="{Binding Path=tvaRate.rate}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding Path=quantite}" />
+                            <DataGridTextColumn Header="Reference" Binding="{Binding Path=reference}" />
+                            <DataGridTextColumn Header="Stockage" Binding="{Binding Path=emplacement}" />
                         </DataGrid.Columns>
-                    </DataGrid>-->
+                    </DataGrid>
                 </HeaderedContentControl>
             </ScrollViewer>
         </HeaderedContentControl>
@@ -81,26 +86,13 @@
             </HeaderedContentControl.Header>
             <ScrollViewer>
                 <StackPanel>
-                    <Border Style="{StaticResource DetailBorder}"  Margin="5">
-                        <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentEntry}">
-                            <ContentControl.Resources>
-<!--                                <DataTemplate DataType="{x:Type vm:UserViewModel}">
-                                    <v:UserDetailView />
-                                </DataTemplate>-->
-                            </ContentControl.Resources>
-                        </ContentControl>
-                    </Border>
-    
-                    <Border Style="{StaticResource DetailBorder}" Margin="5,0,5,5">
-                        <ContentControl Content="{Binding Path=CurrentEntry}" >
-                            <ContentControl.Resources>
-<!--                                <DataTemplate DataType="{x:Type vm:UserViewModel}">
-                                    <v:UserContactsDetailView />
-                                </DataTemplate>-->
-                            </ContentControl.Resources>
-                        </ContentControl>
-                    </Border>
-
+                    <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentStock}">
+                        <ContentControl.Resources>
+                            <DataTemplate DataType="{x:Type vm:StockViewModel}">
+                                    <v:StockDetailsView />
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
                 </StackPanel>
             </ScrollViewer>
         </HeaderedContentControl>

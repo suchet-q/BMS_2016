@@ -4,7 +4,7 @@ using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using System.Windows;
 
-namespace BMS
+namespace UserManagerModule
 {
     /// <summary>
     /// Interaction logic for Shell.xaml

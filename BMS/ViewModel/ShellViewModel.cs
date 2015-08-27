@@ -10,7 +10,7 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.Regions;
 
-namespace UserManagerModule.ViewModel
+namespace BMS.ViewModel
 {
     class ShellViewModel : ViewModelBase
     {
@@ -28,8 +28,8 @@ namespace UserManagerModule.ViewModel
             _container = container;
             _manager = manager;
             _moduleRepository = new ModuleRepository(_catalog);
-            MenuModule.Add(new MenuModuleViewModel(_moduleRepository, _manager));
-
+            var viewModel = new MenuModuleViewModel(_moduleRepository, _manager, _catalog);
+            MenuModule.Add(viewModel);
         }
 
         public ObservableCollection<ViewModelBase> MenuModule

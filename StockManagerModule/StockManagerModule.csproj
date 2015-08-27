@@ -99,7 +99,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="StockManagerModule.cs" />
+    <Compile Include="ViewModel\StockViewModel.cs" />
     <Compile Include="ViewModel\StockManagerModuleViewModel.cs" />
+    <Compile Include="View\StockDetailsView.xaml.cs">
+      <DependentUpon>StockDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StockManagerModuleView.xaml.cs">
       <DependentUpon>StockManagerModuleView.xaml</DependentUpon>
     </Compile>
@@ -120,6 +124,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\StockDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\StockManagerModuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -8,12 +8,14 @@ using Service.Model;
 using System.Collections.ObjectModel;
 using Service.DataAccess;
 using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Prism.Modularity;
 
-namespace UserManagerModule.ViewModel
+namespace BMS.ViewModel
 {
     public class MenuModuleViewModel : ViewModelBase
     {
         IRegionManager _manager;
+        IModuleRepository _moduleRepository;
 
         private Module _selectedModuleInTheList;
 
@@ -35,15 +37,38 @@ namespace UserManagerModule.ViewModel
             }
         }
 
-        public ObservableCollection<Module> ListModule
+        public void AddedModule(object sender, EventArgs e)
         {
-            get;
-            private set;
+            this.ListModule = new ObservableCollection<Module>(_moduleRepository.getListModule());
+            System.Console.Error.WriteLine("ON EST DANS KA FONCTION QUI SE FAT TRIGGER LA TETE");
+            foreach (Module module in ListModule)
+            {
+                System.Console.Error.WriteLine("Module dans la liste : " + module.name);                
+            }
         }
 
-        public MenuModuleViewModel(IModuleRepository moduleRepository, IRegionManager manager)
+        ObservableCollection<Module> _listModule;
+        public ObservableCollection<Module> ListModule
+        {
+            get
+            {
+                return _listModule;
+            }
+            set
+            {
+                if (_listModule == value) return;
+                _listModule = value;
+                this.OnPropertyChanged("ListModule");
+            }
+        }
+
+        public MenuModuleViewModel(IModuleRepository moduleRepository, IRegionManager manager, IModuleCatalog catalog)
         {
             _manager = manager;
+            _moduleRepository = moduleRepository;
+            var tmp = catalog as DynamicDirectoryModuleCatalog;
+            tmp.Added += this.AddedModule;
+//            catalog = tmp;
             this.ListModule = new ObservableCollection<Module>(moduleRepository.getListModule());
         }
 

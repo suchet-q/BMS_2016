@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BMS.View
+namespace StockManagerModule.View
 {
     /// <summary>
-    /// Interaction logic for MenuModuleView.xaml
+    /// Interaction logic for StockDetailsView.xaml
     /// </summary>
-    public partial class MenuModuleView : UserControl
+    public partial class StockDetailsView : UserControl
     {
-        public MenuModuleView()
+        public StockDetailsView()
         {
             InitializeComponent();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
