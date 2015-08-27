@@ -9,7 +9,7 @@ using Microsoft.Practices.Prism.Regions;
 using Service;
 using Service.DataAccess;
 
-namespace UserManagerModule
+namespace BMS
 {
     class Bootstrapper : UnityBootstrapper
     {
@@ -38,7 +38,7 @@ namespace UserManagerModule
  	        base.ConfigureContainer();
             this.Container.RegisterInstance<IModuleCatalog>(this.ModuleCatalog);
             this.InitializeAPI();
-         }
+        }
         protected void InitializeAPI()
         {
             this.api = new API();

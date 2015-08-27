@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace UserManagerModule
+namespace BMS
 {
     /// <summary>
     /// Interaction logic for App.xaml

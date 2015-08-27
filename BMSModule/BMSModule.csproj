@@ -100,6 +100,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Shell.xaml.cs">
+      <DependentUpon>Shell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\GModulesViewModel.cs" />
     <Compile Include="ViewModel\MainGModulesViewModel.cs" />
     <Compile Include="ViewModel\UserListViewModel.cs" />
@@ -135,6 +138,10 @@
     <Page Include="MainGModuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\GModulesView.xaml">
       <SubType>Designer</SubType>

@@ -34,6 +34,14 @@ namespace Service.DataAccess
 
         public IEnumerable<Module> getListModule()
         {
+            IList<ModuleInfo> moduleInfoList = _catalog.Modules.ToList<ModuleInfo>();
+            var tmp = new List<Module>();
+            foreach (var elem in moduleInfoList)
+            {
+                tmp.Add(Module.CreateModule(elem.ModuleName));
+            }
+            this.ListModule = tmp;
+
             return this.ListModule;
         }
     }
