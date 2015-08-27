@@ -72,13 +72,13 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Storage :" />
 
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Zone:" />
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=zone.zone}" Width="150" />
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=zone}" Width="150" />
 
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Subzone:" />
-                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=zone.sous_zone}" Width="150" />
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=sous_zone}" Width="150" />
 
                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Location:" />
-                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=zone.emplacement}" Width="150" />
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=emplacement}" Width="150" />
             </Grid>
         </Border>
 

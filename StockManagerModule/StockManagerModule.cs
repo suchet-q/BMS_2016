@@ -23,7 +23,7 @@ namespace StockManagerModule
 
         public void Initialize()
         {
-            var viewModel = new ViewModel.StockManagerModuleViewModel(_api);
+            var viewModel = new ViewModel.StockManagerModuleViewModel(_api, _container);
             var view = new View.StockManagerModuleView();
             view.DataContext = viewModel;
 

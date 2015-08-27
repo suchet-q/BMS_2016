@@ -73,6 +73,7 @@
                             <DataGridTextColumn Header="VAT" Binding="{Binding Path=tvaRate.rate}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Quantity" Binding="{Binding Path=quantite}" />
                             <DataGridTextColumn Header="Reference" Binding="{Binding Path=reference}" />
+                            <DataGridTextColumn Header="Stockage" Binding="{Binding Path=emplacement}" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </HeaderedContentControl>

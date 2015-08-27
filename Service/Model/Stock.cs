@@ -16,8 +16,10 @@ namespace Service.Model
         public float vente_ttc { get; set; }
         public int quantite { get; set; }
         public string reference { get; set; }
+        public string zone { get; set; }
+        public string sous_zone { get; set; }
+        public string emplacement { get; set; }
         public Tva tva { get; set; }
-        public Zone zone { get; set; }
         public StockCategorie categorie { get; set; }
     }
 }

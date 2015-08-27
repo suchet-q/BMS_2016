@@ -1,4 +1,5 @@
-﻿using Service;
+﻿using Microsoft.Practices.Unity;
+using Service;
 using Service.Model;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,14 @@ namespace StockManagerModule.ViewModel
 
         public Stock Model { get; private set; }
         IAPI                            _api;
+        IUnityContainer                 _container;
         ObservableCollection<Stock>     _stockList;
  
 
-        public StockViewModel(Stock stock, ObservableCollection<Stock> listStock, IAPI api)
+        public StockViewModel(Stock stock, ObservableCollection<Stock> listStock, IAPI api, IUnityContainer container)
         {
             _api = api;
+            _container = container;
             if (stock == null)
             {
                 throw new ArgumentNullException("stock");
@@ -30,8 +33,7 @@ namespace StockManagerModule.ViewModel
             IEnumerable<Tva> tvaRes = _api.Orm.ObjectQuery<Tva>("select * from tva");
             this.AllTvaRate = new ObservableCollection<Tva>(tvaRes);
             this.tvaRate = this.Model.tva;
-            IEnumerable<StockCategorie> categorieRes = _api.Orm.ObjectQuery<StockCategorie>("select * from stock_categorie");
-            this._allCategories = new ObservableCollection<StockCategorie>(categorieRes);
+            this._allCategories = _container.Resolve(typeof(object), "CategoriesList") as ObservableCollection<StockCategorie>;
             this.categorie = this.Model.categorie;
             this.AddCategorieCommand = new DelegateCommand((o) => this.AddCategorie());
             this.DeleteCategorieCommand = new DelegateCommand((o) => this.DeleteCategorie());
@@ -169,6 +171,7 @@ namespace StockManagerModule.ViewModel
                 this.OnPropertyChanged("vente_ht");
                 this.OnPropertyChanged("vente_ttc");
                 _api.Orm.UpdateObject<Stock>(@"update stock set vente_ht = @vente_ht where id = @id", Model);
+                _api.Orm.UpdateObject<Stock>(@"update stock set vente_ttc = @vente_ttc where id = @id", Model);
             }
         }
         public float vente_ttc
@@ -181,9 +184,10 @@ namespace StockManagerModule.ViewModel
             {
                 if (this.Model.vente_ttc == value) return;
                 this.Model.vente_ttc = value;
-                this.Model.vente_ht = this.Model.vente_ttc * (1 - this.Model.tva.rate / 100);
+                this.Model.vente_ht = this.Model.vente_ttc / (1 + this.Model.tva.rate / 100);
                 this.OnPropertyChanged("vente_ttc");
                 this.OnPropertyChanged("vente_ht");
+                _api.Orm.UpdateObject<Stock>(@"update stock set vente_ht = @vente_ht where id = @id", Model);
                 _api.Orm.UpdateObject<Stock>(@"update stock set vente_ttc = @vente_ttc where id = @id", Model);
             }
         }
@@ -215,6 +219,53 @@ namespace StockManagerModule.ViewModel
                 _api.Orm.UpdateObject<Stock>(@"update stock set reference = @reference where id = @id", Model);
             }
         }
+
+        public string zone
+        {
+            get
+            {
+                return this.Model.zone;
+            }
+            set
+            {
+                if (this.Model.zone == value) return;
+                this.Model.zone = value;
+                this.OnPropertyChanged("zone");
+                _api.Orm.UpdateObject<Stock>(@"update stock set zone = @zone where id = @id", Model);
+            }
+        }
+
+        public string sous_zone
+        {
+            get
+            {
+                return this.Model.sous_zone;
+            }
+            set
+            {
+                if (this.Model.sous_zone == value) return;
+                this.Model.sous_zone = value;
+                this.OnPropertyChanged("sous_zone");
+                _api.Orm.UpdateObject<Stock>(@"update stock set sous_zone = @sous_zone where id = @id", Model);
+            }
+        }
+
+        public string emplacement
+        {
+            get
+            {
+                return this.Model.emplacement;
+            }
+            set
+            {
+                if (this.Model.emplacement == value) return;
+                this.Model.emplacement = value;
+                this.OnPropertyChanged("emplacement");
+                _api.Orm.UpdateObject<Stock>(@"update stock set emplacement = @emplacement where id = @id", Model);
+            }
+        }
+
+
         public Tva tvaRate
         {
             get
@@ -227,6 +278,9 @@ namespace StockManagerModule.ViewModel
                 this.Model.tva = value;
                 this.OnPropertyChanged("tvaRate");
                 _api.Orm.Update(@"update stock set id_tva = @tva where id = @Id", new { tva = this.Model.tva.id, Id = this.Model.id });
+                this.Model.vente_ttc = this.Model.vente_ht * (1 + this.Model.tva.rate / 100);
+                _api.Orm.UpdateObject<Stock>(@"update stock set vente_ttc = @vente_ttc where id = @id", Model);
+                this.OnPropertyChanged("vente_ttc");
             }
         }
         public StockCategorie categorie
@@ -244,20 +298,6 @@ namespace StockManagerModule.ViewModel
                     _api.Orm.Update(@"update stock set id_categorie = @categorie where id = @Id", new { categorie = this.Model.categorie.id, Id = this.Model.id });
             }
         }
-        //public Zone zone
-        //{
-        //    get
-        //    {
-        //        return this.Model.zone;
-        //    }
-        //    set
-        //    {
-        //        if (this.Model.zone == value) return;
-        //        this.Model.zone = value;
-        //        this.OnPropertyChanged("zone");
-        //    }
-        //}
-
 
         string _newCategorie;
         public string newCategory
