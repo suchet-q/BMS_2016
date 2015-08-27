@@ -103,7 +103,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModel\OrderDetailViewModel.cs" />
     <Compile Include="ViewModel\OrdersManagerModuleViewModel.cs" />
+    <Compile Include="View\OrderDetailView.xaml.cs">
+      <DependentUpon>OrderDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OrdersManagerModuleView.xaml.cs">
       <DependentUpon>OrdersManagerModuleView.xaml</DependentUpon>
     </Compile>
@@ -125,6 +129,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="View\OrderDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\OrdersManagerModuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

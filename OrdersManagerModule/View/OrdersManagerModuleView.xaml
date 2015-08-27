@@ -36,6 +36,54 @@
     </UserControl.Resources>
 
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0" Margin="0,0,3,0">
+            <HeaderedContentControl.Header>
+                Orders
+            </HeaderedContentControl.Header>
+            <HeaderedContentControl>
+                <HeaderedContentControl.Header>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Margin="2">
+                                <Hyperlink Command="{Binding Path=AddOrderCommand}">Add Order</Hyperlink>
+                            <!--| <Hyperlink Command="{Binding Path=ModifyOrderCommand}">Modify Order</Hyperlink>-->
+                        </TextBlock>
+                    </StackPanel>
+                </HeaderedContentControl.Header>
+                <ListView SelectedItem="{Binding Path=CurrentOrder, Mode=TwoWay}" ItemsSource="{Binding Path=ListAllOrders}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=DateOrdered, StringFormat={}{0:MM/dd/yyyy}}"/>
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Path=Content}"/>
+                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status}"/>
+                            <GridViewColumn Header="Receiver" DisplayMemberBinding="{Binding Path=Receiver}"/>
+                            <GridViewColumn Header="Date Received" DisplayMemberBinding="{Binding Path=DateReceived, StringFormat={}{0:MM/dd/yyyy}}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </HeaderedContentControl>
+        </HeaderedContentControl>
+        
+        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="1">
+            <HeaderedContentControl.Header>
+                Details
+            </HeaderedContentControl.Header>
+            <HeaderedContentControl>
+                <Border Style="{StaticResource DetailBorder}"  Margin="5">
+                    <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentUser}">
+                        <ContentControl.Resources>
+                            <DataTemplate DataType="{x:Type vm:OrderDetailViewModel}">
+                                <v:OrderDetailView />
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
+                </Border>
+            </HeaderedContentControl>
+        </HeaderedContentControl>
+        
     </Grid>
 </UserControl>
