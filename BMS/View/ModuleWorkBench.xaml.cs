@@ -18,14 +18,18 @@ using System.Windows.Shapes;
 namespace BMS.View
 {
     /// <summary>
-    /// Interaction logic for MenuModuleView.xaml
+    /// Interaction logic for ModuleWorkBench.xaml
     /// </summary>
-    public partial class MenuModuleView : UserControl
+    public partial class ModuleWorkBench : UserControl
     {
-        public MenuModuleView()
+        public ModuleWorkBench()
         {
             InitializeComponent();
 
+            IRegionManager regionManager = ServiceLocator.Current.GetInstance<IRegionManager>();
+            regionManager.Regions.Remove("MainModuleRegion");
+            RegionManager.SetRegionManager(this, regionManager);
+            RegionManager.SetRegionName(this.MainModuleRegion, "MainModuleRegion");
         }
     }
 }

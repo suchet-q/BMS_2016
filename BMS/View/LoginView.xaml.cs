@@ -1,6 +1,4 @@
-﻿using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.ServiceLocation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,14 +16,13 @@ using System.Windows.Shapes;
 namespace BMS.View
 {
     /// <summary>
-    /// Interaction logic for MenuModuleView.xaml
+    /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class MenuModuleView : UserControl
+    public partial class LoginView : UserControl
     {
-        public MenuModuleView()
+        public LoginView()
         {
             InitializeComponent();
-
         }
     }
 }

@@ -60,7 +60,7 @@ namespace BMS
         {
             IRegionManager manager = this.Container.Resolve<IRegionManager>();
 
-            var viewModel = new ViewModel.ShellViewModel(this.ModuleCatalog, this.Container, manager);
+            var viewModel = new ViewModel.ShellViewModel(this.ModuleCatalog, this.Container, manager, this.api);
             App.Current.MainWindow.DataContext = viewModel;
             App.Current.MainWindow.Show();
         }
