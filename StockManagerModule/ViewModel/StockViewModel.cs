@@ -165,7 +165,7 @@ namespace StockManagerModule.ViewModel
             {
                 if (this.Model.vente_ht == value) return;
                 this.Model.vente_ht = value;
-                this.Model.vente_ttc *= (1 + this.Model.tva.rate / 100);
+                this.Model.vente_ttc = this.Model.vente_ht * (1 + this.Model.tva.rate / 100);
                 this.OnPropertyChanged("vente_ht");
                 this.OnPropertyChanged("vente_ttc");
                 _api.Orm.UpdateObject<Stock>(@"update stock set vente_ht = @vente_ht where id = @id", Model);
@@ -181,7 +181,7 @@ namespace StockManagerModule.ViewModel
             {
                 if (this.Model.vente_ttc == value) return;
                 this.Model.vente_ttc = value;
-                this.Model.vente_ht *= (1 - this.Model.tva.rate / 100);
+                this.Model.vente_ht = this.Model.vente_ttc * (1 - this.Model.tva.rate / 100);
                 this.OnPropertyChanged("vente_ttc");
                 this.OnPropertyChanged("vente_ht");
                 _api.Orm.UpdateObject<Stock>(@"update stock set vente_ttc = @vente_ttc where id = @id", Model);
