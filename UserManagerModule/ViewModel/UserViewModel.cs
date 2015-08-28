@@ -96,7 +96,8 @@ namespace UserManagerModule.ViewModel
             {
                 this.Model.pwd = value;
                 this.OnPropertyChanged("pwd");
-                _api.Orm.UpdateObject<User>(@"update user set pwd = @pwd where Id = @Id", Model);
+
+                _api.Orm.Update(@"update user set pwd = @Pwd where Id = @Id", new { Pwd = _api.CalculateMD5Hash(pwd), @Id = this.Id});
             }
         }
 

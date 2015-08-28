@@ -100,7 +100,7 @@ namespace BMS.ViewModel
 
         private void ExecuteLogin()
         {
-            IEnumerable<User> res = _api.Orm.ObjectQuery<User>("select * from user where login=@login and pwd=@password", new { login = this.Login, password = this.Password });
+            IEnumerable<User> res = _api.Orm.ObjectQuery<User>("select * from user where login=@login and pwd=@password", new { login = this.Login, password = _api.CalculateMD5Hash(this.Password) });
             if (res != null)
             {
                 int count = 0;
