@@ -48,10 +48,17 @@ namespace StockManagerModule.ViewModel
             this.newCategory = "";
             _api.Orm.Insert("insert into stock_categorie(categorie) values (@NewCategorie)", new { NewCategorie = toInsert.categorie });
             var res = _api.Orm.Query("select max(id) as maxId from stock_categorie");
-            toInsert.id = res.First().maxId;
-            System.Console.Error.WriteLine("nouvel ID de la nouvelle categorie : " + toInsert.id);
-            this.AllCategories.Add(toInsert);
-            this.categorie = toInsert;
+            if (res != null)
+            {
+                toInsert.id = res.First().maxId;
+                System.Console.Error.WriteLine("nouvel ID de la nouvelle categorie : " + toInsert.id);
+                this.AllCategories.Add(toInsert);
+                this.categorie = toInsert;
+            }
+            else
+            {
+                //message d'erreur
+            }
         }
 
         private void    DeleteCategorie()

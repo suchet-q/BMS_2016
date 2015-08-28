@@ -70,6 +70,10 @@ namespace StockManagerModule.ViewModel
         {
 
             IEnumerable<dynamic> stockBrutList = _api.Orm.Query("select * from stock");
+            if (stockBrutList == null)
+            {
+                stockBrutList = new Collection<dynamic>();
+            }
             ObservableCollection<Stock> res = new ObservableCollection<Stock>();
             
             foreach (dynamic stockBrut in stockBrutList)
