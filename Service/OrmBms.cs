@@ -205,10 +205,10 @@ namespace Service
             query += ") values (";
             foreach (PropertyInfo propertyInfo in propertyInfos)
             {
-                if (propertyInfo.PropertyType == typeof(string))
+                if (propertyInfo.PropertyType == typeof(string) || propertyInfo.PropertyType == typeof(DateTime))
                     query += "'";
                 query += propertyInfo.GetValue(toAdd);
-                if (propertyInfo.PropertyType == typeof(string))
+                if (propertyInfo.PropertyType == typeof(string) || propertyInfo.PropertyType == typeof(DateTime))
                     query += "'";
                 query += ", ";
             }

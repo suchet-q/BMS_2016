@@ -11,5 +11,6 @@ namespace Service
         OrmBms Orm { get; set; }
 
         bool Initialize();
+        string CalculateMD5Hash(string input);
     }
 }
