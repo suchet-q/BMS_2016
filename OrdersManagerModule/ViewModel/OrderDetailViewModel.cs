@@ -12,12 +12,12 @@ namespace OrdersManagerModule.ViewModel
 {
     public class OrderDetailViewModel : ViewModelBase
     {
-        Order                        _order;
-        public Order                 Model { get; private set; }
-        ObservableCollection<Order>  _listOrder;
+        Orders                        _order;
+        public Orders                 Model { get; private set; }
+        ObservableCollection<Orders>  _listOrder;
         IAPI                        _api;
 
-        public OrderDetailViewModel(Order order, ObservableCollection<Order> listOrder, IAPI api)
+        public OrderDetailViewModel(Orders order, ObservableCollection<Orders> listOrder, IAPI api)
         {
             _api = api;
             if (order == null)
@@ -54,7 +54,7 @@ namespace OrdersManagerModule.ViewModel
             {
                 this.Model.dateordered = value;
                 this.OnPropertyChanged("DateOrdered");
-                _api.Orm.UpdateObject<Order>(@"update orders set dateordered = @dateordered where Id = @Id", Model);
+                _api.Orm.UpdateObject<Orders>(@"update orders set dateordered = @dateordered where Id = @Id", Model);
             }
         }
 
@@ -69,7 +69,7 @@ namespace OrdersManagerModule.ViewModel
             {
                 this.Model.content = value;
                 this.OnPropertyChanged("Content");
-                _api.Orm.UpdateObject<Order>(@"update orders set content = @content where Id = @Id", Model);
+                _api.Orm.UpdateObject<Orders>(@"update orders set content = @content where Id = @Id", Model);
             }
         }
 
@@ -84,7 +84,7 @@ namespace OrdersManagerModule.ViewModel
             {
                 this.Model.status = value;
                 this.OnPropertyChanged("Status");
-                _api.Orm.UpdateObject<Order>(@"update orders set status = @status where Id = @Id", Model);
+                _api.Orm.UpdateObject<Orders>(@"update orders set status = @status where Id = @Id", Model);
             }
         }
 
@@ -99,7 +99,7 @@ namespace OrdersManagerModule.ViewModel
             {
                 this.Model.receiver = value;
                 this.OnPropertyChanged("Receiver");
-                _api.Orm.UpdateObject<Order>(@"update orders set receiver = @receiver where Id = @Id", Model);
+                _api.Orm.UpdateObject<Orders>(@"update orders set receiver = @receiver where Id = @Id", Model);
             }
         }
 
@@ -114,7 +114,7 @@ namespace OrdersManagerModule.ViewModel
             {
                 this.Model.datereceived = value;
                 this.OnPropertyChanged("DateReceived");
-                _api.Orm.UpdateObject<Order>(@"update orders set datereceived = @datereceived where Id = @Id", Model);
+                _api.Orm.UpdateObject<Orders>(@"update orders set datereceived = @datereceived where Id = @Id", Model);
             }
         }
     }

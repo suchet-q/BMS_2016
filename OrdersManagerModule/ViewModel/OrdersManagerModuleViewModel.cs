@@ -15,7 +15,7 @@ namespace OrdersManagerModule.ViewModel
         IAPI _api;
 
         private OrderDetailViewModel _currentOrder;
-        private ObservableCollection<Order> _listAllOrders;
+        private ObservableCollection<Orders> _listAllOrders;
         public ObservableCollection<OrderDetailViewModel> ListAllOrders { get; private set; }
         public ICommand AddOrderCommand { get; private set; }
 
@@ -37,11 +37,11 @@ namespace OrdersManagerModule.ViewModel
         {
             _api = api;
 
-            IEnumerable<Order> listOrder = _api.Orm.ObjectQuery<Order>("select * from orders");
+            IEnumerable<Orders> listOrder = _api.Orm.ObjectQuery<Orders>("select * from orders");
 
-            _listAllOrders = new ObservableCollection<Order>(listOrder);
+            _listAllOrders = new ObservableCollection<Orders>(listOrder);
             this.ListAllOrders = new ObservableCollection<OrderDetailViewModel>();
-            foreach (Order order in _listAllOrders)
+            foreach (Orders order in _listAllOrders)
             {
                 this.ListAllOrders.Add(new OrderDetailViewModel(order, _listAllOrders, _api));
             }
@@ -60,7 +60,7 @@ namespace OrdersManagerModule.ViewModel
 
         private void AddOrder()
         {
-            Order order = new Order();
+            Orders order = new Orders();
             _api.Orm.InsertObject(order);
             IEnumerable<dynamic> res = _api.Orm.Query("select max(id) as maxId from orders");
             order.id = (int)res.First().maxId;

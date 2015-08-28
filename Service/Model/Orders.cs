@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.Model
 {
-    public class Order
+    public class Orders
     {
         public int id { get; set; }
         public DateTime dateordered { get; set; }
