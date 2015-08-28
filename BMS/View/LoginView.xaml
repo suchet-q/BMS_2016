@@ -7,9 +7,17 @@
              Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="300" Width="400">
         <TextBlock Text="Password:" Margin="73,115,0,169"/>
-        <TextBox Margin="159,76,0,204" Width="150" Height="20" Text="{Binding Login}"/>
-        <TextBlock Text="Login:" Width="40" Margin="73,80,0,204"/>
-        <TextBox Margin="159,111,91,169" Width="150" Height="20" Text="{Binding Password}"/>
+        <TextBox Margin="159,76,0,204" Width="150" Height="20" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox.InputBindings>
+                <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
+            </TextBox.InputBindings>
+         </TextBox>
+            <TextBlock Text="Login:" Width="40" Margin="73,80,0,204"/>
+        <TextBox Margin="159,111,91,169" Width="150" Height="20" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox.InputBindings>
+                <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
+            </TextBox.InputBindings>
+        </TextBox>
         
         <TextBlock Foreground="Red" TextWrapping="Wrap" Text="Invalid Login or Password" TextAlignment="Center" Margin="57,160,56,124">
             <TextBlock.Style>
@@ -19,6 +27,20 @@
                             <Setter Property="UIElement.Visibility" Value="Visible"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding DisplayConnexionErrMsg}" Value="false">
+                            <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Foreground="Red" TextWrapping="Wrap" Text="The Database is not reachable" TextAlignment="Center" Margin="57,160,56,124">
+            <TextBlock.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding DisplayDatabaseErrMsg}" Value="true">
+                            <Setter Property="UIElement.Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding DisplayDatabaseErrMsg}" Value="false">
                             <Setter Property="UIElement.Visibility" Value="Collapsed"/>
                         </DataTrigger>
                     </Style.Triggers>
