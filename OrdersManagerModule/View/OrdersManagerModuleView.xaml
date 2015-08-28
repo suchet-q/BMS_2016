@@ -57,11 +57,11 @@
                 <ListView SelectedItem="{Binding Path=CurrentOrder, Mode=TwoWay}" ItemsSource="{Binding Path=ListAllOrders}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=DateOrdered, StringFormat={}{0:MM/dd/yyyy}}"/>
+                            <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=DateOrdered, StringFormat={}{0:dd/MM/yyyy}}"/>
                             <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Path=Content}"/>
                             <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status}"/>
                             <GridViewColumn Header="Receiver" DisplayMemberBinding="{Binding Path=Receiver}"/>
-                            <GridViewColumn Header="Date Received" DisplayMemberBinding="{Binding Path=DateReceived, StringFormat={}{0:MM/dd/yyyy}}"/>
+                            <GridViewColumn Header="Date Received" DisplayMemberBinding="{Binding Path=DateReceived, StringFormat={}{0:dd/MM/yyyy}}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
