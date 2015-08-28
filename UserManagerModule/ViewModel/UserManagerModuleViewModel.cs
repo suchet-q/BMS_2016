@@ -40,6 +40,10 @@ namespace UserManagerModule.ViewModel
 
             // Get list de la BD
             IEnumerable<User> listUser = _api.Orm.ObjectQuery<User>("select * from user");
+            if (listUser == null)
+            {
+                listUser = new Collection<User>();                                
+            }
 
             _listAllUsers = new ObservableCollection<User>(listUser);
             this.AllUsers = new ObservableCollection<UserViewModel>();
@@ -48,7 +52,6 @@ namespace UserManagerModule.ViewModel
                 this.AllUsers.Add(new UserViewModel(user, _listAllUsers, _api));
                 System.Console.Error.WriteLine(user.name);
             }
-
             _currentUser = AllUsers.Count > 0 ? AllUsers[0] : null;
 
             this.AllUsers.CollectionChanged += (sender, e) =>
@@ -69,11 +72,17 @@ namespace UserManagerModule.ViewModel
             User user = new User();
             _api.Orm.InsertObject(user);
             IEnumerable<dynamic> res = _api.Orm.Query("select max(id) as maxId from user");
-            user.id = (int)res.First().maxId;
-
-            UserViewModel vm = new UserViewModel(user, _listAllUsers, _api);
-            this.AllUsers.Add(vm);
-            this.CurrentUser = vm;
+            if (res != null)
+            {
+                user.id = (int)res.First().maxId;
+                UserViewModel vm = new UserViewModel(user, _listAllUsers, _api);
+                this.AllUsers.Add(vm);
+                this.CurrentUser = vm;
+            }
+            else
+            {
+                //Message d erreur
+            }
         }
 
         private void DeleteCurrentUser()

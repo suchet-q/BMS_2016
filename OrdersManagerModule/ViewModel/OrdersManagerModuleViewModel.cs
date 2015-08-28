@@ -55,16 +55,18 @@ namespace OrdersManagerModule.ViewModel
                     this.CurrentOrder = null;
                 }
             };
+            AddOrderCommand = new DelegateCommand((o) => this.AddOrder());
         }
 
         private void AddOrder()
         {
             Order order = new Order();
             _api.Orm.InsertObject(order);
-            IEnumerable<dynamic> res = _api.Orm.Query("select max(id) as maxId from Order");
+            IEnumerable<dynamic> res = _api.Orm.Query("select max(id) as maxId from orders");
             order.id = (int)res.First().maxId;
             order.dateordered = DateTime.Now;
 
+            _listAllOrders.Add(order);
             OrderDetailViewModel vm = new OrderDetailViewModel(order, _listAllOrders, _api);
             this.ListAllOrders.Add(vm);
             this.CurrentOrder = vm;
