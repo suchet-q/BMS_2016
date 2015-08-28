@@ -26,6 +26,8 @@ namespace BMS.ViewModel
             _container = container;
 
             this.LoginCommand = new DelegateCommand((o) => this.ExecuteLogin(), (o) => this.CanExecuteLogin());
+            this.DisplayDatabaseErrMsg = false;
+            this.DisplayConnexionErrMsg = false;
         }
 
 
@@ -35,6 +37,21 @@ namespace BMS.ViewModel
                 EventLogin(this, e);
         }
 
+
+        private bool _displayDatabaseErrMsg;
+        public bool DisplayDatabaseErrMsg
+        {
+            get
+            {
+                return _displayDatabaseErrMsg;
+            }
+            set
+            {
+                if (_displayDatabaseErrMsg == value) return;
+                _displayDatabaseErrMsg = value;
+                this.OnPropertyChanged("DisplayDatabaseErrMsg");
+            }
+        }
 
         private bool _displayConnexionErrMsg;
         public bool DisplayConnexionErrMsg
@@ -95,9 +112,15 @@ namespace BMS.ViewModel
                 }
                 else
                 {
+                    this.DisplayDatabaseErrMsg = false;
                     this.DisplayConnexionErrMsg = true;
                     this.Password = "";
                 }
+            }
+            else
+            {
+                this.DisplayDatabaseErrMsg = true;
+                this.DisplayConnexionErrMsg = false;
             }
         }
 

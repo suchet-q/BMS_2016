@@ -29,8 +29,13 @@ namespace BMS.ViewModel
             _catalog = catalog;
             _container = container;
             _manager = manager;
-            var viewModel = new LoginViewModel(api, _container);
-            viewModel.EventLogin += this.NavigateToModuleWorkBench;
+            // On le met en comentaire pour les tests pour eviter de ce log a chaque test
+            //var viewModel = new LoginViewModel(api, _container);
+            //viewModel.EventLogin += this.NavigateToModuleWorkBench;
+
+            //Bypass du login
+            var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager);
+
             ViewModels.Add(viewModel);
         }
 
