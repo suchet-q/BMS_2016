@@ -15,6 +15,10 @@ namespace OrdersManagerModule.ViewModel
         IAPI _api;
 
         private OrderDetailViewModel _currentOrder;
+        private ObservableCollection<Order> _listAllOrders;
+        public ObservableCollection<OrderDetailViewModel> ListAllOrders { get; private set; }
+        public ICommand AddOrderCommand { get; private set; }
+
         public OrderDetailViewModel CurrentOrder
         {
             get
@@ -29,26 +33,7 @@ namespace OrdersManagerModule.ViewModel
             }
         }
 
-        private ObservableCollection<Order> _listAllOrders;
-
-        public ObservableCollection<OrderDetailViewModel> ListAllOrders { get; private set; }
-
-        public ICommand AddOrderCommand { get; private set; }
-
-        private void AddOrder()
-        {
-            Order order = new Order();
-            _api.Orm.InsertObject(order);
-            IEnumerable<dynamic> res = _api.Orm.Query("select max(id) as maxId from Order");
-            order.id = (int)res.First().maxId;
-            order.dateordered = DateTime.Now;
-
-            OrderDetailViewModel vm = new OrderDetailViewModel(order, _listAllOrders, _api);
-            this.ListAllOrders.Add(vm);
-            this.CurrentOrder = vm;
-        }
-
-         public OrdersManagerModuleViewModel(IAPI api)
+        public OrdersManagerModuleViewModel(IAPI api)
         {
             _api = api;
 
@@ -70,7 +55,19 @@ namespace OrdersManagerModule.ViewModel
                     this.CurrentOrder = null;
                 }
             };
+        }
 
+        private void AddOrder()
+        {
+            Order order = new Order();
+            _api.Orm.InsertObject(order);
+            IEnumerable<dynamic> res = _api.Orm.Query("select max(id) as maxId from Order");
+            order.id = (int)res.First().maxId;
+            order.dateordered = DateTime.Now;
+
+            OrderDetailViewModel vm = new OrderDetailViewModel(order, _listAllOrders, _api);
+            this.ListAllOrders.Add(vm);
+            this.CurrentOrder = vm;
         }
     }
 }

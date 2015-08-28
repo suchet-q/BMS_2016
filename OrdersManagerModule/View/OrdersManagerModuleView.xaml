@@ -67,14 +67,14 @@
                 </ListView>
             </HeaderedContentControl>
         </HeaderedContentControl>
-        
+
         <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="1">
             <HeaderedContentControl.Header>
                 Details
             </HeaderedContentControl.Header>
             <HeaderedContentControl>
                 <Border Style="{StaticResource DetailBorder}"  Margin="5">
-                    <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentUser}">
+                    <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentOrder}">
                         <ContentControl.Resources>
                             <DataTemplate DataType="{x:Type vm:OrderDetailViewModel}">
                                 <v:OrderDetailView />
