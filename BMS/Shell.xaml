@@ -14,6 +14,13 @@
     <Grid>
 
         <local:Banner VerticalAlignment="Top" />
+        <ItemsControl ItemsSource="{Binding CoreMenu}">
+            <ItemsControl.Resources>
+                <DataTemplate DataType="{x:Type vm:CoreMenuViewModel}">
+                    <v:CoreMenuView />
+                </DataTemplate>
+            </ItemsControl.Resources>
+        </ItemsControl>
         <StackPanel Width="Auto" Height="Auto">
 <!--         <ContentControl Name="MainWindowRegion" prism:RegionManager.RegionName="" -->
             <ItemsControl ItemsSource="{Binding ViewModels}">

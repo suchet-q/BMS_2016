@@ -30,13 +30,13 @@ namespace BMS.ViewModel
             _container = container;
             _manager = manager;
             // On le met en comentaire pour les tests pour eviter de ce log a chaque test
-            //var viewModel = new LoginViewModel(api, _container);
-            //viewModel.EventLogin += this.NavigateToModuleWorkBench;
+            var viewModel = new LoginViewModel(api, _container);
+            viewModel.EventLogin += this.NavigateToModuleWorkBench;
 
             //Bypass du login
-            var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager);
-
+            //var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager);
             ViewModels.Add(viewModel);
+            this.CoreMenu.Add(new CoreMenuViewModel());
         }
 
         //public ObservableCollection<ViewModelBase> MenuModule
@@ -50,6 +50,26 @@ namespace BMS.ViewModel
         //        return _viewModels;
         //    }
         //}
+
+        private ObservableCollection<CoreMenuViewModel> _coreMenu;
+        public ObservableCollection<CoreMenuViewModel> CoreMenu
+        {
+            get
+            {
+                if (_coreMenu == null)
+                {
+                    _coreMenu = new ObservableCollection<CoreMenuViewModel>();
+                }
+                return _coreMenu;
+            }
+            set
+            {
+                if (_coreMenu == value) return;
+                _coreMenu = value;
+                OnPropertyChanged("CoreMenu");
+            }
+        }
+
 
 
         public ObservableCollection<ViewModelBase> ViewModels

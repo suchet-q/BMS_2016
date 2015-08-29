@@ -18,7 +18,7 @@ namespace Service
 
         public bool Initialize()
         {
-            this.Orm.Initialize("localhost", "bms", "root", "");
+            this.Orm.Initialize("mysql-bms-market.alwaysdata.net", "bms-market_logiciel", "110624_bms", "655957ab");
             return true;
         }
 
