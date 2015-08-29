@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              Height="Auto" Width="Auto">
     <StackPanel>
-        <Menu IsMainMenu="True">
+        <Menu IsMainMenu="True" BorderThickness="1" BorderBrush="LightGray">
             <MenuItem Header="_Account">
                 <MenuItem Header="Log out" Command="{Binding LogoutCommand}">
                     <!--<MenuItem.Icon>

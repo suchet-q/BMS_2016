@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BMS.ViewModel
 {
-    public class CoreMenuViewModel : ViewModelBase
+    public class CoreMenuViewModel : BasicMenuViewModel
     {
         public CoreMenuViewModel()
         {

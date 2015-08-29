@@ -36,7 +36,7 @@ namespace BMS.ViewModel
             //Bypass du login
             //var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager);
             ViewModels.Add(viewModel);
-            this.CoreMenu.Add(new CoreMenuViewModel());
+            this.LoginMenu.Add(new BasicMenuViewModel());
         }
 
         //public ObservableCollection<ViewModelBase> MenuModule
@@ -50,6 +50,25 @@ namespace BMS.ViewModel
         //        return _viewModels;
         //    }
         //}
+
+        private ObservableCollection<BasicMenuViewModel> _loginMenu;
+        public ObservableCollection<BasicMenuViewModel> LoginMenu
+        {
+            get
+            {
+                if (_loginMenu == null)
+                {
+                    _loginMenu = new ObservableCollection<BasicMenuViewModel>();
+                }
+                return _loginMenu;
+            }
+            set
+            {
+                if (_loginMenu == value) return;
+                _loginMenu = value;
+                OnPropertyChanged("LoginMenu");
+            }
+        }
 
         private ObservableCollection<CoreMenuViewModel> _coreMenu;
         public ObservableCollection<CoreMenuViewModel> CoreMenu
@@ -92,6 +111,8 @@ namespace BMS.ViewModel
 
         void NavigateToModuleWorkBench(object sender, EventArgs args)
         {
+            this.LoginMenu.Clear();
+            this.CoreMenu.Add(new CoreMenuViewModel());
             var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager);
             this.ViewModels.Clear();
             this.ViewModels.Add(viewModel);
