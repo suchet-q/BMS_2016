@@ -114,10 +114,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModel\AgendaEventViewModel.cs" />
+    <Compile Include="ViewModel\AddEventViewModel.cs" />
+    <Compile Include="ViewModel\AgendaListEvent.cs" />
+    <Compile Include="ViewModel\DetailsEventsViewModel.cs" />
     <Compile Include="ViewModel\ModuleAgendaViewModel.cs" />
-    <Compile Include="View\EventDetailView.xaml.cs">
-      <DependentUpon>EventDetailView.xaml</DependentUpon>
+    <Compile Include="View\AddEventView.xaml.cs">
+      <DependentUpon>AddEventView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailsEventsView.xaml.cs">
+      <DependentUpon>DetailsEventsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ModuleAgendaView.xaml.cs">
       <DependentUpon>ModuleAgendaView.xaml</DependentUpon>
@@ -133,7 +138,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\EventDetailView.xaml">
+    <Page Include="View\AddEventView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailsEventsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

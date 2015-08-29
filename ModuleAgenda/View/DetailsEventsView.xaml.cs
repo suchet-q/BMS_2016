@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ModuleAgenda.View
 {
     /// <summary>
-    /// Interaction logic for EventDetailView.xaml
+    /// Interaction logic for DetailsEventsView.xaml
     /// </summary>
-    public partial class EventDetailView : UserControl
+    public partial class DetailsEventsView : UserControl
     {
-        public EventDetailView()
+        public DetailsEventsView()
         {
             InitializeComponent();
         }
