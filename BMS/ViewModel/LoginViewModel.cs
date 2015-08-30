@@ -166,7 +166,7 @@ namespace BMS.ViewModel
         private void ConnectDatabase()
         {
             System.Console.Error.WriteLine("Change setting de la bdd plz");
-//            _api.Orm.Initialize(this.Host, this.Database, this.Port, this.Login, this.Password);
+            _api.Orm.Initialize(this.Host, this.Database, this.Port, this.Login, this.Password);
         }
 
         private void DisplayDatabaseParamExecute()
