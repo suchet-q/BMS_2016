@@ -24,6 +24,7 @@ namespace ModuleAgenda.ViewModel
             _api = api;
             _model = new AgendaEvent();
             this.AddEventCommand = new DelegateCommand((o) => this.AddEvent());
+            this.DeleteEventCommand = new DelegateCommand((o) => this.DeleteEvent());
             this._pattern = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
             this._rgx = new Regex(this._pattern, RegexOptions.IgnoreCase);
             this._model.startevent = "00:00";
@@ -31,6 +32,11 @@ namespace ModuleAgenda.ViewModel
             this._model.color = "green";
         }
 
+        public ICommand DeleteEventCommand { get; private set; }
+
+        public void DeleteEvent()
+        { 
+        }
         public ICommand AddEventCommand { get; private set; }
 
         public void AddEvent()
@@ -41,17 +47,21 @@ namespace ModuleAgenda.ViewModel
              this._model.endevent = this._model.endevent.Trim();
              if (this._model.title.Length > 0 && this._model.startevent.Length > 0 && this._model.endevent.Length > 0)
              {
-                 this._model.date = this._currentDate;
-                 Console.Error.WriteLine("ajout nouveaux champs step 2");
-                 //_api.Orm.InsertObject<AgendaEvent>(this._model);
-                 //this._model = new AgendaEvent();
-                 DateAdd = this._currentDate;
-                 StartAdd = "00:00";
-                 EndAdd = "00:00";
-                 TitleAdd = "titre";
-                 DescriptionAdd = "";
-                 LocationAdd = "";
-                 ColorAdd = "green";
+                 int res = _api.Orm.InsertObject<AgendaEvent>(this._model);
+                 IEnumerable<dynamic> idmax = _api.Orm.Query("select max(id) as maxId from agendaevent");
+                 this._model.id = (int)idmax.First().maxId;
+                 int resupdate = _api.Orm.UpdateObject<AgendaEvent>(@"update agendaevent set date = @date where Id = @Id", this._model);
+                 if (res > 0 && resupdate > 0) 
+                 {
+                     this._model = new AgendaEvent();
+                     DateAdd = this._currentDate;
+                     StartAdd = "00:00";
+                     EndAdd = "00:00";
+                     TitleAdd = "titre";
+                     DescriptionAdd = "";
+                     LocationAdd = "";
+                     ColorAdd = "green";
+                 }
             }
         }
         public DateTime CurrentDate
@@ -65,6 +75,7 @@ namespace ModuleAgenda.ViewModel
                 if (_currentDate == value) return;
                 _currentDate = value;
                 this._model.date = _currentDate;
+                this.DateAdd = _currentDate;
                 this.OnPropertyChanged("CurrentDate");
             }
         }

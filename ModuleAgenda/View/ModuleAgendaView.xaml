@@ -64,12 +64,7 @@
                 </HeaderedContentControl>
             </HeaderedContentControl>
         </StackPanel>
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0" VerticalAlignment="Top" Margin="0,3,3,0">
-            <HeaderedContentControl.Header>
-                NewEvent
-            </HeaderedContentControl.Header>
-            <HeaderedContentControl>
-                <StackPanel>
+
                     <Border Style="{StaticResource DetailBorder}"  Margin="5">
                         <ContentControl HorizontalAlignment="Stretch" Content="{Binding Path=_viewAddEvent}">
                             <ContentControl.Resources>
@@ -79,9 +74,7 @@
                             </ContentControl.Resources>
                         </ContentControl>
                     </Border>
-                </StackPanel>
-            </HeaderedContentControl>
-        </HeaderedContentControl>
+
         <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0" Grid.Row="1" Margin="0,5,3,0">
             <HeaderedContentControl.Header>
                 Detail Event

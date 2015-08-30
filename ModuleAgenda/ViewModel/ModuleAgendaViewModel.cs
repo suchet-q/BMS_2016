@@ -14,20 +14,39 @@ namespace ModuleAgenda.ViewModel
     public class ModuleAgendaViewModel : ViewModelBase
     {
         IAPI _api;
-        ObservableCollection<AgendaEvent> _listEvent;
+        public ObservableCollection<AgendaEvent> _listEvent;
         public DetailsEventsViewModel _viewEvent { get; set; }
         public AddEventViewModel _viewAddEvent { get; set; }
         public ModuleAgendaViewModel(IAPI api)
         {
             _api = api;
-            IEnumerable<AgendaEvent> tmpList = _api.Orm.ObjectQuery<AgendaEvent>("select * from agenda_event");
-            _listEvent = new ObservableCollection<AgendaEvent>(tmpList);
+           /* this.DisplayConnexionErrMsg = false;*/
+            IEnumerable<AgendaEvent> tmpList = _api.Orm.ObjectQuery<AgendaEvent>("select * from agendaevent");
+            if (tmpList != null)
+                _listEvent = new ObservableCollection<AgendaEvent>(tmpList);
+            else
+                _listEvent = null;
             _viewEvent = new DetailsEventsViewModel(_listEvent, _api);
             _viewAddEvent = new AddEventViewModel(_api);
             this._currentDate = DateTime.Now;
             this._viewEvent.CurrentDate = this._currentDate;
             this._viewAddEvent.CurrentDate = this._currentDate;
         }
+
+       /* private bool _displayDatabaseErrMsg;
+        public bool DisplayConnexionErrMsg
+        {
+            get
+            {
+                return _displayDatabaseErrMsg;
+            }
+            set
+            {
+                if (_displayDatabaseErrMsg == value) return;
+                _displayDatabaseErrMsg = value;
+                this.OnPropertyChanged("DisplayConnexionErrMsg");
+            }
+        }*/
 
         private DateTime _currentDate;
 

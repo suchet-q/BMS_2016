@@ -18,6 +18,6 @@ namespace Service.Model
         public int userid { get; set; }
         public string color { get; set; }
         public int status { get; set; }
-        //public List<int> participants { get; set; }
+        public string participants { get; set; }
     }
 }

@@ -56,11 +56,14 @@ namespace ModuleAgenda.ViewModel
                 if (_currentDate == value) return;
                 this._currentListEvent.Clear();
                 _currentDate = value;
-                foreach (AgendaEvent evt in _listEvent)
+                if (_listEvent != null)
                 {
-                    if (evt.date == value)
+                    foreach (AgendaEvent evt in _listEvent)
                     {
-                        this._currentListEvent.Add(new AgendaListEvent(evt, _api));
+                        if (evt.date == value)
+                        {
+                            this._currentListEvent.Add(new AgendaListEvent(evt, _api));
+                        }
                     }
                 }
                 this.OnPropertyChanged("CurrentDate");

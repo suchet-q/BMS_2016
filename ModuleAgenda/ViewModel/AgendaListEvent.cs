@@ -217,6 +217,7 @@ namespace ModuleAgenda.ViewModel
                 }
                 this.OnPropertyChanged("status");
                 _api.Orm.UpdateObject<AgendaEvent>(@"update agenda_event set status = @status where Id = @Id", _model);
+                
             }
         }
 
