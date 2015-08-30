@@ -8,11 +8,11 @@
     <Grid>
         
         <ContentControl>
-            
-            <DataGrid ItemsSource="{Binding Path=CurrentListEvent}" AutoGenerateColumns="False" MaxHeight="500">
+
+            <DataGrid SelectedItem="{Binding Path=CurrentEvent, Mode=TwoWay}" ItemsSource="{Binding Path=CurrentListEvent}" AutoGenerateColumns="False" MaxHeight="500">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}" />
-                    <DataGridTextColumn IsReadOnly="True" Header="Date" Binding="{Binding Path=Date}" />
+                    <DataGridTextColumn IsReadOnly="True" Header="Date" Binding="{Binding Path=Date, StringFormat={}{0:MM/dd/yyyy}}" />
                     <DataGridTextColumn Header="Start" Binding="{Binding Path=StartEvent}" />
                     <DataGridTextColumn Header="End" Binding="{Binding Path=EndEvent}" />
                     <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" />

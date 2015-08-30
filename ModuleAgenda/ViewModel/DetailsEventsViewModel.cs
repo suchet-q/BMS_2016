@@ -16,6 +16,7 @@ namespace ModuleAgenda.ViewModel
         IAPI _api;
         private DateTime _currentDate;
         public AgendaEvent _model { get; private set; }
+        public AgendaEvent _currentevent { get; private set; }
         private ObservableCollection<AgendaEvent> _listEvent;
         private ObservableCollection<AgendaListEvent> _currentListEvent;
         public DetailsEventsViewModel(ObservableCollection<AgendaEvent> listEvent, IAPI api)
@@ -27,11 +28,23 @@ namespace ModuleAgenda.ViewModel
             this.DeleteventCommand = new DelegateCommand((o) => this.DeleteEvent());
         }
 
+        public AgendaEvent Currentevent
+        {
+            get
+            {
+                return _currentevent;
+            }
+            set
+            {
+                _currentevent = value;
+                OnPropertyChanged("Currentevent");
+            }
+        }
         public ICommand DeleteventCommand { get; private set; }
 
         public void DeleteEvent()
         {
-           
+           //delete
         }
         public ObservableCollection<AgendaListEvent> CurrentListEvent
         {

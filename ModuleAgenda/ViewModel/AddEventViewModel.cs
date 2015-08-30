@@ -35,13 +35,13 @@ namespace ModuleAgenda.ViewModel
         public ICommand DeleteEventCommand { get; private set; }
 
         public void DeleteEvent()
-        { 
+        {
+                
         }
         public ICommand AddEventCommand { get; private set; }
 
         public void AddEvent()
         {
-             Console.Error.WriteLine("ajout nouveaux champs step 1");
              this._model.title = this._model.title.Trim();
              this._model.startevent = this._model.startevent.Trim();
              this._model.endevent = this._model.endevent.Trim();
