@@ -64,5 +64,10 @@ namespace BMS
             App.Current.MainWindow.DataContext = viewModel;
             App.Current.MainWindow.Show();
         }
+
+        public void LateInitializeModules()
+        {
+            base.InitializeModules();
+        }
     }
 }

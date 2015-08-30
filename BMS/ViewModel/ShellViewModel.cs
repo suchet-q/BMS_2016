@@ -11,6 +11,8 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.Regions;
 using BMS.ViewModel;
 using BMS.View;
+using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.Prism.UnityExtensions;
 
 namespace BMS.ViewModel
 {
@@ -29,14 +31,17 @@ namespace BMS.ViewModel
             _catalog = catalog;
             _container = container;
             _manager = manager;
-            // On le met en comentaire pour les tests pour eviter de ce log a chaque test
+            //On le met en comentaire pour les tests pour eviter de ce log a chaque test
             var viewModel = new LoginViewModel(api, _container);
-            viewModel.EventLogin += this.NavigateToModuleWorkBench;
+           viewModel.EventLogin += this.NavigateToModuleWorkBench;
+
+            // Test pour le form de database
+            //var viewModel = new DatabaseParametersViewModel(api);
 
             //Bypass du login
             //var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager);
             ViewModels.Add(viewModel);
-            this.LoginMenu.Add(new BasicMenuViewModel());
+            //this.LoginMenu.Add(new BasicMenuViewModel());
         }
 
         //public ObservableCollection<ViewModelBase> MenuModule
@@ -111,6 +116,8 @@ namespace BMS.ViewModel
 
         void NavigateToModuleWorkBench(object sender, EventArgs args)
         {
+            var catalog = _catalog as DynamicDirectoryModuleCatalog;
+            catalog.LoadAllModulesInTheDirectory();
             this.LoginMenu.Clear();
             this.CoreMenu.Add(new CoreMenuViewModel());
             var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager);

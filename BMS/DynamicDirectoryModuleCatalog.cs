@@ -56,7 +56,13 @@ namespace BMS
 
         protected override void InnerLoad()
         {
+            //this.LoadModuleCatalog(this.ModulePath);
+        }
+
+        public void LoadAllModulesInTheDirectory()
+        {
             this.LoadModuleCatalog(this.ModulePath);
+            this.LoadModules(this.Modules.ToArray());
         }
 
         void LoadModuleCatalog(string path, bool isFile = false)
@@ -106,6 +112,7 @@ namespace BMS
                     //we are dealing with a file from our file watcher, so let's notify it needs to be loaded
                     if (isFile)
                     {
+                         // La on est censé load les modules mais on va pas le faire
                         LoadModules(modules);
                     }
 
@@ -118,7 +125,7 @@ namespace BMS
         }
 
         // Uses the IModuleManager to load the modules into memory
-        private void LoadModules(ModuleInfo[] modules)
+        public void LoadModules(ModuleInfo[] modules)
         {
             if (this._context == null)
                 return;

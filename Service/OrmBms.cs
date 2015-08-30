@@ -13,10 +13,12 @@ namespace Service
     public class OrmBms
     {
         private MySqlConnection connection;
-        private string _server;
-        private string _database;
-        private string _uid;
-        private string _password;
+        public string Server { get; private set; }
+        public string Database { get; private set; }
+        public int Port { get; private set; }
+        public string Uid { get; private set; }
+        public string Password { get; private set; }
+        public string ConnectionString { get; private set; }
 
         public OrmBms()
         {
@@ -24,17 +26,17 @@ namespace Service
         }
 
         // Appelé par l'API a l'initialisation, cette methode n'est pas censé etre appelé ailleurs
-        public bool Initialize(string server, string database, string uid, string password)
+        public bool Initialize(string server, string database, int port, string uid, string password)
         {
-            _server = server;
-            _database = database;
-            _uid = uid;
-            _password = password;
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "PORT=3306;" + "DATABASE=" +
+            Server = server;
+            Database = database;
+            Uid = uid;
+            Password = password;
+            Port = port;
+            ConnectionString = "SERVER=" + server + ";" + "PORT=" + port + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
-            connection = new MySqlConnection(connectionString);
+            connection = new MySqlConnection(ConnectionString);
             return true;
         }
 
