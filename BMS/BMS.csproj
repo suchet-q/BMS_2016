@@ -101,7 +101,6 @@
     </Compile>
     <Compile Include="ViewModel\BasicMenuViewModel.cs" />
     <Compile Include="ViewModel\CoreMenuViewModel.cs" />
-    <Compile Include="ViewModel\DatabaseParametersViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MenuModuleViewModel.cs" />
     <Compile Include="ViewModel\ModuleWorkBenchViewModel.cs" />
@@ -111,9 +110,6 @@
     </Compile>
     <Compile Include="View\CoreMenuView.xaml.cs">
       <DependentUpon>CoreMenuView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\DatabaseParametersView.xaml.cs">
-      <DependentUpon>DatabaseParametersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -172,10 +168,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CoreMenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\DatabaseParametersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
