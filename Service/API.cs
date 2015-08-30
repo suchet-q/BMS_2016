@@ -25,6 +25,8 @@ namespace Service
         public string CalculateMD5Hash(string input)
         {
             // step 1, calculate MD5 hash from input
+            if (input == null)
+                return "";
             MD5 md5 = System.Security.Cryptography.MD5.Create();
             byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
             byte[] hash = md5.ComputeHash(inputBytes);

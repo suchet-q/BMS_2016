@@ -114,15 +114,20 @@ namespace BMS.ViewModel
             }
         }
 
-        void NavigateToModuleWorkBench(object sender, EventArgs args)
+        async void NavigateToModuleWorkBenchAsync()
         {
             var catalog = _catalog as DynamicDirectoryModuleCatalog;
-            catalog.LoadAllModulesInTheDirectory();
+            await Task.Run(() => { catalog.LoadAllModulesInTheDirectory(); });
             this.LoginMenu.Clear();
             this.CoreMenu.Add(new CoreMenuViewModel());
             var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager);
             this.ViewModels.Clear();
             this.ViewModels.Add(viewModel);
+        }
+
+        void NavigateToModuleWorkBench(object sender, EventArgs args)
+        {
+            this.NavigateToModuleWorkBenchAsync();
         }
     }
 }

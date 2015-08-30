@@ -68,6 +68,21 @@ namespace BMS.ViewModel
             }
         }
 
+        private bool _displayConnexionSuccMsg;
+        public bool DisplayConnexionSuccMsg
+        {
+            get
+            {
+                return _displayConnexionSuccMsg;
+            }
+            set
+            {
+                if (_displayConnexionSuccMsg == value) return;
+                _displayConnexionSuccMsg = value;
+                this.OnPropertyChanged("DisplayConnexionSuccMsg");
+            }
+        }
+
         string _login;
         public string Login
         {
@@ -108,19 +123,24 @@ namespace BMS.ViewModel
                     count++;
                 if (count > 0)
                 {
-                    this.OnLogin(EventArgs.Empty);   
+                    this.DisplayConnexionErrMsg = false;
+                    this.DisplayDatabaseErrMsg = false;
+                    this.DisplayConnexionSuccMsg = true;
+                    this.OnLogin(EventArgs.Empty);
                 }
                 else
                 {
                     this.DisplayDatabaseErrMsg = false;
+                    this.DisplayConnexionSuccMsg = false;
                     this.DisplayConnexionErrMsg = true;
                     this.Password = "";
                 }
             }
             else
             {
-                this.DisplayDatabaseErrMsg = true;
                 this.DisplayConnexionErrMsg = false;
+                this.DisplayConnexionSuccMsg = false;
+                this.DisplayDatabaseErrMsg = true;
             }
         }
 

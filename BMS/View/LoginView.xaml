@@ -47,6 +47,20 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
+        <TextBlock Foreground="Green" TextWrapping="Wrap" Text="Authentification successful. Please wait while the Modules are loaded..." TextAlignment="Center" Margin="57,160,56,102">
+            <TextBlock.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding DisplayConnexionSuccMsg}" Value="true">
+                            <Setter Property="UIElement.Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding DisplayConnexionSuccMsg}" Value="false">
+                            <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
         <Button Content="Login" Margin="252,260,26,20" Command="{Binding LoginCommand}"/>
 
