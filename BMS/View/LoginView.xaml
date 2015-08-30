@@ -6,63 +6,104 @@
              mc:Ignorable="d" 
              Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="300" Width="400">
-        <TextBlock Text="Password:" Margin="73,115,0,169"/>
-        <TextBox Margin="159,76,0,204" Width="150" Height="20" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}">
-            <TextBox.InputBindings>
-                <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
-            </TextBox.InputBindings>
-         </TextBox>
+        <Grid>
+            <TextBlock Text="Password:" Margin="73,115,0,169"/>
+            <TextBox Margin="159,76,0,204" Width="150" Height="20" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
+                </TextBox.InputBindings>
+            </TextBox>
             <TextBlock Text="Login:" Width="40" Margin="73,80,0,204"/>
-        <TextBox Margin="159,111,91,169" Width="150" Height="20" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}">
-            <TextBox.InputBindings>
-                <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
-            </TextBox.InputBindings>
-        </TextBox>
-        
-        <TextBlock Foreground="Red" TextWrapping="Wrap" Text="Invalid Login or Password" TextAlignment="Center" Margin="57,160,56,124">
-            <TextBlock.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding DisplayConnexionErrMsg}" Value="true">
-                            <Setter Property="UIElement.Visibility" Value="Visible"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding DisplayConnexionErrMsg}" Value="false">
-                            <Setter Property="UIElement.Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-        <TextBlock Foreground="Red" TextWrapping="Wrap" Text="The Database is not reachable" TextAlignment="Center" Margin="57,160,56,124">
-            <TextBlock.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding DisplayDatabaseErrMsg}" Value="true">
-                            <Setter Property="UIElement.Visibility" Value="Visible"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding DisplayDatabaseErrMsg}" Value="false">
-                            <Setter Property="UIElement.Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-        <TextBlock Foreground="Green" TextWrapping="Wrap" Text="Authentification successful. Please wait while the Modules are loaded..." TextAlignment="Center" Margin="57,160,56,102">
-            <TextBlock.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding DisplayConnexionSuccMsg}" Value="true">
-                            <Setter Property="UIElement.Visibility" Value="Visible"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding DisplayConnexionSuccMsg}" Value="false">
-                            <Setter Property="UIElement.Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
+            <TextBox Margin="159,111,91,169" Width="150" Height="20" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
+                </TextBox.InputBindings>
+            </TextBox>
 
-        <Button Content="Login" Margin="252,260,26,20" Command="{Binding LoginCommand}"/>
+            <TextBlock Foreground="Red" TextWrapping="Wrap" Text="Invalid Login or Password" TextAlignment="Center" Margin="57,160,56,124">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding DisplayConnexionErrMsg}" Value="true">
+                                <Setter Property="UIElement.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding DisplayConnexionErrMsg}" Value="false">
+                                <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock Foreground="Red" TextWrapping="Wrap" Text="The Database is not reachable" TextAlignment="Center" Margin="57,160,56,124">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding DisplayDatabaseErrMsg}" Value="true">
+                                <Setter Property="UIElement.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding DisplayDatabaseErrMsg}" Value="false">
+                                <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock Foreground="Green" TextWrapping="Wrap" Text="Authentification successful. Please wait while the Modules are loaded..." TextAlignment="Center" Margin="57,160,56,102">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding DisplayConnexionSuccMsg}" Value="true">
+                                <Setter Property="UIElement.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding DisplayConnexionSuccMsg}" Value="false">
+                                <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
 
+            <Button Content="Login" Margin="255,216,23,64" Command="{Binding LoginCommand}"/>
+            <TextBlock Margin="24,255,0,26" Height="19" Width="178">
+                <Hyperlink Command="{Binding DisplayDatabaseParamCommand}">  Change Database Parameters... </Hyperlink>
+            </TextBlock>
+        </Grid>
+        <Grid Margin="10,254,-10,-254">
+            <Grid.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding DisplayDatabaseParameter}" Value="true">
+                            <Setter Property="UIElement.Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding DisplayDatabaseParameter}" Value="false">
+                            <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <HeaderedContentControl Height="214" Width="266" >
+                        <HeaderedContentControl>
+                            <Grid Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75*"/>
+                                    <ColumnDefinition Width="187*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Host: " RenderTransformOrigin="0.645,1.688" Margin="10,19,0,-4" />
+                                <TextBox Text="{Binding Host}" Margin="10,17,0,-4" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1"/>
+
+                                <TextBlock Text="Database: " Height="19" Margin="10,44,0,-32" Width="60" RenderTransformOrigin="0.6,-0.947"/>
+                                <TextBox Text="{Binding Database}" Margin="10,43,0,-30" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
+                                <TextBlock Text="Port :" Height="19" Margin="10,71,0,-59" Width="60" RenderTransformOrigin="0.6,-0.947"/>
+                                <TextBox Text="{Binding Port}" Margin="10,70,0,-57" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
+                                <TextBlock Text="Login:" Height="19" Margin="10,98,0,-86" Width="60" RenderTransformOrigin="0.6,-0.947"/>
+                                <TextBox Text="{Binding DbLogin}" Margin="10,97,0,-84" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
+                                <TextBox Text="{Binding DbPassword}" Margin="10,124,0,-111" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
+                                <TextBlock Text="Password:" Height="19" Margin="10,125,0,-113" Width="60" RenderTransformOrigin="0.6,-0.947"/>
+
+                                <Button Command="{Binding ChangeDatabaseCommand}" Content="Change" Margin="112,156,16,-145" Grid.Column="1"/>
+                            </Grid>
+                        </HeaderedContentControl>
+                </HeaderedContentControl>
+        </Grid>
     </Grid>
 </UserControl>

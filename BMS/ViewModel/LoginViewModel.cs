@@ -28,8 +28,17 @@ namespace BMS.ViewModel
             this.LoginCommand = new DelegateCommand((o) => this.ExecuteLogin(), (o) => this.CanExecuteLogin());
             this.DisplayDatabaseErrMsg = false;
             this.DisplayConnexionErrMsg = false;
-        }
 
+            this.ConnectDatabaseCommand = new DelegateCommand((o) => this.ConnectDatabase());
+            this.Host = api.Orm.Server;
+            this.Database = api.Orm.Database;
+            this.Port = api.Orm.Port;
+            this.DbLogin = api.Orm.Uid;
+            this.DbPassword = api.Orm.Password;
+            this.DisplayDatabaseParameter = false;
+
+            this.DisplayDatabaseParamCommand = new DelegateCommand((o) => this.DisplayDatabaseParamExecute());
+        }
 
         protected virtual void OnLogin(EventArgs e)
         {
@@ -152,5 +161,112 @@ namespace BMS.ViewModel
         }
 
         public ICommand LoginCommand { get; set; }
-    }
+
+
+        private void ConnectDatabase()
+        {
+            System.Console.Error.WriteLine("Change setting de la bdd plz");
+//            _api.Orm.Initialize(this.Host, this.Database, this.Port, this.Login, this.Password);
+        }
+
+        private void DisplayDatabaseParamExecute()
+        {
+            this.DisplayDatabaseParameter = true;
+        }
+
+        public ICommand ConnectDatabaseCommand { get; set; }
+        public ICommand DisplayDatabaseParamCommand { get; set; }
+
+
+        string _host;
+        public string Host
+        {
+            get
+            {
+                return _host;
+            }
+            set
+            {
+                if (_host == value) return;
+                _host = value;
+                this.OnPropertyChanged("Host");
+            }
+        }
+
+        string _database;
+        public string Database
+        {
+            get
+            {
+                return _database;
+            }
+            set
+            {
+                if (_database == value) return;
+                _database = value;
+                this.OnPropertyChanged("Database");
+            }
+        }
+
+        int _port;
+        public int Port
+        {
+            get
+            {
+                return _port;
+            }
+            set
+            {
+                if (_port == value) return;
+                _port = value;
+                this.OnPropertyChanged("Port");
+            }
+        }
+
+        string _dbLogin;
+        public string DbLogin
+        {
+            get
+            {
+                return _dbLogin;
+            }
+            set
+            {
+                if (_dbLogin == value) return;
+                _dbLogin = value;
+                this.OnPropertyChanged("DbLogin");
+            }
+        }
+
+        string _dbPassword;
+        public string DbPassword
+        {
+            get
+            {
+                return _dbPassword;
+            }
+            set
+            {
+                if (_dbPassword == value) return;
+                _dbPassword = value;
+                this.OnPropertyChanged("DbPassword");
+            }
+        }
+
+        bool _displayDatabaseParameter;
+        public bool DisplayDatabaseParameter
+        { 
+            get
+            {
+                return _displayDatabaseParameter;
+            }
+            set
+            {
+                if (_displayDatabaseParameter == value) return;
+                _displayDatabaseParameter = value;
+                OnPropertyChanged("DisplayDatabaseParameter");
+            }
+        }
+
+   }
 }

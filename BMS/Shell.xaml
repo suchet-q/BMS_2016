@@ -14,13 +14,13 @@
     <Grid>
 
         <local:Banner VerticalAlignment="Top" />
-        <ItemsControl ItemsSource="{Binding LoginMenu}" Margin="0,50,0,0" >
+        <!--<ItemsControl ItemsSource="{Binding LoginMenu}" Margin="0,50,0,0" >
             <ItemsControl.Resources>
                 <DataTemplate DataType="{x:Type vm:BasicMenuViewModel}">
                     <v:BasicMenuView />
                 </DataTemplate>
             </ItemsControl.Resources>
-        </ItemsControl>
+        </ItemsControl>-->
         <ItemsControl ItemsSource="{Binding CoreMenu}" Margin="0,50,0,0" >
             <ItemsControl.Resources>
                 <DataTemplate DataType="{x:Type vm:CoreMenuViewModel}">

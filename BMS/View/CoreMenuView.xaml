@@ -22,8 +22,8 @@
             </MenuItem>
             <!--<MenuItem Header="_Tools" />-->
             <MenuItem Header="_Parameters">
-                <MenuItem Header="Database Parameters..." Command="{Binding NavigateToDatabaseParametersCommand}">
-                </MenuItem>
+                <!--<MenuItem Header="Database Parameters..." Command="{Binding NavigateToDatabaseParametersCommand}">
+                </MenuItem>-->
             </MenuItem>
 
             <!--            <MenuItem Header="_Edit" />
