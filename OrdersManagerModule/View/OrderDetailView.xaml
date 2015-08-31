@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Ordered :" />
@@ -33,5 +34,7 @@
         
         <TextBlock Grid.Column="0" Grid.Row="4" Text="Received :" />
         <DatePicker Grid.Column="1" Grid.Row="4" SelectedDate="{Binding Path=DateReceived}" Width="240" />
+
+        <Button Content="Validate" Command="{Binding ValidateOrderCommand}" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="5" Width="150"/>
     </Grid>
 </UserControl>

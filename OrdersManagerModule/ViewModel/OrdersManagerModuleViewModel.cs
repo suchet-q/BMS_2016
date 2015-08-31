@@ -18,6 +18,7 @@ namespace OrdersManagerModule.ViewModel
         private ObservableCollection<Orders> _listAllOrders;
         public ObservableCollection<OrderDetailViewModel> ListAllOrders { get; private set; }
         public ICommand AddOrderCommand { get; private set; }
+        public ICommand DeleteOrderCommand { get; private set; }
 
         public OrderDetailViewModel CurrentOrder
         {
@@ -56,6 +57,7 @@ namespace OrdersManagerModule.ViewModel
                 }
             };
             AddOrderCommand = new DelegateCommand((o) => this.AddOrder());
+            DeleteOrderCommand = new DelegateCommand((o) => this.DeleteOrder());
         }
 
         private void AddOrder()
@@ -70,6 +72,11 @@ namespace OrdersManagerModule.ViewModel
             OrderDetailViewModel vm = new OrderDetailViewModel(order, _listAllOrders, _api);
             this.ListAllOrders.Add(vm);
             this.CurrentOrder = vm;
+        }
+
+        private void DeleteOrder()
+        {
+
         }
     }
 }

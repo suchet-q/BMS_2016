@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace OrdersManagerModule.ViewModel
 {
@@ -16,6 +17,7 @@ namespace OrdersManagerModule.ViewModel
         public Orders                 Model { get; private set; }
         ObservableCollection<Orders>  _listOrder;
         IAPI                        _api;
+        public ICommand             ValidateOrderCommand { get; private set; }
 
         public OrderDetailViewModel(Orders order, ObservableCollection<Orders> listOrder, IAPI api)
         {
@@ -27,6 +29,7 @@ namespace OrdersManagerModule.ViewModel
             System.Console.Error.WriteLine("Order ID ===> " + order.id);
             _order = Model = order;
             _listOrder = listOrder;
+            ValidateOrderCommand = new DelegateCommand((o) => this.ValidateOrder());
         }
 
         public int Id
@@ -52,9 +55,7 @@ namespace OrdersManagerModule.ViewModel
 
             set
             {
-                this.Model.dateordered = value;
-                this.OnPropertyChanged("DateOrdered");
-                _api.Orm.UpdateObject<Orders>(@"update orders set dateordered = @dateordered where Id = @Id", Model);
+                this.Model.dateordered = value;             
             }
         }
 
@@ -68,8 +69,6 @@ namespace OrdersManagerModule.ViewModel
             set
             {
                 this.Model.content = value;
-                this.OnPropertyChanged("Content");
-                _api.Orm.UpdateObject<Orders>(@"update orders set content = @content where Id = @Id", Model);
             }
         }
 
@@ -83,8 +82,6 @@ namespace OrdersManagerModule.ViewModel
             set
             {
                 this.Model.status = value;
-                this.OnPropertyChanged("Status");
-                _api.Orm.UpdateObject<Orders>(@"update orders set status = @status where Id = @Id", Model);
             }
         }
 
@@ -98,8 +95,6 @@ namespace OrdersManagerModule.ViewModel
             set
             {
                 this.Model.receiver = value;
-                this.OnPropertyChanged("Receiver");
-                _api.Orm.UpdateObject<Orders>(@"update orders set receiver = @receiver where Id = @Id", Model);
             }
         }
 
@@ -113,9 +108,22 @@ namespace OrdersManagerModule.ViewModel
             set
             {
                 this.Model.datereceived = value;
-                this.OnPropertyChanged("DateReceived");
-                _api.Orm.UpdateObject<Orders>(@"update orders set datereceived = @datereceived where Id = @Id", Model);
             }
         }
+
+        private void ValidateOrder()
+        {
+            this.OnPropertyChanged("DateOrdered");
+            _api.Orm.UpdateObject<Orders>(@"update orders set dateordered = @dateordered where Id = @Id", Model);
+            this.OnPropertyChanged("Content");
+            _api.Orm.UpdateObject<Orders>(@"update orders set content = @content where Id = @Id", Model);
+            this.OnPropertyChanged("Status");
+            _api.Orm.UpdateObject<Orders>(@"update orders set status = @status where Id = @Id", Model);
+            this.OnPropertyChanged("Receiver");
+            _api.Orm.UpdateObject<Orders>(@"update orders set receiver = @receiver where Id = @Id", Model);
+            this.OnPropertyChanged("DateReceived");
+            _api.Orm.UpdateObject<Orders>(@"update orders set datereceived = @datereceived where Id = @Id", Model);
+        }
+
     }
 }

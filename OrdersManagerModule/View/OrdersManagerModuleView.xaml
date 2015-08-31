@@ -50,7 +50,7 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Margin="2">
                                 <Hyperlink Command="{Binding Path=AddOrderCommand}">Add Order</Hyperlink>
-                            <!--| <Hyperlink Command="{Binding Path=ModifyOrderCommand}">Modify Order</Hyperlink>-->
+                            | <Hyperlink Command="{Binding Path=DeleteOrderCommand}">Delete Order</Hyperlink>
                         </TextBlock>
                     </StackPanel>
                 </HeaderedContentControl.Header>
