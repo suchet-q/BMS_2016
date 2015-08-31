@@ -76,7 +76,11 @@ namespace OrdersManagerModule.ViewModel
 
         private void DeleteOrder()
         {
-
+            _api.Orm.Delete("delete from orders where id=@idorder", new { idorder = this._currentOrder.Model.id });
+            this._listAllOrders.Remove(this.CurrentOrder.Model);
+            this.ListAllOrders.Remove(this.CurrentOrder);
+            _currentOrder = ListAllOrders.Count > 0 ? ListAllOrders[0] : null;
+            this.OnPropertyChanged("CurrentOrder");
         }
     }
 }
