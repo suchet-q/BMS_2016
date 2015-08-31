@@ -14,10 +14,11 @@ namespace OrdersManagerModule
         IUnityContainer _container;
         IAPI            _api;
 
-        public OrdersManagerModule(IUnityContainer container, IAPI api)
+        public OrdersManagerModule(IUnityContainer container, IAPI api, IMetadataModuleCatalog metadataCatalog)
         {
             _container = container;
             _api = api;
+            metadataCatalog.ModuleMetadata.Add(new ModuleMetadata("Orders Manager", "OrdersManagerModule", "1.0", "This module allow to manage the list of Orders", "BMS"));
         }
 
         public void Initialize()
