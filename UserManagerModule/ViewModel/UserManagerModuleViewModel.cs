@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -62,9 +63,23 @@ namespace UserManagerModule.ViewModel
                 }
             };
             System.Console.Error.WriteLine("UserManagerModuleViewModel");
+            this.GenerateCsvCommand = new DelegateCommand((o) => this.GenerateCsv());
             this.AddUserCommand = new DelegateCommand((o) => this.AddUser());
             this.DeleteUserCommand = new DelegateCommand((o) => this.DeleteCurrentUser(), (o) => this.CurrentUser != null);
             System.Console.Error.WriteLine("End UserManagerModuleViewModel");
+        }
+
+        async private void showAndHideGeneratedMsg()
+        {
+            this.DisplayGeneratedMsg = true;
+            await Task.Run(() => { Thread.Sleep(5000); });
+            this.DisplayGeneratedMsg = false;
+        }
+
+        private void GenerateCsv()
+        {
+            _api.GenerateCsv<User>(this._listAllUsers);
+            this.showAndHideGeneratedMsg();
         }
 
         private void AddUser()
@@ -93,8 +108,24 @@ namespace UserManagerModule.ViewModel
             this.CurrentUser = null;
         }
 
-
+        public ICommand GenerateCsvCommand { get; private set; }
         public ICommand AddUserCommand { get; private set; }
         public ICommand DeleteUserCommand { get; private set; }
+
+
+        bool _displayGeneratedMsg;
+        public bool DisplayGeneratedMsg
+        {
+            get
+            {
+                return _displayGeneratedMsg;
+            }
+            set
+            {
+                if (_displayGeneratedMsg == value) return;
+                _displayGeneratedMsg = value;
+                this.OnPropertyChanged("DisplayGeneratedMsg");
+            }
+        }
     }
 }

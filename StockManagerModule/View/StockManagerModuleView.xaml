@@ -57,9 +57,24 @@
                 <HeaderedContentControl>
                     <HeaderedContentControl.Header>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Foreground="Green" TextWrapping="Wrap" Text=".csv file successfuly generated" TextAlignment="Center" Margin="2" Width="168">
+                                <TextBlock.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding DisplayGeneratedMsg}" Value="true">
+                                                <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding DisplayGeneratedMsg}" Value="false">
+                                                <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                             <TextBlock Margin="2">
+                                    <Hyperlink Command="{Binding GenerateCsvCommand}"><Run Text="Generate .csv"/></Hyperlink> |
                                     <Hyperlink Command="{Binding Path=AddStockCommand}">Add Entry</Hyperlink>
-                                    <Hyperlink Command="{Binding Path=DeleteStockCommand}">Delete Entry</Hyperlink>
+                                    | <Hyperlink Command="{Binding Path=DeleteStockCommand}">Delete Entry</Hyperlink>
                             </TextBlock>
                         </StackPanel>
                     </HeaderedContentControl.Header>
@@ -68,9 +83,9 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Path=nom}" />
                             <DataGridTextColumn Header="Info" Binding="{Binding Path=info}" />
-                            <DataGridTextColumn Header="Category" Binding="{Binding Path=categorie.categorie}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Category" Binding="{Binding Path=categorie.categorie, Mode=TwoWay}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Price inc. VAT" Binding="{Binding Path=vente_ttc}" />
-                            <DataGridTextColumn Header="VAT" Binding="{Binding Path=tvaRate.rate}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="VAT" Binding="{Binding Path=tvaRate.rate, Mode=TwoWay}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Quantity" Binding="{Binding Path=quantite}" />
                             <DataGridTextColumn Header="Reference" Binding="{Binding Path=reference}" />
                             <DataGridTextColumn Header="Stockage" Binding="{Binding Path=emplacement}" />

@@ -12,5 +12,6 @@ namespace Service
 
         bool Initialize();
         string CalculateMD5Hash(string input);
+        void GenerateCsv<T>(IEnumerable<T> data, string fileName = null);
     }
 }

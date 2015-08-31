@@ -34,37 +34,47 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="0,0,-0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-
         <ScrollViewer>
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0">
-            <HeaderedContentControl.Header>
-                User
-            </HeaderedContentControl.Header>
-            <ScrollViewer>
-                <HeaderedContentControl>
-                    <HeaderedContentControl.Header>
+            <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0">
+                <HeaderedContentControl.Header>
+                    User
+                </HeaderedContentControl.Header>
+                <ScrollViewer>
+                    <HeaderedContentControl>
+                        <HeaderedContentControl.Header>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBlock Margin="2">
-                                <Hyperlink Command="{Binding Path=AddUserCommand}">Add User</Hyperlink>
-                                | <Hyperlink Command="{Binding Path=DeleteUserCommand}">Delete User</Hyperlink>
-                            </TextBlock>
-                        </StackPanel>
-                    </HeaderedContentControl.Header>
+                                <TextBlock Foreground="Green" TextWrapping="Wrap" Text=".csv file successfuly generated" TextAlignment="Center" Margin="2" Width="168">
+                                    <TextBlock.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding DisplayGeneratedMsg}" Value="true">
+                                                    <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding DisplayGeneratedMsg}" Value="false">
+                                                    <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Margin="2"><Hyperlink Command="{Binding GenerateCsvCommand}"><Run Text="Generate .csv"/></Hyperlink> | <Hyperlink Command="{Binding AddUserCommand}"><Run Text="Add User"/></Hyperlink><Run Text=" | "/><Hyperlink Command="{Binding DeleteUserCommand}"><Run Text="Delete User"/></Hyperlink></TextBlock>
+                            </StackPanel>
+                        </HeaderedContentControl.Header>
                         <DataGrid SelectedItem="{Binding Path=CurrentUser, Mode=TwoWay}" ItemsSource="{Binding Path=AllUsers}" AutoGenerateColumns="False" MaxHeight="500">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Path=name}" />
-                            <DataGridTextColumn Header="Last Name" Binding="{Binding Path=last_name}" />
-                            <DataGridTextColumn Header="Login" Binding="{Binding Path=login}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </HeaderedContentControl>
-            </ScrollViewer>
-        </HeaderedContentControl>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Path=name}" />
+                                <DataGridTextColumn Header="Last Name" Binding="{Binding Path=last_name}" />
+                                <DataGridTextColumn Header="Login" Binding="{Binding Path=login}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </HeaderedContentControl>
+                </ScrollViewer>
+            </HeaderedContentControl>
         </ScrollViewer>
         <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Margin="10,0,0,0" Grid.Column="1" >
             <HeaderedContentControl.Header>
@@ -81,7 +91,7 @@
                             </ContentControl.Resources>
                         </ContentControl>
                     </Border>
-<!--
+                    <!--
                     <Border Style="{StaticResource DetailBorder}" Margin="5,0,5,5">
                         <ContentControl Content="{Binding Path=CurrentUser}" >
                             <ContentControl.Resources>
