@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -42,7 +43,7 @@ namespace Service
             return sb.ToString();
         }
 
-        public void GenerateCsv<T>(IEnumerable<T> data, string fileName = null)
+        public void GenerateCsv<T>(IEnumerable<T> data, string fileName = null, bool openInDirectory = false)
         {
             string csv = "";
             PropertyInfo[] propertyInfos;
@@ -76,6 +77,11 @@ namespace Service
             }
 
             File.WriteAllText(Path.Combine(dir,  fileName + ".csv"), csv);
+
+            if (openInDirectory == true)
+            {
+                Process.Start("explorer.exe", string.Format("/select,\"{0}\"", Path.GetFullPath(Path.Combine(dir, fileName + ".csv"))));
+            }
         }
     }
 }

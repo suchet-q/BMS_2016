@@ -141,7 +141,7 @@ namespace StockManagerModule.ViewModel
                 list.Add(new CsvStockData(stock.id, stock.nom, stock.info, stock.categorie.categorie, stock.achat.ToString(), stock.vente_ht.ToString(), stock.vente_ttc.ToString(), stock.tva.rate.ToString(), stock.quantite, stock.reference, stock.zone, stock.sous_zone, stock.emplacement));
             }
 
-            _api.GenerateCsv<CsvStockData>(list, "Stock " + DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss"));
+            _api.GenerateCsv<CsvStockData>(list, "Stock " + DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss"), true);
             this.showAndHideGeneratedMsg();
         }
 
