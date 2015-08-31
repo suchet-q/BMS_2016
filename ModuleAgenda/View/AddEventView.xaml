@@ -39,9 +39,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-
         <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0" VerticalAlignment="Top" Margin="0,3,3,0">
             <HeaderedContentControl.Header>
                 NewEvent
@@ -62,11 +60,10 @@
                         <ColumnDefinition Width="Auto"/>
 
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-                        <Button Content="Add event" Command="{Binding AddEventCommand}"/>
-                        <Button Content="Delete event" Command="{Binding DeleteEventCommand}"/>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Confirm" Command="{Binding AddEventCommand}" Width="80" Margin="0,3"  />
                     </StackPanel>
-
+                        
                     <TextBlock Text="Title : " Grid.Column="0" Grid.Row="1"/>
                     <TextBox Text="{Binding Path=TitleAdd}" Grid.Column="1" Margin="29,0,0,0" Grid.Row="1" Width="150"/>
 

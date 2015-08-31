@@ -64,37 +64,23 @@
                 </HeaderedContentControl>
             </HeaderedContentControl>
         </StackPanel>
-
-                    <Border Style="{StaticResource DetailBorder}"  Margin="5">
-                        <ContentControl HorizontalAlignment="Stretch" Content="{Binding Path=_viewAddEvent}">
-                            <ContentControl.Resources>
-                                <DataTemplate DataType="{x:Type vm:AddEventViewModel}">
-                                    <v:AddEventView />
-                                </DataTemplate>
-                            </ContentControl.Resources>
-                        </ContentControl>
-                    </Border>
-
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0" Grid.Row="1" Margin="0,5,3,0">
-            <HeaderedContentControl.Header>
-                Detail Event
-            </HeaderedContentControl.Header>
-            <ScrollViewer>
-                <HeaderedContentControl>
-                    <StackPanel>
-                        <Border Style="{StaticResource DetailBorder}"  Margin="5">
-                            <ContentControl HorizontalAlignment="Stretch" Content="{Binding Path=_viewEvent}">
-                                <ContentControl.Resources>
-                                    <DataTemplate DataType="{x:Type vm:DetailsEventsViewModel}">
-                                        <v:DetailsEventsView />
-                                    </DataTemplate>
-                                </ContentControl.Resources>
-                            </ContentControl>
-                        </Border>
-                    </StackPanel>
-                </HeaderedContentControl>
-            </ScrollViewer>
-        </HeaderedContentControl>
-
+        <Border Style="{StaticResource DetailBorder}"  Margin="5">
+            <ContentControl HorizontalAlignment="Stretch" Content="{Binding Path=_viewAddEvent}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type vm:AddEventViewModel}">
+                        <v:AddEventView />
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Border>
+        <Border Style="{StaticResource DetailBorder}"  Margin="5,10,4.6,258" Grid.Row="1" >
+            <ContentControl HorizontalAlignment="Stretch" Content="{Binding Path=_viewEvent}" Grid.Column="0" Grid.Row="1" Margin="0,5,3,0">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type vm:DetailsEventsViewModel}">
+                        <v:DetailsEventsView />
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Border>
     </Grid>
 </UserControl>

@@ -16,7 +16,7 @@ namespace ModuleAgenda.ViewModel
         IAPI _api;
         private DateTime _currentDate;
         public AgendaEvent _model { get; private set; }
-        public AgendaEvent _currentevent { get; private set; }
+        public AgendaListEvent _currentevent { get; private set; }
         private ObservableCollection<AgendaEvent> _listEvent;
         private ObservableCollection<AgendaListEvent> _currentListEvent;
         public DetailsEventsViewModel(ObservableCollection<AgendaEvent> listEvent, IAPI api)
@@ -25,10 +25,10 @@ namespace ModuleAgenda.ViewModel
             _model = new AgendaEvent();
             _listEvent = listEvent;
             _currentListEvent = new ObservableCollection<AgendaListEvent>();
-            this.DeleteventCommand = new DelegateCommand((o) => this.DeleteEvent());
+            this.DeleteEventCommand = new DelegateCommand((o) => this.DeleteEvent());
         }
 
-        public AgendaEvent Currentevent
+        public AgendaListEvent CurrentEvent
         {
             get
             {
@@ -36,15 +36,19 @@ namespace ModuleAgenda.ViewModel
             }
             set
             {
+                System.Console.WriteLine("je set levent en cours");
                 _currentevent = value;
-                OnPropertyChanged("Currentevent");
+                OnPropertyChanged("CurrentEvent");
             }
         }
-        public ICommand DeleteventCommand { get; private set; }
+        public ICommand DeleteEventCommand { get; private set; }
 
         public void DeleteEvent()
         {
-           //delete
+            System.Console.WriteLine("je delete un event " + this._currentevent._model.id);
+            _api.Orm.Delete("delete from agendaevent where id=@idevent", new { idevent = this._currentevent._model.id });
+            this._currentListEvent.Remove(this.CurrentEvent);
+            //this.AllUsers.Remove(this.CurrentUser);
         }
         public ObservableCollection<AgendaListEvent> CurrentListEvent
         {
