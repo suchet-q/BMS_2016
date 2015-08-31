@@ -14,10 +14,11 @@ namespace UserManagerModule
         IUnityContainer _container;
         IAPI            _api;
 
-        public UserManagerModule(IUnityContainer container, IAPI api)
+        public UserManagerModule(IUnityContainer container, IAPI api, IMetadataModuleCatalog metadataCatalog)
         {
             _container = container;
             _api = api;
+            metadataCatalog.ModuleMetadata.Add(new ModuleMetadata("User Manager", "UserManagerModule", "1.0", "This module allow to manage the list of User", "BMS"));
         }
 
         public void Initialize()

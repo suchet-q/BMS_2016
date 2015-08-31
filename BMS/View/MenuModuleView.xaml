@@ -12,7 +12,7 @@
                 <DataTemplate>
                     <Border Style="{StaticResource DetailBorder}" Margin="2,2,2,0">
                         <StackPanel>
-                            <TextBlock Text="{Binding Path=name}" FontWeight="Bold" />
+                            <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" />
                         </StackPanel>
                     </Border>
                 </DataTemplate>

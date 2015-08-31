@@ -37,14 +37,24 @@ namespace BMS
         {
  	        base.ConfigureContainer();
             this.Container.RegisterInstance<IModuleCatalog>(this.ModuleCatalog);
+            this.CreateMetadataModuleCatalog();
             this.InitializeAPI();
         }
+
+        protected void CreateMetadataModuleCatalog()
+        {
+            IMetadataModuleCatalog metadataCatalog = new MetadataModuleCatalog();
+
+            this.Container.RegisterInstance<IMetadataModuleCatalog>(metadataCatalog);
+        }
+
         protected void InitializeAPI()
         {
             this.api = new API();
             this.api.Initialize();
             this.Container.RegisterInstance<IAPI>(this.api);
         }
+        
         protected override void InitializeModules()
         {
             base.InitializeModules();
@@ -60,7 +70,7 @@ namespace BMS
         {
             IRegionManager manager = this.Container.Resolve<IRegionManager>();
 
-            var viewModel = new ViewModel.ShellViewModel(this.ModuleCatalog, this.Container, manager, this.api);
+            var viewModel = new ViewModel.ShellViewModel(this.ModuleCatalog, this.Container, manager, this.api, this.Container.Resolve<IMetadataModuleCatalog>());
             App.Current.MainWindow.DataContext = viewModel;
             App.Current.MainWindow.Show();
         }

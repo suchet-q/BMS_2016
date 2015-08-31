@@ -17,9 +17,9 @@ namespace BMS.ViewModel
         IRegionManager _manager;
         IModuleRepository _moduleRepository;
 
-        private Module _selectedModuleInTheList;
+        private ModuleMetadata _selectedModuleInTheList;
 
-        public Module SelectedModuleInTheList
+        public ModuleMetadata SelectedModuleInTheList
         {
             get { return _selectedModuleInTheList; }
             //setter appelé quand le focus change dans la listBox
@@ -28,8 +28,8 @@ namespace BMS.ViewModel
                 if (_selectedModuleInTheList == value)
                     return;
                 _selectedModuleInTheList = value;
-                string moduleHomeView = value.name + "View";
-                if (value.name == "BMSModule") // Sera retiré par la suite, on met ca en attendant car le nom de sa "home" view n'est pas composé comme ceci : NomDuModuleView
+                string moduleHomeView = value.ModuleName + "View";
+                if (value.ModuleName == "BMSModule") // Sera retiré par la suite, on met ca en attendant car le nom de sa "home" view n'est pas composé comme ceci : NomDuModuleView
                     moduleHomeView = "MainGModulesView";
                 Uri destination = new Uri(moduleHomeView, UriKind.Relative);
                 IRegion regionToNavigate = this._manager.Regions["MainModuleRegion"];
@@ -39,16 +39,16 @@ namespace BMS.ViewModel
 
         public void AddedModule(object sender, EventArgs e)
         {
-            this.ListModule = new ObservableCollection<Module>(_moduleRepository.getListModule());
+            this.ListModule = new ObservableCollection<ModuleMetadata>(_moduleRepository.getListModule());
             System.Console.Error.WriteLine("ON EST DANS KA FONCTION QUI SE FAT TRIGGER LA TETE");
-            foreach (Module module in ListModule)
+            foreach (ModuleMetadata module in ListModule)
             {
-                System.Console.Error.WriteLine("Module dans la liste : " + module.name);                
+                System.Console.Error.WriteLine("Module dans la liste : " + module.Name);                
             }
         }
 
-        ObservableCollection<Module> _listModule;
-        public ObservableCollection<Module> ListModule
+        ObservableCollection<ModuleMetadata> _listModule;
+        public ObservableCollection<ModuleMetadata> ListModule
         {
             get
             {
@@ -69,7 +69,7 @@ namespace BMS.ViewModel
             var tmp = catalog as DynamicDirectoryModuleCatalog;
             tmp.Added += this.AddedModule;
 //            catalog = tmp;
-            this.ListModule = new ObservableCollection<Module>(moduleRepository.getListModule());
+            this.ListModule = new ObservableCollection<ModuleMetadata>(moduleRepository.getListModule());
         }
 
         protected override void OnDispose()

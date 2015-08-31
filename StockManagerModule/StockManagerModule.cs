@@ -15,10 +15,11 @@ namespace StockManagerModule
         IAPI        _api;
         IUnityContainer _container;
 
-        public StockManagerModule(IAPI api, IUnityContainer container)
+        public StockManagerModule(IAPI api, IUnityContainer container, IMetadataModuleCatalog metadataCatalog)
         {
             _api = api;
             _container = container;
+            metadataCatalog.ModuleMetadata.Add(new ModuleMetadata("Stock Manager", "StockManagerModule", "1.0", "This Module allow you to manager your Stock", "BMS"));
         }
 
         public void Initialize()

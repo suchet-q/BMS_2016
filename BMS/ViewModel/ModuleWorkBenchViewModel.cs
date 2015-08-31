@@ -24,12 +24,12 @@ namespace BMS.ViewModel
         IUnityContainer                     _container;
         IRegionManager                      _manager;
 
-        public ModuleWorkBenchViewModel(IModuleCatalog catalog, IUnityContainer container, IRegionManager manager)
+        public ModuleWorkBenchViewModel(IModuleCatalog catalog, IUnityContainer container, IRegionManager manager, IMetadataModuleCatalog metadataCatalog)
         {
             _catalog = catalog;
             _container = container;
             _manager = manager;
-            _moduleRepository = new ModuleRepository(_catalog);
+            _moduleRepository = new ModuleRepository(metadataCatalog);
             var viewModel = new MenuModuleViewModel(_moduleRepository, _manager, _catalog);
             MenuModule.Add(viewModel);
         }

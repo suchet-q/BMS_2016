@@ -11,38 +11,38 @@ namespace Service.DataAccess
 {
     public class ModuleRepository : IModuleRepository
     {
-        IModuleCatalog _catalog; 
+        IMetadataModuleCatalog _catalog; 
 
-        public IEnumerable<Module> ListModule // VA FALLOIR trigger un event a l'ajout d'un module, ce qui mettra a jour toute les listes
-        {
-            get;
-            private set;
-        }
+        //public List<ModuleMetadata> ListModule // VA FALLOIR trigger un event a l'ajout d'un module, ce qui mettra a jour toute les listes
+        //{
+        //    get;
+        //    private set;
+        //}
 
-        public ModuleRepository(IModuleCatalog catalog)
+        public ModuleRepository(IMetadataModuleCatalog catalog)
         {
             this._catalog = catalog;
 
-            IList<ModuleInfo> moduleInfoList = _catalog.Modules.ToList<ModuleInfo>();
-            var tmp = new List<Module>();
-            foreach (var elem in moduleInfoList)
-            {                
-                tmp.Add(Module.CreateModule(elem.ModuleName));
-            }
-            this.ListModule = new List<Module>(tmp);
+            //IList<ModuleInfo> moduleInfoList = _catalog.Modules.ToList<ModuleInfo>();
+            //var tmp = new List<Module>();
+            //foreach (var elem in moduleInfoList)
+            //{                
+            //    tmp.Add(Module.CreateModule(elem.ModuleName));
+            //}
+            //this.ListModule = new List<Module>(tmp);
         }
 
-        public IEnumerable<Module> getListModule()
+        public List<ModuleMetadata> getListModule()
         {
-            IList<ModuleInfo> moduleInfoList = _catalog.Modules.ToList<ModuleInfo>();
-            var tmp = new List<Module>();
-            foreach (var elem in moduleInfoList)
-            {
-                tmp.Add(Module.CreateModule(elem.ModuleName));
-            }
-            this.ListModule = tmp;
+            //IList<ModuleInfo> moduleInfoList = _catalog.Modules.ToList<ModuleInfo>();
+            //var tmp = new List<Module>();
+            //foreach (var elem in moduleInfoList)
+            //{
+            //    tmp.Add(Module.CreateModule(elem.ModuleName));
+            //}
+            //this.ListModule = tmp;
 
-            return this.ListModule;
+            return this._catalog.ModuleMetadata;
         }
     }
 }

@@ -69,6 +69,8 @@
     <Compile Include="DataAccess\ModuleRepository.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="IAPI.cs" />
+    <Compile Include="IMetadataModuleCatalog.cs" />
+    <Compile Include="MetadataModuleCatalog.cs" />
     <Compile Include="Model\AgendaEvent.cs" />
     <Compile Include="Model\Module.cs" />
     <Compile Include="Model\Orders.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Model\Tva.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Zone.cs" />
+    <Compile Include="ModuleMetadata.cs" />
     <Compile Include="OrmBms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelBase.cs" />

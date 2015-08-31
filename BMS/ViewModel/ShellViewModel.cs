@@ -25,12 +25,14 @@ namespace BMS.ViewModel
         readonly IModuleCatalog             _catalog;
         IUnityContainer                     _container;
         IRegionManager                      _manager;
+        IMetadataModuleCatalog              _metadataCatalog;
 
-        public ShellViewModel(IModuleCatalog catalog, IUnityContainer container, IRegionManager manager, IAPI api)
+        public ShellViewModel(IModuleCatalog catalog, IUnityContainer container, IRegionManager manager, IAPI api, IMetadataModuleCatalog metadataCatalog)
         {
             _catalog = catalog;
             _container = container;
             _manager = manager;
+            _metadataCatalog = metadataCatalog;
             //On le met en comentaire pour les tests pour eviter de ce log a chaque test
             //var viewModel = new LoginViewModel(api, _container);
           // viewModel.EventLogin += this.NavigateToModuleWorkBench;
@@ -120,7 +122,7 @@ namespace BMS.ViewModel
             await Task.Run(() => { catalog.LoadAllModulesInTheDirectory(); });
             this.LoginMenu.Clear();
             this.CoreMenu.Add(new CoreMenuViewModel());
-            var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager);
+            var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager, _metadataCatalog);
             this.ViewModels.Clear();
             this.ViewModels.Add(viewModel);
         }

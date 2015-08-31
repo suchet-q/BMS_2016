@@ -9,6 +9,6 @@ namespace Service.DataAccess
 {
     public interface IModuleRepository
     {
-        IEnumerable<Module> getListModule();
+        List<ModuleMetadata> getListModule();
     }
 }
