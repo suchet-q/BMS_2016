@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Service.Model;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -13,6 +14,7 @@ namespace Service
     public class API : IAPI
     {
         public OrmBms Orm { get; set; }
+        public User LoggedUser { get; set; }
    
         public API()
         {

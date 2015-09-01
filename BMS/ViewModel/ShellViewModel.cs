@@ -27,12 +27,15 @@ namespace BMS.ViewModel
         IRegionManager                      _manager;
         IMetadataModuleCatalog              _metadataCatalog;
 
+        IAPI _api;
+
         public ShellViewModel(IModuleCatalog catalog, IUnityContainer container, IRegionManager manager, IAPI api, IMetadataModuleCatalog metadataCatalog)
         {
             _catalog = catalog;
             _container = container;
             _manager = manager;
             _metadataCatalog = metadataCatalog;
+            _api = api;
             //On le met en comentaire pour les tests pour eviter de ce log a chaque test
             //var viewModel = new LoginViewModel(api, _container);
           // viewModel.EventLogin += this.NavigateToModuleWorkBench;
@@ -123,6 +126,10 @@ namespace BMS.ViewModel
             this.LoginMenu.Clear();
             this.CoreMenu.Add(new CoreMenuViewModel());
             var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager, _metadataCatalog);
+            LoginViewModel tmp = null;
+            if (this.ViewModels.Count() > 0) tmp = this.ViewModels.First() as LoginViewModel;
+            if (tmp != null) this._api.LoggedUser = tmp.LoggedUser;
+
             this.ViewModels.Clear();
             this.ViewModels.Add(viewModel);
         }
