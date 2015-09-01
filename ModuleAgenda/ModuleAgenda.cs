@@ -14,10 +14,11 @@ namespace ModuleAgenda
          IUnityContainer _container;
         IAPI            _api;
 
-        public ModuleAgenda(IUnityContainer container, IAPI api)
+        public ModuleAgenda(IUnityContainer container, IAPI api, IMetadataModuleCatalog metadataCatalog)
         {
             _container = container;
             _api = api;
+            metadataCatalog.ModuleMetadata.Add(new ModuleMetadata("Agenda", "ModuleAgenda", "1.0", "This Module allow you to manage yours event", "BMS"));
         }
 
         public void Initialize()
