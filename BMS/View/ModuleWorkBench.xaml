@@ -18,13 +18,13 @@
     </UserControl.Resources>
 
     <Grid>
-        <HeaderedContentControl Style="{StaticResource DisplayArea}" Margin="30,80,30,30" HorizontalAlignment="Left" Width="150" Height="Auto" VerticalAlignment="Top">
+        <HeaderedContentControl Style="{StaticResource DisplayArea}" Margin="30,80,30,30" HorizontalAlignment="Left" Width="250" Height="Auto" VerticalAlignment="Top">
             <HeaderedContentControl.Header>
                 Menu
             </HeaderedContentControl.Header>
             <ItemsControl ItemsSource="{Binding ViewModels}"  />
         </HeaderedContentControl>
-        <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Stretch" Margin="195,80,10,10" VerticalAlignment="Stretch" CornerRadius="5">
+        <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Stretch" Margin="295,80,10,10" VerticalAlignment="Stretch" CornerRadius="5">
             <StackPanel Background="White">
                 <ContentControl x:Name="MainModuleRegion" Margin="4" prism:RegionManager.RegionName="MainModuleRegion"/>
             </StackPanel>
