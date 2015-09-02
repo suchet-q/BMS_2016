@@ -359,5 +359,32 @@ namespace Service
             return res;
         }
 
+        public int Execute(string query, object parameter = null, bool letConnectionOpen = false)
+        {
+            int res;
+
+
+            if (connection.State == ConnectionState.Closed)
+                if (!this.OpenConnection())
+                    return 0;
+
+            try
+            {
+                if (parameter != null)
+                    res = this.connection.Execute(query, parameter);
+                else
+                    res = this.connection.Execute(query);
+            }
+            catch (Exception e)
+            {
+                System.Console.Error.WriteLine(e.Message);
+                return 0;
+            }
+
+            if (connection.State == ConnectionState.Open && !letConnectionOpen)
+                this.CloseConnection();
+            return res;
+        }
+
     }
 }

@@ -20,6 +20,8 @@ namespace BMS.ViewModel
 
         public event OnLoginHandler EventLogin;
 
+        public User LoggedUser { get; set; }
+
         public LoginViewModel(IAPI api, IUnityContainer container)
         {
             _api = api;
@@ -135,6 +137,7 @@ namespace BMS.ViewModel
                     this.DisplayConnexionErrMsg = false;
                     this.DisplayDatabaseErrMsg = false;
                     this.DisplayConnexionSuccMsg = true;
+                    this.LoggedUser = res.First();
                     this.OnLogin(EventArgs.Empty);
                 }
                 else

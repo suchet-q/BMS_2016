@@ -78,7 +78,7 @@ namespace UserManagerModule.ViewModel
 
         private void GenerateCsv()
         {
-            _api.GenerateCsv<User>(this._listAllUsers);
+            _api.GenerateCsv<User>(this._listAllUsers, null, true);
             this.showAndHideGeneratedMsg();
         }
 
