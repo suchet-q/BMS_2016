@@ -42,6 +42,7 @@ namespace EmployeeManagerModule.ViewModel
             {
                 foreach (Phone phone in listPhone)
                 {
+                    System.Console.Error.WriteLine("LALALALL => "  + phone.contact_detail_id);
                     this.currentEmployee.ContactDetails.Add(phone);
                 }
             }
@@ -127,7 +128,7 @@ namespace EmployeeManagerModule.ViewModel
             this.AddEmailAddressCommand = new DelegateCommand((o) => this.AddContactDetail<Email>());
             this.AddPhoneNumberCommand = new DelegateCommand((o) => this.AddContactDetail<Phone>());
             this.AddAddressCommand = new DelegateCommand((o) => this.AddContactDetail<Address>());
-            this.DeleteContactDetailCommand = new DelegateCommand((o) => this.DeleteCurrentContactDetail(), (o) => this.CurrentContactDetail != null);
+            this.DeleteContactDetailCommand = new DelegateCommand((o) => this.DeleteCurrentContactDetail());
         }
 
         public void setManagerLookup(IUnityContainer container)
@@ -330,17 +331,36 @@ namespace EmployeeManagerModule.ViewModel
         /// </summary>
         private void DeleteCurrentContactDetail()
         {
-            EmailViewModel evm = this.CurrentContactDetail as EmailViewModel;
-            if (evm != null)
+            if (CurrentContactDetail != null)
             {
-                _api.Orm.Delete("delete from email where contact_detail_id=@contact_detail_id", new { contact_detail_id = this.CurrentContactDetail.Model.id_contact_detail });
+                ContactDetailViewModel evm = this.CurrentContactDetail;
+                if (evm != null)
+                {
+                    EmailViewModel e = evm as EmailViewModel;
+                    if (e != null)
+                    {
+                        System.Console.Error.WriteLine("EmailViewModel == " + this.CurrentContactDetail.Model.id_contact_detail);
+                        _api.Orm.Delete("delete from email where contact_detail_id=@contact_detail_id", new { contact_detail_id = this.CurrentContactDetail.Model.id_contact_detail });
+                    }
+
+                    PhoneViewModel p = evm as PhoneViewModel;
+                    if (p != null)
+                    {
+                        System.Console.Error.WriteLine("PhoneViewModel");
+                        _api.Orm.Delete("delete from phone where contact_detail_id=@contact_detail_id", new { contact_detail_id = this.CurrentContactDetail.Model.id_contact_detail });
+                    }
+
+                    AddressViewModel a = evm as AddressViewModel;
+                    if (a != null)
+                    {
+                        System.Console.Error.WriteLine("AddressViewModel");
+                        _api.Orm.Delete("delete from address where contact_detail_id=@contact_detail_id", new { contact_detail_id = this.CurrentContactDetail.Model.id_contact_detail });
+                    }
+                }
+                _api.Orm.Delete("delete from contactdetail where id_contact_detail=@id_contact_detail", new { id_contact_detail = this.CurrentContactDetail.Model.id_contact_detail });
+                this.ContactDetails.Remove(this.CurrentContactDetail);
+                this.CurrentContactDetail = null;
             }
-            _api.Orm.Delete("delete from contactdetail where id_contact_detail=@id_contact_detail", new { id_contact_detail = this.CurrentContactDetail.Model.id_contact_detail });
-            //CurrentContactDetail
-            //_api.Orm.Delete("delete from user where user.id=@idUser", new { idUser = this.CurrentContactDetail.Model.id });
-            //this.unitOfWork.RemoveContactDetail(this.Model, this.CurrentContactDetail.Model);
-            this.ContactDetails.Remove(this.CurrentContactDetail);
-            this.CurrentContactDetail = null;
         }
 
     }

@@ -13,7 +13,7 @@ namespace BMS
     { 
         protected override void OnStartup(StartupEventArgs e)
         {
-            string myVar = "BMS";
+            string myVar = "MODULE_PATH";
             string value = Path.GetFullPath("./Modules");
 
             ConsoleManager.Show();
