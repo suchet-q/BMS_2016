@@ -7,8 +7,9 @@
         xmlns:cal="http://www.codeplex.com/prism"
         xmlns:prism="http://www.codeplex.com/prism"
         Title="Business Managment Software" 
-        WindowState="Maximized"
-        Background="#FFEDEDED">
+        WindowState="Normal"
+        Background="#FFEDEDED"
+        Height="{Binding WindowHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="{Binding WindowWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
     
     <Grid>

@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:BMS"
              xmlns:prism="http://www.codeplex.com/prism"
              mc:Ignorable="d" 
-             Height="Auto" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+             Height="850" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type vm:MenuModuleViewModel}">

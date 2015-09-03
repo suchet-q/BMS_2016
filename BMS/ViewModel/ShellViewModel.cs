@@ -37,16 +37,19 @@ namespace BMS.ViewModel
             _metadataCatalog = metadataCatalog;
             _api = api;
             //On le met en comentaire pour les tests pour eviter de ce log a chaque test
-            //var viewModel = new LoginViewModel(api, _container);
-          // viewModel.EventLogin += this.NavigateToModuleWorkBench;
+            this.WindowHeight = 600;
+            this.WindowWidth = 800;
+            var viewModel = new LoginViewModel(api, _container);
+            viewModel.EventLogin += this.NavigateToModuleWorkBench;
 
             // Test pour le form de database
             //var viewModel = new DatabaseParametersViewModel(api);
 
             //Bypass du login
 
-            NavigateToModuleWorkBenchAsync();
+            //NavigateToModuleWorkBenchAsync();
             //this.LoginMenu.Add(new BasicMenuViewModel());
+            this.ViewModels.Add(viewModel);
         }
 
         //public ObservableCollection<ViewModelBase> MenuModule
@@ -124,6 +127,8 @@ namespace BMS.ViewModel
             var catalog = _catalog as DynamicDirectoryModuleCatalog;
             await Task.Run(() => { catalog.LoadAllModulesInTheDirectory(); });
             this.LoginMenu.Clear();
+            this.WindowHeight = 900;
+            this.WindowWidth = 1500;
             this.CoreMenu.Add(new CoreMenuViewModel());
             var viewModel = new ModuleWorkBenchViewModel(_catalog, _container, _manager, _metadataCatalog);
             LoginViewModel tmp = null;
@@ -137,6 +142,36 @@ namespace BMS.ViewModel
         void NavigateToModuleWorkBench(object sender, EventArgs args)
         {
             this.NavigateToModuleWorkBenchAsync();
+        }
+        
+        int _windowHeigh;
+        public int WindowHeight
+        {
+            get
+            {
+                return _windowHeigh;
+            }
+            set
+            {
+                if (_windowHeigh == value) return;
+                _windowHeigh = value;
+                this.OnPropertyChanged("WindowHeight");
+            }
+        }
+
+        int _windowWidth;
+        public int WindowWidth
+        {
+            get
+            {
+                return _windowWidth;
+            }
+            set
+            {
+                if (_windowWidth == value) return;
+                _windowWidth = value;
+                this.OnPropertyChanged("WindowWidth");
+            }
         }
     }
 }

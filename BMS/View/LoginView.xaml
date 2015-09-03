@@ -97,7 +97,7 @@
                                 <TextBox Text="{Binding Port}" Margin="10,70,0,-57" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
                                 <TextBlock Text="Login:" Height="19" Margin="10,98,0,-86" Width="60" RenderTransformOrigin="0.6,-0.947"/>
                                 <TextBox Text="{Binding DbLogin}" Margin="10,97,0,-84" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
-                                <TextBox Text="{Binding DbPassword}" Margin="10,124,0,-111" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
+                                <TextBox Text="{Binding DbPassword, UpdateSourceTrigger=PropertyChanged}" Margin="10,124,0,-111" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
                                 <TextBlock Text="Password:" Height="19" Margin="10,125,0,-113" Width="60" RenderTransformOrigin="0.6,-0.947"/>
 
                                 <Button Command="{Binding ChangeDatabaseCommand}" Content="Change" Margin="112,156,16,-145" Grid.Column="1"/>

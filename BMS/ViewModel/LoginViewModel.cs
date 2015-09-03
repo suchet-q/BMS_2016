@@ -109,6 +109,8 @@ namespace BMS.ViewModel
             }
         }
 
+
+        string _realPassword;
         string _password;
         public string Password
         {
@@ -119,14 +121,32 @@ namespace BMS.ViewModel
             set
             {
                 if (_password == value) return;
-                _password = value;
+                if (_password == null)
+                    _password = "";
+                if (value.Length > _password.Length)
+                {
+                    for (int i = value.Length - (value.Length - _password.Length); i < value.Length; ++i)
+                        _realPassword += value[i];
+                    _password = "";
+                    foreach (char c in value)
+                    {
+                        _password += '*';
+                    }
+                }
+                else if (value.Length < _password.Length)
+                {
+                    _realPassword = _realPassword.Remove(_realPassword.Length - (_password.Length - value.Length));
+                    _password = _password.Remove(_password.Length - (_password.Length - value.Length));  
+                }
+
+//                _password = value;
                 this.OnPropertyChanged("Password");
             }
         }
 
         private void ExecuteLogin()
         {
-            IEnumerable<User> res = _api.Orm.ObjectQuery<User>("select * from user where login=@login and pwd=@password", new { login = this.Login, password = _api.CalculateMD5Hash(this.Password) });
+            IEnumerable<User> res = _api.Orm.ObjectQuery<User>("select * from user where login=@login and pwd=@password", new { login = this.Login, password = _api.CalculateMD5Hash(this._realPassword) });
             if (res != null)
             {
                 int count = 0;
@@ -169,7 +189,7 @@ namespace BMS.ViewModel
         private void ConnectDatabase()
         {
             System.Console.Error.WriteLine("Change setting de la bdd plz");
-            _api.Orm.Initialize(this.Host, this.Database, this.Port, this.Login, this.Password);
+            _api.Orm.Initialize(this.Host, this.Database, this.Port, this.DbLogin, this._realDbPassword);
         }
 
         private void DisplayDatabaseParamExecute()
@@ -241,6 +261,7 @@ namespace BMS.ViewModel
             }
         }
 
+        string _realDbPassword;
         string _dbPassword;
         public string DbPassword
         {
@@ -251,7 +272,25 @@ namespace BMS.ViewModel
             set
             {
                 if (_dbPassword == value) return;
-                _dbPassword = value;
+                if (_dbPassword == null)
+                    _dbPassword = "";
+                if (value.Length > _dbPassword.Length)
+                {
+                    for (int i = value.Length - (value.Length - _dbPassword.Length); i < value.Length; ++i)
+                        _realDbPassword += value[i];
+                    _dbPassword = "";
+                    foreach (char c in value)
+                    {
+                        _dbPassword += '*';
+                    }
+                }
+                else if (value.Length < _dbPassword.Length)
+                {
+                    _realDbPassword = _realDbPassword.Remove(_realDbPassword.Length - (_dbPassword.Length - value.Length));
+                    _dbPassword = _dbPassword.Remove(_dbPassword.Length - (_dbPassword.Length - value.Length));
+                }
+
+                //                _password = value;
                 this.OnPropertyChanged("DbPassword");
             }
         }
