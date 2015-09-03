@@ -23,8 +23,8 @@ namespace Service
 
         public bool Initialize()
         {
-//            this.Orm.Initialize("mysql-bms-market.alwaysdata.net", "bms-market_logiciel", 3306, "110624_bms", "655957ab");
-            this.Orm.Initialize("localhost", "bms", 3306, "root", "");
+            this.Orm.Initialize("mysql-bms-market.alwaysdata.net", "bms-market_logiciel", 3306, "110624_bms", "655957ab");
+//            this.Orm.Initialize("localhost", "bms", 3306, "root", "");
             return true;
         }
 

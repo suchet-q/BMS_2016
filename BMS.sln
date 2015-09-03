@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMS", "BMS\BMS.csproj", "{53F883CD-8CA5-4356-BDBE-C2A0977EA998}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManagerModule", "StockManagerModule\StockManagerModule.csproj", "{3C899B8D-669B-4CB8-808A-32E0E0005BB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersManagerModule", "OrdersManagerModule\OrdersManagerModule.csproj", "{C4719554-B9FC-435B-8683-BD7822E46438}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagerModule", "EmployeeManagerModule\EmployeeManagerModule.csproj", "{2DECF253-17F8-432A-BD45-08CC052047F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{C4719554-B9FC-435B-8683-BD7822E46438}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4719554-B9FC-435B-8683-BD7822E46438}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4719554-B9FC-435B-8683-BD7822E46438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DECF253-17F8-432A-BD45-08CC052047F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DECF253-17F8-432A-BD45-08CC052047F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DECF253-17F8-432A-BD45-08CC052047F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DECF253-17F8-432A-BD45-08CC052047F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Windows;
+using System.IO;
 
 namespace BMS
 {
@@ -13,13 +14,13 @@ namespace BMS
         protected override void OnStartup(StartupEventArgs e)
         {
             string myVar = "BMS";
-            string exists = "MODULE_BMS";
+            string value = Path.GetFullPath("./Modules");
 
             ConsoleManager.Show();
             base.OnStartup(e);
             if (Environment.GetEnvironmentVariable(myVar) == null)
             {
-                Environment.SetEnvironmentVariable(myVar, exists, EnvironmentVariableTarget.User);
+                Environment.SetEnvironmentVariable(myVar, value, EnvironmentVariableTarget.Machine);
             }
             Bootstrapper bootstrapper = new Bootstrapper();
             bootstrapper.Run();
