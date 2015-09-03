@@ -20,6 +20,14 @@ namespace BMS.ViewModel
             this.AddModuleByPathCommand = new DelegateCommand((o) => this.AddModuleByPath());
         }
 
+        async void UnzipModule(Microsoft.Win32.OpenFileDialog dlg, FolderBrowserDialog fbd)
+        {
+            await Task.Run(() => { ZipFile.ExtractToDirectory(dlg.FileName, fbd.SelectedPath); });
+        }
+        async void UnzipModuleEnv(Microsoft.Win32.OpenFileDialog dlg, string resultEnv)
+        {
+            await Task.Run(() => { ZipFile.ExtractToDirectory(dlg.FileName, resultEnv); });
+        }
          public ICommand AddModuleByPathCommand { get; private set; }
 
          public void AddModuleByPath()
@@ -35,13 +43,15 @@ namespace BMS.ViewModel
                  resultEnv = Environment.GetEnvironmentVariable("MODULE_PATH");
                  if (resultEnv != null)
                  {
-                     ZipFile.ExtractToDirectory(dlg.FileName, resultEnv);
+                     UnzipModuleEnv(dlg, resultEnv);
+                    // ZipFile.ExtractToDirectory(dlg.FileName, resultEnv);
                  }
                  else
                  {
                      FolderBrowserDialog fbd = new FolderBrowserDialog();
                      DialogResult resultFBD = fbd.ShowDialog();
-                     ZipFile.ExtractToDirectory(dlg.FileName, fbd.SelectedPath);
+                     UnzipModule(dlg, fbd);
+                    // ZipFile.ExtractToDirectory(dlg.FileName, fbd.SelectedPath);
                  }
              }
          }
