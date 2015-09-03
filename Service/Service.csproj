@@ -71,9 +71,14 @@
     <Compile Include="IAPI.cs" />
     <Compile Include="IMetadataModuleCatalog.cs" />
     <Compile Include="MetadataModuleCatalog.cs" />
+    <Compile Include="Model\Address.cs" />
     <Compile Include="Model\AgendaEvent.cs" />
+    <Compile Include="Model\BasicEmployee.cs" />
+    <Compile Include="Model\ContactDetail.cs" />
+    <Compile Include="Model\Email.cs" />
     <Compile Include="Model\Module.cs" />
     <Compile Include="Model\Orders.cs" />
+    <Compile Include="Model\Phone.cs" />
     <Compile Include="Model\Stock.cs" />
     <Compile Include="Model\StockCategorie.cs" />
     <Compile Include="Model\Tva.cs" />

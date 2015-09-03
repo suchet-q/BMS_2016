@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Input;
 using EmployeeManagerModule.Model;
 using Service;
+using Service.Model;
 using System.Collections.Generic;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.ServiceLocation;

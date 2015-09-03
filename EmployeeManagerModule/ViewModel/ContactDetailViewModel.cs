@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Service;
+using Service.Model;
 using EmployeeManagerModule.Model;
 
 namespace EmployeeManagerModule.ViewModel

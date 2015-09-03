@@ -3,6 +3,7 @@ using EmployeeManagerModule.Model;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using Service;
+using Service.Model;
 
 namespace EmployeeManagerModule.ViewModel
 {
