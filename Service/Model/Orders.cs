@@ -14,7 +14,7 @@ namespace Service.Model
         public DateTime dateordered { get; set; }
         public string content { get; set; }
         public int status { get; set; }
-        public string receiver { get; set; }
+        public Client receiver { get; set; }
         public DateTime datereceived { get; set; }
     }
 }

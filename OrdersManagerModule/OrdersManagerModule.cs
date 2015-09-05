@@ -23,7 +23,7 @@ namespace OrdersManagerModule
 
         public void Initialize()
         {
-            var viewModel = new ViewModel.OrdersManagerModuleViewModel(_api);
+            var viewModel = new ViewModel.OrdersManagerModuleViewModel(_api, _container);
             var view = new View.OrdersManagerModuleView();
             view.DataContext = viewModel;
             System.Console.Error.WriteLine("Initialize");

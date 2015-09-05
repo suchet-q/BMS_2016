@@ -1,4 +1,5 @@
-﻿using Service;
+﻿using Microsoft.Practices.Unity;
+using Service;
 using Service.Model;
 using System;
 using System.Collections.Generic;
@@ -14,22 +15,34 @@ namespace OrdersManagerModule.ViewModel
     public class OrderDetailViewModel : ViewModelBase
     {
         Orders                        _order;
+
         public Orders                 Model { get; private set; }
+
         ObservableCollection<Orders>  _listOrder;
+        
         IAPI                        _api;
+
+        IUnityContainer _container;
+        
         public ICommand             ValidateOrderCommand { get; private set; }
+        
         public Array EnumCol { get; set; }
 
-        public OrderDetailViewModel(Orders order, ObservableCollection<Orders> listOrder, IAPI api)
+        public ObservableCollection<Client> AllClient { get; set; }
+
+        public OrderDetailViewModel(Orders order, ObservableCollection<Orders> listOrder, IAPI api, IUnityContainer container)
         {
             _api = api;
+            _container = container;
+
             if (order == null)
             {
                 throw new ArgumentNullException("Order");
             }
-            System.Console.Error.WriteLine("Order ID ===> " + order.id);
             _order = Model = order;
             _listOrder = listOrder;
+            IEnumerable<Client> tvaRes = _api.Orm.ObjectQuery<Client>("select * from client");
+            this.AllClient = new ObservableCollection<Client>(tvaRes);
             ValidateOrderCommand = new DelegateCommand((o) => this.ValidateOrder());
             var enum_names = Enum.GetValues(typeof (OrderStatus));
             EnumCol = enum_names;
@@ -88,7 +101,7 @@ namespace OrdersManagerModule.ViewModel
             }
         }
 
-        public string Receiver
+        public Client Receiver
         {
             get
             {
@@ -97,6 +110,7 @@ namespace OrdersManagerModule.ViewModel
 
             set
             {
+                if (this.Model.receiver == value) return;
                 this.Model.receiver = value;
             }
         }
@@ -123,7 +137,8 @@ namespace OrdersManagerModule.ViewModel
             this.OnPropertyChanged("Status");
             _api.Orm.UpdateObject<Orders>(@"update orders set status = @status where Id = @Id", Model);
             this.OnPropertyChanged("Receiver");
-            _api.Orm.UpdateObject<Orders>(@"update orders set receiver = @receiver where Id = @Id", Model);
+            _api.Orm.Update(@"update orders set id_tva = @tva where id = @Id", new { tva = this.Model.receiver.id, Id = this.Model.id });
+            //_api.Orm.UpdateObject<Orders>(@"update orders set receiver = @receiver where Id = @Id", Model);
             this.OnPropertyChanged("DateReceived");
             _api.Orm.UpdateObject<Orders>(@"update orders set datereceived = @datereceived where Id = @Id", Model);
         }

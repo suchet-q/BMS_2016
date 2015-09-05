@@ -60,7 +60,7 @@
                             <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=DateOrdered, StringFormat={}{0:dd/MM/yyyy}}"/>
                             <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Path=Content}"/>
                             <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status}"/>
-                            <GridViewColumn Header="Receiver" DisplayMemberBinding="{Binding Path=Receiver}"/>
+                            <GridViewColumn Header="Receiver" DisplayMemberBinding="{Binding Path=Receiver.name}"/>
                             <GridViewColumn Header="Date Received" DisplayMemberBinding="{Binding Path=DateReceived, StringFormat={}{0:dd/MM/yyyy}}"/>
                         </GridView>
                     </ListView.View>
