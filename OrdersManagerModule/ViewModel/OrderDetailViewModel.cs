@@ -79,12 +79,12 @@ namespace OrdersManagerModule.ViewModel
         {
             get
             {
-                return this.Model.status;
+                return (OrderStatus)this.Model.status;
             }
 
             set
             {
-                this.Model.status = value;
+                this.Model.status = (int)value;
             }
         }
 
