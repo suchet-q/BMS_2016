@@ -27,7 +27,7 @@
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Content}" Width="240" Height="150" />
 
         <TextBlock Grid.Column="0" Grid.Row="2" Text="Status :" />
-        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Status}" Width="240" />
+        <ComboBox Grid.Column="1" Grid.Row="2" SelectedValue="{Binding Path=Status}" ItemsSource="{Binding EnumCol}" Width="240"/>
 
         <TextBlock Grid.Column="0" Grid.Row="3" Text="Receiver :" />
         <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Receiver}" Width="240" />

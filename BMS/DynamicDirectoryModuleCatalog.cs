@@ -137,7 +137,6 @@ namespace BMS
                 foreach (var module in modules)
                 {
                      manager.LoadModule(module.ModuleName);
-                     System.Console.Error.WriteLine("AJOUT MODULE MAGGLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
                      this.OnAdded(EventArgs.Empty);
                 }
             }), null);

@@ -18,6 +18,7 @@ namespace OrdersManagerModule.ViewModel
         ObservableCollection<Orders>  _listOrder;
         IAPI                        _api;
         public ICommand             ValidateOrderCommand { get; private set; }
+        public Array EnumCol { get; set; }
 
         public OrderDetailViewModel(Orders order, ObservableCollection<Orders> listOrder, IAPI api)
         {
@@ -30,6 +31,8 @@ namespace OrdersManagerModule.ViewModel
             _order = Model = order;
             _listOrder = listOrder;
             ValidateOrderCommand = new DelegateCommand((o) => this.ValidateOrder());
+            var enum_names = Enum.GetValues(typeof (OrderStatus));
+            EnumCol = enum_names;
         }
 
         public int Id
@@ -72,7 +75,7 @@ namespace OrdersManagerModule.ViewModel
             }
         }
 
-        public int Status
+        public OrderStatus Status
         {
             get
             {
