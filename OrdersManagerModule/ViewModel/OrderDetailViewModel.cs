@@ -19,6 +19,8 @@ namespace OrdersManagerModule.ViewModel
         public Orders                 Model { get; private set; }
 
         ObservableCollection<Orders>  _listOrder;
+
+        ObservableCollection<Client> _allClient;
         
         IAPI                        _api;
 
@@ -27,8 +29,6 @@ namespace OrdersManagerModule.ViewModel
         public ICommand             ValidateOrderCommand { get; private set; }
         
         public Array EnumCol { get; set; }
-
-        public ObservableCollection<Client> AllClient { get; set; }
 
         public OrderDetailViewModel(Orders order, ObservableCollection<Orders> listOrder, IAPI api, IUnityContainer container)
         {
@@ -41,11 +41,26 @@ namespace OrdersManagerModule.ViewModel
             }
             _order = Model = order;
             _listOrder = listOrder;
-            IEnumerable<Client> tvaRes = _api.Orm.ObjectQuery<Client>("select * from client");
-            this.AllClient = new ObservableCollection<Client>(tvaRes);
+            _allClient = _container.Resolve(typeof(object), "ClientList") as ObservableCollection<Client>;
+            System.Console.Error.WriteLine("ORDERS DEBUG");
+            System.Console.Error.WriteLine(Model.receiver.name);
             ValidateOrderCommand = new DelegateCommand((o) => this.ValidateOrder());
             var enum_names = Enum.GetValues(typeof (OrderStatus));
             EnumCol = enum_names;
+        }
+
+        public ObservableCollection<Client> AllClient
+        {
+            get
+            {
+                return this._allClient;
+            }
+            set
+            {
+                if (this._allClient == value) return;
+                this._allClient = value;
+                this.OnPropertyChanged("AllClient");
+            }
         }
 
         public int Id
@@ -138,7 +153,6 @@ namespace OrdersManagerModule.ViewModel
             _api.Orm.UpdateObject<Orders>(@"update orders set status = @status where Id = @Id", Model);
             this.OnPropertyChanged("Receiver");
             _api.Orm.Update(@"update orders set id_tva = @tva where id = @Id", new { tva = this.Model.receiver.id, Id = this.Model.id });
-            //_api.Orm.UpdateObject<Orders>(@"update orders set receiver = @receiver where Id = @Id", Model);
             this.OnPropertyChanged("DateReceived");
             _api.Orm.UpdateObject<Orders>(@"update orders set datereceived = @datereceived where Id = @Id", Model);
         }
