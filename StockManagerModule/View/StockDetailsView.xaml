@@ -117,7 +117,7 @@
                 <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=newCategory, Mode=TwoWay}" Width="150" />
             </Grid>
         </Border>
-        <TextBlock Foreground="Red" TextAlignment="Center" TextWrapping="Wrap" Text="You can't delete a Categorie if there is other Entry associated with it" Margin="10,0" Height="42">
+        <TextBlock Foreground="Red" TextAlignment="Center" TextWrapping="Wrap" Text="You can't delete a Categorie if there is an other Entry associated with it" Margin="10,0" Height="42">
             <TextBlock.Style>
                 <Style>
                     <Style.Triggers>

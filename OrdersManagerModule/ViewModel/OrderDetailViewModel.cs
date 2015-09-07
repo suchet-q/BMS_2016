@@ -8,27 +8,40 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace OrdersManagerModule.ViewModel
 {
     public class OrderDetailViewModel : ViewModelBase
     {
-        Orders                        _order;
+        Orders _order;
 
-        public Orders                 Model { get; private set; }
-
-        ObservableCollection<Orders>  _listOrder;
+        ObservableCollection<Orders> _listOrder;
 
         ObservableCollection<Client> _allClient;
         
-        IAPI                        _api;
+        IAPI _api;
 
         IUnityContainer _container;
+
+        public Orders Model { get; private set; }
         
-        public ICommand             ValidateOrderCommand { get; private set; }
+        public ICommand ValidateOrderCommand { get; private set; }
+
+        public ICommand AddClientCommand { get; private set; }
+
+        public ICommand ConfirmClientCommand { get; private set; }
+        
+        public ICommand DeleteClientCommand { get; private set; }
         
         public Array EnumCol { get; set; }
+
+        public string newClientName { get; set; }
+
+        public string newClientAddress { get; set; }
+
+        public System.Windows.Visibility newReceiverVisibility;
 
         public OrderDetailViewModel(Orders order, ObservableCollection<Orders> listOrder, IAPI api, IUnityContainer container)
         {
@@ -42,10 +55,13 @@ namespace OrdersManagerModule.ViewModel
             _order = Model = order;
             _listOrder = listOrder;
             _allClient = _container.Resolve(typeof(object), "ClientList") as ObservableCollection<Client>;
-            System.Console.Error.WriteLine("ORDERS DEBUG");
-            System.Console.Error.WriteLine(Model.receiver.name);
             ValidateOrderCommand = new DelegateCommand((o) => this.ValidateOrder());
-            var enum_names = Enum.GetValues(typeof (OrderStatus));
+            AddClientCommand = new DelegateCommand((o) => this.AddClient());
+            ConfirmClientCommand = new DelegateCommand((o) => this.ConfirmClient());
+            DeleteClientCommand = new DelegateCommand((o) => this.DeleteClient());
+            newReceiverVisibility = Visibility.Collapsed;
+            this.OnPropertyChanged("newReceiverVisibility");
+            var enum_names = Enum.GetValues(typeof(OrderStatus));
             EnumCol = enum_names;
         }
 
@@ -155,6 +171,42 @@ namespace OrdersManagerModule.ViewModel
             _api.Orm.Update(@"update orders set id_client = @client where id = @Id", new { client = this.Model.receiver.id, Id = this.Model.id });
             this.OnPropertyChanged("DateReceived");
             _api.Orm.UpdateObject<Orders>(@"update orders set datereceived = @datereceived where Id = @Id", Model);
+        }
+
+        private void AddClient()
+        {
+            newReceiverVisibility = Visibility.Visible;
+            this.OnPropertyChanged("newReceiverVisibility");
+        }
+
+        private void ConfirmClient()
+        {
+            Client toInsert = new Client();
+
+            toInsert.name = this.newClientName;
+            toInsert.address = this.newClientAddress;
+            this.newClientAddress = "";
+            this.newClientName = "";
+            _api.Orm.Insert("insert into client(name, address) values (@newname, @newaddress)", new { newname = toInsert.name, newaddress = toInsert.address });
+            var res = _api.Orm.Query("select max(id) as maxId from client");
+            if (res != null)
+            {
+                toInsert.id = res.First().maxId;
+                this.AllClient.Add(toInsert);
+                this.Receiver = toInsert;
+                this.OnPropertyChanged("Receiver");
+            }
+            else
+            {
+                System.Console.Error.WriteLine("Cannot create new client");
+            }
+            newReceiverVisibility = Visibility.Collapsed;
+            this.OnPropertyChanged("newReceiverVisibility");
+        }
+
+        private void DeleteClient()
+        {
+
         }
 
     }
