@@ -60,7 +60,7 @@
             </TextBlock>
         </StackPanel>
 
-        <Border Style="{StaticResource DetailBorder}"  Margin="3" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Visibility="{Binding Path=newReceiverVisibility}">
+        <Border Style="{StaticResource DetailBorder}"  Margin="3" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Visibility="{Binding Path=NewReceiverVisibility}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />

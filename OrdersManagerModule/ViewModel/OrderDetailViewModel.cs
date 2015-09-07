@@ -25,6 +25,8 @@ namespace OrdersManagerModule.ViewModel
 
         IUnityContainer _container;
 
+        System.Windows.Visibility _newReceiverVisibility = Visibility.Collapsed;
+
         public Orders Model { get; private set; }
         
         public ICommand ValidateOrderCommand { get; private set; }
@@ -40,8 +42,6 @@ namespace OrdersManagerModule.ViewModel
         public string newClientName { get; set; }
 
         public string newClientAddress { get; set; }
-
-        public System.Windows.Visibility newReceiverVisibility;
 
         public OrderDetailViewModel(Orders order, ObservableCollection<Orders> listOrder, IAPI api, IUnityContainer container)
         {
@@ -59,10 +59,23 @@ namespace OrdersManagerModule.ViewModel
             AddClientCommand = new DelegateCommand((o) => this.AddClient());
             ConfirmClientCommand = new DelegateCommand((o) => this.ConfirmClient());
             DeleteClientCommand = new DelegateCommand((o) => this.DeleteClient());
-            newReceiverVisibility = Visibility.Collapsed;
             this.OnPropertyChanged("newReceiverVisibility");
             var enum_names = Enum.GetValues(typeof(OrderStatus));
             EnumCol = enum_names;
+        }
+
+        public System.Windows.Visibility NewReceiverVisibility
+        {
+            get
+            {
+                return this._newReceiverVisibility;
+            }
+
+            set
+            {
+                this._newReceiverVisibility = value;
+                this.OnPropertyChanged("NewReceiverVisibility");
+            }
         }
 
         public ObservableCollection<Client> AllClient
@@ -175,9 +188,7 @@ namespace OrdersManagerModule.ViewModel
 
         private void AddClient()
         {
-            newReceiverVisibility = Visibility.Visible;
-            this.OnPropertyChanged("newReceiverVisibility");
-        }
+            NewReceiverVisibility = Visibility.Visible;        }
 
         private void ConfirmClient()
         {
@@ -200,8 +211,7 @@ namespace OrdersManagerModule.ViewModel
             {
                 System.Console.Error.WriteLine("Cannot create new client");
             }
-            newReceiverVisibility = Visibility.Collapsed;
-            this.OnPropertyChanged("newReceiverVisibility");
+            NewReceiverVisibility = Visibility.Collapsed;
         }
 
         private void DeleteClient()
