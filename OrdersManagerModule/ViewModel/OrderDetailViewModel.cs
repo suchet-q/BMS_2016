@@ -152,7 +152,7 @@ namespace OrdersManagerModule.ViewModel
             this.OnPropertyChanged("Status");
             _api.Orm.UpdateObject<Orders>(@"update orders set status = @status where Id = @Id", Model);
             this.OnPropertyChanged("Receiver");
-            _api.Orm.Update(@"update orders set id_tva = @tva where id = @Id", new { tva = this.Model.receiver.id, Id = this.Model.id });
+            _api.Orm.Update(@"update orders set id_client = @client where id = @Id", new { client = this.Model.receiver.id, Id = this.Model.id });
             this.OnPropertyChanged("DateReceived");
             _api.Orm.UpdateObject<Orders>(@"update orders set datereceived = @datereceived where Id = @Id", Model);
         }

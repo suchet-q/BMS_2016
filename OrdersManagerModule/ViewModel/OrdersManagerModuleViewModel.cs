@@ -88,7 +88,14 @@ namespace OrdersManagerModule.ViewModel
                 newElem.dateordered = stockBrut.dateordered;
                 newElem.datereceived = stockBrut.datereceived;
                 newElem.status = stockBrut.status;
-                newElem.receiver = _api.Orm.ObjectQuery<Client>("select * from client where id=@id", new { id = stockBrut.id_client }).First(); ;
+                foreach (Client client in _listAllClients)
+                {
+                    if (client.id == stockBrut.id_client)
+                    {
+                        newElem.receiver = client;
+                        break;
+                    }
+                }
                 res.Add(newElem);
             }
             return res;

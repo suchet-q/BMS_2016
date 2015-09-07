@@ -18,31 +18,32 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Ordered :" />
-        <DatePicker Grid.Column="1" Grid.Row="0" SelectedDate="{Binding Path=DateOrdered}" Width="240" />
+        <DatePicker Grid.Column="1" Grid.Row="0" SelectedDate="{Binding Path=DateOrdered}" Width="240" Margin="0,0,1,0" />
 
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Content :"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Content}" Width="240" Height="50" TextWrapping="Wrap" AcceptsReturn="True" />
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Content}" Width="240" Height="50" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,1,1,0" />
 
         <TextBlock Grid.Column="0" Grid.Row="2" Text="Received :" />
-        <DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding Path=DateReceived}" Width="240" />
+        <DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding Path=DateReceived}" Width="240" Margin="0,0,1,0" />
 
         <TextBlock Grid.Column="0" Grid.Row="3" Text="Status :" />
-        <ComboBox Grid.Column="1" Grid.Row="3" SelectedValue="{Binding Path=Status}" ItemsSource="{Binding EnumCol}" Width="240"/>
+        <ComboBox Grid.Column="1" Grid.Row="3" SelectedValue="{Binding Path=Status}" ItemsSource="{Binding EnumCol}" Width="240" Margin="0,0,1,0"/>
 
         <TextBlock Grid.Column="0" Grid.Row="4" Text="Receiver :" />
-        <ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding AllClient, Mode=TwoWay}" SelectedItem="{Binding Path=Receiver, Mode=TwoWay}" Width="240">
+        <ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding AllClient, Mode=TwoWay}" SelectedItem="{Binding Path=Receiver, Mode=TwoWay}" Width="240" Margin="0,0,1,0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding name}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        
 
 
-        <Button Content="Validate" Command="{Binding ValidateOrderCommand}" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="5" Width="150"/>
+
+        <Button Content="Validate" Command="{Binding ValidateOrderCommand}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="5" Width="150" Margin="18,0,73,0"/>
     </Grid>
 </UserControl>
