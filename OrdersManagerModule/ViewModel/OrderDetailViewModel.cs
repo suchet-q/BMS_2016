@@ -27,6 +27,8 @@ namespace OrdersManagerModule.ViewModel
 
         System.Windows.Visibility _newReceiverVisibility = Visibility.Collapsed;
 
+        bool _displayDeleteClientErrMsg;
+
         public Orders Model { get; private set; }
         
         public ICommand ValidateOrderCommand { get; private set; }
@@ -62,6 +64,20 @@ namespace OrdersManagerModule.ViewModel
             this.OnPropertyChanged("newReceiverVisibility");
             var enum_names = Enum.GetValues(typeof(OrderStatus));
             EnumCol = enum_names;
+            this.DisplayDeleteClientErrMsg = false;
+        }
+
+        public bool DisplayDeleteClientErrMsg
+        {
+            get
+            {
+                return _displayDeleteClientErrMsg;
+            }
+            set
+            {
+                _displayDeleteClientErrMsg = value;
+                this.OnPropertyChanged("DisplayDeleteClientErrMsg");
+            }
         }
 
         public System.Windows.Visibility NewReceiverVisibility
@@ -216,7 +232,25 @@ namespace OrdersManagerModule.ViewModel
 
         private void DeleteClient()
         {
+            if (this.DisplayDeleteClientErrMsg)
+                this.DisplayDeleteClientErrMsg = false;
 
+            int count = 0;
+            foreach (Orders elem in this._listOrder)
+            {
+                if (elem.receiver.id == this.Receiver.id)
+                    ++count;
+                if (count >= 2)
+                {
+                    this.DisplayDeleteClientErrMsg = true;
+                    return;
+                }
+            }
+            _api.Orm.Delete("delete from client where id = @Id", new { Id = this.Receiver.id });
+            var tmp = this.Receiver;
+            this.AllClient.Remove(tmp);
+            this._allClient.Remove(tmp);
+            this.Receiver = this.AllClient.Count() > 0 ? this.AllClient.First() : null;
         }
 
     }
