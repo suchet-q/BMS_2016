@@ -135,7 +135,11 @@ namespace ModuleManagerModule.ViewModel
             _toBeDeleted.Remove(this.CurrentModule.Metadata);
             this.IsCurrentModuleActivate = true;
             _metadataCatalog.OnChange(null);
-            this.CurrentModule = this.ListAllModules[this.ListAllModules.IndexOf(tmp)];
+            foreach (ModuleViewModel elem in this.ListAllModules)
+            {
+                if (elem.Name == tmp.Name)
+                    this.CurrentModule = elem;
+            }
         }
 
         void ToBeDeleted()
@@ -152,7 +156,11 @@ namespace ModuleManagerModule.ViewModel
             System.Console.Error.WriteLine("Je dois supprimer le module maggle");
             this.IsCurrentModuleActivate = false;
             _metadataCatalog.OnChange(null);
-            this.CurrentModule = this.ListAllModules[this.ListAllModules.IndexOf(tmp)];
+            foreach (ModuleViewModel elem in this.ListAllModules)
+            {
+                if (elem.Name == tmp.Name)
+                    this.CurrentModule = elem;
+            }
         }
 
         void UpdateModuleList(object sender, EventArgs e)
