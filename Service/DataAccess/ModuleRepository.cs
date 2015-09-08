@@ -11,7 +11,18 @@ namespace Service.DataAccess
 {
     public class ModuleRepository : IModuleRepository
     {
-        IMetadataModuleCatalog _catalog; 
+        IMetadataModuleCatalog _catalog;
+        public IMetadataModuleCatalog Catalog
+        {
+            get
+            {
+                return _catalog;
+            }
+            set
+            {
+                _catalog = value;
+            }
+        }      
 
         //public List<ModuleMetadata> ListModule // VA FALLOIR trigger un event a l'ajout d'un module, ce qui mettra a jour toute les listes
         //{
@@ -43,6 +54,17 @@ namespace Service.DataAccess
             //this.ListModule = tmp;
 
             return this._catalog.ModuleMetadata;
+        }
+        public List<ModuleMetadata> getListActivatedModule()
+        {
+            List<ModuleMetadata> res = new List<ModuleMetadata>(); 
+
+            foreach (ModuleMetadata elem in _catalog.ModuleMetadata)
+            {
+                if (elem.State == ModuleStatus.Activated)
+                    res.Add(elem);
+            }
+            return res;
         }
     }
 }

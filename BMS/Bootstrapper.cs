@@ -8,6 +8,10 @@ using System.IO;
 using Microsoft.Practices.Prism.Regions;
 using Service;
 using Service.DataAccess;
+using System.Collections.Generic;
+using System;
+using mscoree;
+using System.Runtime.InteropServices;
 
 namespace BMS
 {
@@ -72,12 +76,45 @@ namespace BMS
 
             var viewModel = new ViewModel.ShellViewModel(this.ModuleCatalog, this.Container, manager, this.api, this.Container.Resolve<IMetadataModuleCatalog>());
             App.Current.MainWindow.DataContext = viewModel;
+            App.Current.MainWindow.Closed += viewModel.WindowIsClosing;
             App.Current.MainWindow.Show();
         }
 
         public void LateInitializeModules()
         {
             base.InitializeModules();
+        }
+
+        public static IEnumerable<AppDomain> EnumAppDomains()
+        {
+            IntPtr enumHandle = IntPtr.Zero;
+            ICorRuntimeHost host = null;
+
+            try
+            {
+                host = new CorRuntimeHost();
+                host.EnumDomains(out enumHandle);
+                object domain = null;
+
+                host.NextDomain(enumHandle, out domain);
+                while (domain != null)
+                {
+                    yield return (AppDomain)domain;
+                    host.NextDomain(enumHandle, out domain);
+                }
+            }
+            finally
+            {
+                if (host != null)
+                {
+                    if (enumHandle != IntPtr.Zero)
+                    {
+                        host.CloseEnum(enumHandle);
+                    }
+
+                    Marshal.ReleaseComObject(host);
+                }
+            }
         }
     }
 }

@@ -16,9 +16,14 @@ namespace UserManagerModule
 
         public UserManagerModule(IUnityContainer container, IAPI api, IMetadataModuleCatalog metadataCatalog)
         {
+            List<string> BDDTableUsed = new List<string>();
             _container = container;
             _api = api;
-            metadataCatalog.ModuleMetadata.Add(new ModuleMetadata("User Manager", "UserManagerModule", "1.0", "This module allow to manage the list of User", "BMS"));
+
+            //La tu mets les tables que tu utilse maggle
+            //BDDTableUsed.Add("tatable");
+
+            metadataCatalog.Add(new ModuleMetadata("User Manager", "UserManagerModule", "1.0", "This module allow to manage the list of User", "BMS", BDDTableUsed));
         }
 
         public void Initialize()

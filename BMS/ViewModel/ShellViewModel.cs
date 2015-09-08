@@ -13,9 +13,16 @@ using BMS.ViewModel;
 using BMS.View;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Prism.UnityExtensions;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
+using mscoree;
+
+
 
 namespace BMS.ViewModel
 {
+  
     class ShellViewModel : ViewModelBase
     {
         ObservableCollection<ViewModelBase> _viewModels;
@@ -27,6 +34,8 @@ namespace BMS.ViewModel
         IRegionManager                      _manager;
         IMetadataModuleCatalog              _metadataCatalog;
 
+        List<ModuleMetadata>                _toBeDeleted;
+
         IAPI _api;
 
         public ShellViewModel(IModuleCatalog catalog, IUnityContainer container, IRegionManager manager, IAPI api, IMetadataModuleCatalog metadataCatalog)
@@ -36,6 +45,8 @@ namespace BMS.ViewModel
             _manager = manager;
             _metadataCatalog = metadataCatalog;
             _api = api;
+            _toBeDeleted = new List<ModuleMetadata>();
+            _container.RegisterInstance(typeof(object), "toBeDeleted", _toBeDeleted);
             //On le met en comentaire pour les tests pour eviter de ce log a chaque test
             this.WindowHeight = 600;
             this.WindowWidth = 800;
@@ -49,6 +60,7 @@ namespace BMS.ViewModel
 
             //NavigateToModuleWorkBenchAsync();
             //this.LoginMenu.Add(new BasicMenuViewModel());
+            //this.NavigateToModuleWorkBenchAsync();
             this.ViewModels.Add(viewModel);
         }
 
@@ -64,24 +76,24 @@ namespace BMS.ViewModel
         //    }
         //}
 
-        private ObservableCollection<BasicMenuViewModel> _loginMenu;
-        public ObservableCollection<BasicMenuViewModel> LoginMenu
-        {
-            get
-            {
-                if (_loginMenu == null)
-                {
-                    _loginMenu = new ObservableCollection<BasicMenuViewModel>();
-                }
-                return _loginMenu;
-            }
-            set
-            {
-                if (_loginMenu == value) return;
-                _loginMenu = value;
-                OnPropertyChanged("LoginMenu");
-            }
-        }
+        //private ObservableCollection<BasicMenuViewModel> _loginMenu;
+        //public ObservableCollection<BasicMenuViewModel> LoginMenu
+        //{
+        //    get
+        //    {
+        //        if (_loginMenu == null)
+        //        {
+        //            _loginMenu = new ObservableCollection<BasicMenuViewModel>();
+        //        }
+        //        return _loginMenu;
+        //    }
+        //    set
+        //    {
+        //        if (_loginMenu == value) return;
+        //        _loginMenu = value;
+        //        OnPropertyChanged("LoginMenu");
+        //    }
+        //}
 
         private ObservableCollection<CoreMenuViewModel> _coreMenu;
         public ObservableCollection<CoreMenuViewModel> CoreMenu
@@ -126,7 +138,7 @@ namespace BMS.ViewModel
         {
             var catalog = _catalog as DynamicDirectoryModuleCatalog;
             await Task.Run(() => { catalog.LoadAllModulesInTheDirectory(); });
-            this.LoginMenu.Clear();
+//            this.LoginMenu.Clear();
             this.WindowHeight = 900;
             this.WindowWidth = 1500;
             this.CoreMenu.Add(new CoreMenuViewModel());
@@ -172,6 +184,20 @@ namespace BMS.ViewModel
                 _windowWidth = value;
                 this.OnPropertyChanged("WindowWidth");
             }
+        }
+
+        public void WindowIsClosing(object sender, EventArgs args)
+        {
+            List<ModuleMetadata> toBeDeleted = _container.Resolve(typeof(object), "toBeDeleted") as List<ModuleMetadata>;
+
+            foreach (ModuleMetadata elem in toBeDeleted)
+            {
+                if (File.Exists("./Modules/" + elem.ModuleName + ".dll"))
+                {
+                    System.Console.Error.WriteLine("Et BIM JE SUPPRIME LE MODULE " + elem.ModuleName + ".dll");
+                    File.Delete("./Modules/" + elem.ModuleName + ".dll");
+                }
+            }            
         }
     }
 }

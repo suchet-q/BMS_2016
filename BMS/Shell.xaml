@@ -11,9 +11,9 @@
         Background="#FFEDEDED"
         Height="{Binding WindowHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="{Binding WindowWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
-    
-    <Grid>
 
+
+    <Grid>
         <local:Banner VerticalAlignment="Top" />
         <!--<ItemsControl ItemsSource="{Binding LoginMenu}" Margin="0,50,0,0" >
             <ItemsControl.Resources>

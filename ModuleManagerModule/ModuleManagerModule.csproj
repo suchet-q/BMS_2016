@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{53F883CD-8CA5-4356-BDBE-C2A0977EA998}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{717B86B7-97EF-4002-88F8-1ACF1D2F6C1C}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BMS</RootNamespace>
-    <AssemblyName>BMS</AssemblyName>
+    <RootNamespace>ModuleManagerModule</RootNamespace>
+    <AssemblyName>ModuleManagerModule</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationManifest>BMS.exe.manifest</ApplicationManifest>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.Composition">
@@ -72,9 +72,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -88,50 +85,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Banner.xaml.cs">
-      <DependentUpon>Banner.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Bootstrapper.cs" />
-    <Compile Include="ConsoleManager.cs" />
-    <Compile Include="DynamicDirectoryModuleCatalog.cs" />
-    <Compile Include="Shell.xaml.cs">
-      <DependentUpon>Shell.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModel\BasicMenuViewModel.cs" />
-    <Compile Include="ViewModel\CoreMenuViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="ViewModel\MenuModuleViewModel.cs" />
-    <Compile Include="ViewModel\ModuleWorkBenchViewModel.cs" />
-    <Compile Include="ViewModel\ShellViewModel.cs" />
-    <Compile Include="View\BasicMenuView.xaml.cs">
-      <DependentUpon>BasicMenuView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\CoreMenuView.xaml.cs">
-      <DependentUpon>CoreMenuView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MenuModuleView.xaml.cs">
-      <DependentUpon>MenuModuleView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ModuleManagerView.xaml.cs">
-      <DependentUpon>ModuleManagerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ModuleWorkBench.xaml.cs">
-      <DependentUpon>ModuleWorkBench.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="MainWindow.cs" />
+    <Compile Include="ModuleManagerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -145,59 +99,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModel\ModuleManagerViewModel.cs" />
+    <Compile Include="ViewModel\ModuleViewModel.cs" />
+    <Compile Include="View\ModuleManagerModuleView.xaml.cs">
+      <DependentUpon>ModuleManagerModuleView.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="BMS.exe.manifest" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Banner.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CompactFormStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Shell.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\BasicMenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CoreMenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\LoginView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\MenuModuleView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ModuleManagerView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ModuleWorkBench.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Service\Service.csproj">
@@ -206,17 +121,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="mscoree">
-      <Guid>{5477469E-83B1-11D2-8B49-00A0C9B7C9C4}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>4</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
+    <Page Include="View\ModuleManagerModuleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if not exist "$(SolutionDir)BMS\bin\Release\Modules" mkdir "$(SolutionDir)BMS\bin\Release\Modules"
+xcopy "$(TargetDir)ModuleManagerModule.dll"  "$(SolutionDir)BMS\bin\Release\Modules" /Y</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

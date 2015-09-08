@@ -17,9 +17,14 @@ namespace StockManagerModule
 
         public StockManagerModule(IAPI api, IUnityContainer container, IMetadataModuleCatalog metadataCatalog)
         {
+            List<string>    BDDTableUsed = new List<string>();
             _api = api;
             _container = container;
-            metadataCatalog.ModuleMetadata.Add(new ModuleMetadata("Stock Manager", "StockManagerModule", "1.0", "This Module allow you to manager your Stock", "BMS"));
+
+            BDDTableUsed.Add("stock");
+            BDDTableUsed.Add("tva");
+            BDDTableUsed.Add("stock_categorie");
+            metadataCatalog.Add(new ModuleMetadata("Stock Manager", "StockManagerModule", "1.0", "This Module allow you to manager your Stock", "BMS", BDDTableUsed));
         }
 
         public void Initialize()

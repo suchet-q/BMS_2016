@@ -43,7 +43,7 @@ namespace OrdersManagerModule.ViewModel
             _listOrder = listOrder;
             _allClient = _container.Resolve(typeof(object), "ClientList") as ObservableCollection<Client>;
             System.Console.Error.WriteLine("ORDERS DEBUG");
-            System.Console.Error.WriteLine(Model.receiver.name);
+            //System.Console.Error.WriteLine(Model.receiver.name);
             ValidateOrderCommand = new DelegateCommand((o) => this.ValidateOrder());
             var enum_names = Enum.GetValues(typeof (OrderStatus));
             EnumCol = enum_names;

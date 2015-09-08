@@ -16,7 +16,7 @@ namespace BMS
 
     public delegate void AddedModuleHandler(object sender, EventArgs e);
 
-    class DynamicDirectoryModuleCatalog : ModuleCatalog
+    public class DynamicDirectoryModuleCatalog : ModuleCatalog
     {
 
         SynchronizationContext _context;

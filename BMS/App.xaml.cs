@@ -16,6 +16,11 @@ namespace BMS
             string myVar = "MODULE_PATH";
             string value = Path.GetFullPath("./Modules");
 
+
+            AppDomain.CurrentDomain.SetCachePath(@"C:\Cache");
+            AppDomain.CurrentDomain.SetShadowCopyPath(AppDomain.CurrentDomain.BaseDirectory);
+            AppDomain.CurrentDomain.SetShadowCopyFiles();
+
             ConsoleManager.Show();
             base.OnStartup(e);
             if (Environment.GetEnvironmentVariable(myVar) == null)

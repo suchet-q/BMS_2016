@@ -19,6 +19,8 @@
                 </MenuItem>
                 <MenuItem Header="Add a Module" Command="{Binding AddModuleByPathCommand}">
                 </MenuItem>
+                <MenuItem Header="Manage my Modules..." Command="{Binding NavigateToModuleManager}">                    
+                </MenuItem>
             </MenuItem>
             <!--<MenuItem Header="_Tools" />-->
             <MenuItem Header="_Parameters">

@@ -16,9 +16,14 @@ namespace EmployeeManagerModule
 
         public EmployeeManagerModule(IUnityContainer container, IAPI api, IMetadataModuleCatalog metadataCatalog)
         {
+            List<string> BDDTableUsed = new List<string>();
             _container = container;
             _api = api;
-            metadataCatalog.ModuleMetadata.Add(new ModuleMetadata("Employee Manager", "EmployeeManagerModule", "1.0", "This module allow to manage the list of employee", "BMS"));
+
+            //La tu mets les tables que tu utilse maggle
+            //BDDTableUsed.Add("tatable");
+
+            metadataCatalog.Add(new ModuleMetadata("Employee Manager", "EmployeeManagerModule", "1.0", "This module allow to manage the list of employee", "BMS", BDDTableUsed));
         }
 
         public void Initialize()

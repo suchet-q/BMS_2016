@@ -39,7 +39,7 @@ namespace BMS.ViewModel
 
         public void AddedModule(object sender, EventArgs e)
         {
-            this.ListModule = new ObservableCollection<ModuleMetadata>(_moduleRepository.getListModule());
+            this.ListModule = new ObservableCollection<ModuleMetadata>(_moduleRepository.getListActivatedModule());
             System.Console.Error.WriteLine("ON EST DANS KA FONCTION QUI SE FAT TRIGGER LA TETE");
             foreach (ModuleMetadata module in ListModule)
             {
@@ -69,7 +69,9 @@ namespace BMS.ViewModel
             var tmp = catalog as DynamicDirectoryModuleCatalog;
             tmp.Added += this.AddedModule;
 //            catalog = tmp;
-            this.ListModule = new ObservableCollection<ModuleMetadata>(moduleRepository.getListModule());
+            moduleRepository.Catalog.Changed += this.AddedModule;
+
+            this.ListModule = new ObservableCollection<ModuleMetadata>(moduleRepository.getListActivatedModule());
         }
 
         protected override void OnDispose()
