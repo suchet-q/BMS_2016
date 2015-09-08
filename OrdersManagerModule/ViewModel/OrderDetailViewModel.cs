@@ -8,27 +8,42 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace OrdersManagerModule.ViewModel
 {
     public class OrderDetailViewModel : ViewModelBase
     {
-        Orders                        _order;
+        Orders _order;
 
-        public Orders                 Model { get; private set; }
-
-        ObservableCollection<Orders>  _listOrder;
+        ObservableCollection<Orders> _listOrder;
 
         ObservableCollection<Client> _allClient;
         
-        IAPI                        _api;
+        IAPI _api;
 
         IUnityContainer _container;
+
+        System.Windows.Visibility _newReceiverVisibility = Visibility.Collapsed;
+
+        bool _displayDeleteClientErrMsg;
+
+        public Orders Model { get; private set; }
         
-        public ICommand             ValidateOrderCommand { get; private set; }
+        public ICommand ValidateOrderCommand { get; private set; }
+
+        public ICommand AddClientCommand { get; private set; }
+
+        public ICommand ConfirmClientCommand { get; private set; }
+        
+        public ICommand DeleteClientCommand { get; private set; }
         
         public Array EnumCol { get; set; }
+
+        public string newClientName { get; set; }
+
+        public string newClientAddress { get; set; }
 
         public OrderDetailViewModel(Orders order, ObservableCollection<Orders> listOrder, IAPI api, IUnityContainer container)
         {
@@ -42,11 +57,41 @@ namespace OrdersManagerModule.ViewModel
             _order = Model = order;
             _listOrder = listOrder;
             _allClient = _container.Resolve(typeof(object), "ClientList") as ObservableCollection<Client>;
-            System.Console.Error.WriteLine("ORDERS DEBUG");
-            //System.Console.Error.WriteLine(Model.receiver.name);
             ValidateOrderCommand = new DelegateCommand((o) => this.ValidateOrder());
-            var enum_names = Enum.GetValues(typeof (OrderStatus));
+            AddClientCommand = new DelegateCommand((o) => this.AddClient());
+            ConfirmClientCommand = new DelegateCommand((o) => this.ConfirmClient());
+            DeleteClientCommand = new DelegateCommand((o) => this.DeleteClient());
+            this.OnPropertyChanged("newReceiverVisibility");
+            var enum_names = Enum.GetValues(typeof(OrderStatus));
             EnumCol = enum_names;
+            this.DisplayDeleteClientErrMsg = false;
+        }
+
+        public bool DisplayDeleteClientErrMsg
+        {
+            get
+            {
+                return _displayDeleteClientErrMsg;
+            }
+            set
+            {
+                _displayDeleteClientErrMsg = value;
+                this.OnPropertyChanged("DisplayDeleteClientErrMsg");
+            }
+        }
+
+        public System.Windows.Visibility NewReceiverVisibility
+        {
+            get
+            {
+                return this._newReceiverVisibility;
+            }
+
+            set
+            {
+                this._newReceiverVisibility = value;
+                this.OnPropertyChanged("NewReceiverVisibility");
+            }
         }
 
         public ObservableCollection<Client> AllClient
@@ -155,6 +200,57 @@ namespace OrdersManagerModule.ViewModel
             _api.Orm.Update(@"update orders set id_client = @client where id = @Id", new { client = this.Model.receiver.id, Id = this.Model.id });
             this.OnPropertyChanged("DateReceived");
             _api.Orm.UpdateObject<Orders>(@"update orders set datereceived = @datereceived where Id = @Id", Model);
+        }
+
+        private void AddClient()
+        {
+            NewReceiverVisibility = Visibility.Visible;        }
+
+        private void ConfirmClient()
+        {
+            Client toInsert = new Client();
+
+            toInsert.name = this.newClientName;
+            toInsert.address = this.newClientAddress;
+            this.newClientAddress = "";
+            this.newClientName = "";
+            _api.Orm.Insert("insert into client(name, address) values (@newname, @newaddress)", new { newname = toInsert.name, newaddress = toInsert.address });
+            var res = _api.Orm.Query("select max(id) as maxId from client");
+            if (res != null)
+            {
+                toInsert.id = res.First().maxId;
+                this.AllClient.Add(toInsert);
+                this.Receiver = toInsert;
+                this.OnPropertyChanged("Receiver");
+            }
+            else
+            {
+                System.Console.Error.WriteLine("Cannot create new client");
+            }
+            NewReceiverVisibility = Visibility.Collapsed;
+        }
+
+        private void DeleteClient()
+        {
+            if (this.DisplayDeleteClientErrMsg)
+                this.DisplayDeleteClientErrMsg = false;
+
+            int count = 0;
+            foreach (Orders elem in this._listOrder)
+            {
+                if (elem.receiver.id == this.Receiver.id)
+                    ++count;
+                if (count >= 2)
+                {
+                    this.DisplayDeleteClientErrMsg = true;
+                    return;
+                }
+            }
+            _api.Orm.Delete("delete from client where id = @Id", new { Id = this.Receiver.id });
+            var tmp = this.Receiver;
+            this.AllClient.Remove(tmp);
+            this._allClient.Remove(tmp);
+            this.Receiver = this.AllClient.Count() > 0 ? this.AllClient.First() : null;
         }
 
     }

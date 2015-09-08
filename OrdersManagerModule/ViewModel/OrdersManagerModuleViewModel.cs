@@ -19,6 +19,7 @@ namespace OrdersManagerModule.ViewModel
         private OrderDetailViewModel _currentOrder;
 
         private ObservableCollection<Orders> _listAllOrders;
+        
         private ObservableCollection<Client> _listAllClients;
 
         public ObservableCollection<OrderDetailViewModel> ListAllOrders { get; private set; }
@@ -26,6 +27,7 @@ namespace OrdersManagerModule.ViewModel
         public ICommand AddOrderCommand { get; private set; }
         
         public ICommand DeleteOrderCommand { get; private set; }
+
 
         public OrderDetailViewModel CurrentOrder
         {

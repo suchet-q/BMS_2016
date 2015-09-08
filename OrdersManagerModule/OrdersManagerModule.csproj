@@ -127,7 +127,6 @@
       <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Page Include="View\OrderDetailView.xaml">
       <SubType>Designer</SubType>
