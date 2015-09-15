@@ -43,7 +43,7 @@
                 <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=vente_ttc}" Width="150" />
 
                 <TextBlock Grid.Column="0" Grid.Row="4" Text="VAT:" />
-                <ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding AllTvaRate}" SelectedItem="{Binding Path=tvaRate, Mode=TwoWay}" Width="150">
+                <ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding AllTvaRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=tvaRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding rate}"/>
@@ -99,7 +99,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Category :" />
 
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Categories:" />
-                <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding AllCategories, Mode=TwoWay}" SelectedItem="{Binding Path=categorie, Mode=TwoWay}" Height="20" VerticalAlignment="Top" Margin="7,0" Width="150">
+                <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding AllCategories, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=categorie, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="20" VerticalAlignment="Top" Margin="7,0" Width="150">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding categorie}"/>

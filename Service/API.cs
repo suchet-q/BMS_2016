@@ -23,7 +23,7 @@ namespace Service
 
         public bool Initialize()
         {
-            this.Orm.Initialize("mysql-bms-market.alwaysdata.net", "bms-market_logiciel", 3306, "110624_bms", "655957ab");
+            this.Orm.Initialize("mysql-bms-market.alwaysdata.net", "bms-market_logiciel", 3306, "110624_bms", "655957ab", new BDDType("MySQL", BDDTypeEnum.MySQL));
 //            this.Orm.Initialize("localhost", "bms", 3306, "root", "");
             return true;
         }
@@ -86,5 +86,67 @@ namespace Service
                 Process.Start("explorer.exe", string.Format("/select,\"{0}\"", Path.GetFullPath(Path.Combine(dir, fileName + ".csv"))));
             }
         }
+
+
+        public byte[] GenerateRandomSalt()
+        {
+            int minSaltLength = 4;
+            int maxSaltLength = 16;
+            byte[] SaltBytes = null;
+
+            Random r = new Random();
+            int SaltLentgh = r.Next(minSaltLength, maxSaltLength);
+            SaltBytes = new byte[SaltLentgh];
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            rng.GetNonZeroBytes(SaltBytes);
+            rng.Dispose();
+
+            return SaltBytes;
+        }
+
+
+        public string ComputeSaltHashSHA256(string plainText, byte[] salt = null)
+        {
+            int minSaltLength = 4;
+            int maxSaltLength = 16;
+            byte[] SaltBytes = null;
+
+
+            if (salt != null)
+                SaltBytes = salt;
+            else
+            {
+                Random r = new Random();
+                int SaltLentgh = r.Next(minSaltLength, maxSaltLength);
+                SaltBytes = new byte[SaltLentgh];
+                RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+                rng.GetNonZeroBytes(SaltBytes);
+                rng.Dispose();
+            }
+
+            byte[] plainData = ASCIIEncoding.UTF8.GetBytes(plainText);
+            byte[] plainDataAndSalt = new byte[plainData.Length + SaltBytes.Length];
+
+            for (int x = 0; x < plainData.Length; x++)
+                plainDataAndSalt[x] = plainData[x];
+            for (int n = 0; n < SaltBytes.Length; n++)
+                plainDataAndSalt[plainData.Length + n] = SaltBytes[n];
+
+            byte[] HashValue = null;
+
+            SHA256Managed sha = new SHA256Managed();
+            HashValue = sha.ComputeHash(plainDataAndSalt);
+            sha.Dispose();
+
+            byte[] Result = new byte[HashValue.Length + SaltBytes.Length];
+
+            for (int x = 0; x < HashValue.Length; x++)
+                Result[x] = HashValue[x];
+            for (int n = 0; n < SaltBytes.Length; n++)
+                Result[HashValue.Length + n] = SaltBytes[n];
+
+            return Convert.ToBase64String(Result);
+        }
+
     }
 }

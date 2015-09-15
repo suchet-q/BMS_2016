@@ -51,6 +51,9 @@ namespace BMS.ViewModel
                 }
                 else
                 {
+
+                }
+                {
                     FolderBrowserDialog fbd = new FolderBrowserDialog();
                     DialogResult resultFBD = fbd.ShowDialog();
                     UnzipModule(dlg, fbd);

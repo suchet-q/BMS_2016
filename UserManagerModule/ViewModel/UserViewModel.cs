@@ -85,19 +85,25 @@ namespace UserManagerModule.ViewModel
                 _api.Orm.UpdateObject<User>(@"update user set login = @login where Id = @Id", Model);
             }
         }
+
+        string _pwd;
         public string pwd
         {
             get
             {
-                return this.Model.pwd;
+                return _pwd;
             }
 
             set
             {
                 this.Model.pwd = value;
+                _pwd = value;
                 this.OnPropertyChanged("pwd");
+                byte[] salt = _api.GenerateRandomSalt();
+                string saltString = Convert.ToBase64String(salt);
+                string pwdString = _api.ComputeSaltHashSHA256(pwd, salt);
 
-                _api.Orm.Update(@"update user set pwd = @Pwd where Id = @Id", new { Pwd = _api.CalculateMD5Hash(pwd), @Id = this.Id});
+                _api.Orm.Update(@"update user set pwd = @Pwd, salt = @Salt where Id = @Id", new { Pwd = pwdString, Salt = saltString, @Id = this.Id });
             }
         }
 

@@ -82,28 +82,36 @@
                 </Style>
             </Grid.Style>
             <HeaderedContentControl Height="214" Width="266" >
-                        <HeaderedContentControl>
-                            <Grid Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="75*"/>
-                                    <ColumnDefinition Width="187*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Host: " RenderTransformOrigin="0.645,1.688" Margin="10,19,0,-4" />
-                                <TextBox Text="{Binding Host}" Margin="10,17,0,-4" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1"/>
+                <HeaderedContentControl>
+                    <Grid Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75*"/>
+                            <ColumnDefinition Width="187*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Host: " RenderTransformOrigin="0.645,1.688" Margin="10,19,0,-4" />
+                        <TextBox Text="{Binding Host}" Margin="10,17,0,-4" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1"/>
 
-                                <TextBlock Text="Database: " Height="19" Margin="10,44,0,-32" Width="60" RenderTransformOrigin="0.6,-0.947"/>
-                                <TextBox Text="{Binding Database}" Margin="10,43,0,-30" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
-                                <TextBlock Text="Port :" Height="19" Margin="10,71,0,-59" Width="60" RenderTransformOrigin="0.6,-0.947"/>
-                                <TextBox Text="{Binding Port}" Margin="10,70,0,-57" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
-                                <TextBlock Text="Login:" Height="19" Margin="10,98,0,-86" Width="60" RenderTransformOrigin="0.6,-0.947"/>
-                                <TextBox Text="{Binding DbLogin}" Margin="10,97,0,-84" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
-                                <TextBox Text="{Binding DbPassword, UpdateSourceTrigger=PropertyChanged}" Margin="10,124,0,-111" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
-                                <TextBlock Text="Password:" Height="19" Margin="10,125,0,-113" Width="60" RenderTransformOrigin="0.6,-0.947"/>
+                        <TextBlock Text="Database: " Height="19" Margin="10,44,0,-32" Width="60" RenderTransformOrigin="0.6,-0.947"/>
+                        <TextBox Text="{Binding Database}" Margin="10,43,0,-30" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
+                        <TextBlock Text="Port :" Height="19" Margin="10,71,0,-59" Width="60" RenderTransformOrigin="0.6,-0.947"/>
+                        <TextBox Text="{Binding Port}" Margin="10,70,0,-57" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
+                        <TextBlock Text="Login:" Height="19" Margin="10,98,0,-86" Width="60" RenderTransformOrigin="0.6,-0.947"/>
+                        <TextBox Text="{Binding DbLogin}" Margin="10,97,0,-84" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
+                        <TextBox Text="{Binding DbPassword, UpdateSourceTrigger=PropertyChanged}" Margin="10,124,0,-111" RenderTransformOrigin="0.5,0.5" Width="148" Height="18" Grid.Column="1" />
+                        <TextBlock Text="Password:" Height="19" Margin="10,125,0,-113" Width="60" RenderTransformOrigin="0.6,-0.947"/>
+                        <ComboBox ItemsSource="{Binding AllHandledBDD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedBDD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="20" VerticalAlignment="Top" Margin="10,153,0,-142" Width="150" Grid.Column="1">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
 
-                                <Button Command="{Binding ChangeDatabaseCommand}" Content="Change" Margin="112,156,16,-145" Grid.Column="1"/>
-                            </Grid>
-                        </HeaderedContentControl>
+                        <Button Command="{Binding ConnectDatabaseCommand}" Content="Connect" Margin="113,194,15,-183" Grid.Column="1"/>
+                        <TextBlock Text="Type de BDD: " Height="19" Margin="9,154,0,-142" Width="70" RenderTransformOrigin="0.6,-0.947" Grid.ColumnSpan="2"/>
+                    </Grid>
                 </HeaderedContentControl>
+            </HeaderedContentControl>
         </Grid>
     </Grid>
 </UserControl>

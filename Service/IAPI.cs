@@ -15,5 +15,7 @@ namespace Service
         bool Initialize();
         string CalculateMD5Hash(string input);
         void GenerateCsv<T>(IEnumerable<T> data, string fileName = null, bool openInDirectory = false);
+        string ComputeSaltHashSHA256(string plainText, byte[] salt = null);
+        byte[] GenerateRandomSalt();
     }
 }

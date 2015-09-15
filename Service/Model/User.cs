@@ -13,5 +13,6 @@ namespace Service.Model
         public string last_name { get; set; }
         public string login { get; set; }
         public string pwd { get; set; }
+        public string salt { get; set; }
     }
 }

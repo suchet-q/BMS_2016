@@ -3,6 +3,7 @@ using Service;
 using Service.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,9 @@ namespace BMS.ViewModel
             this.DisplayDatabaseParameter = false;
 
             this.DisplayDatabaseParamCommand = new DelegateCommand((o) => this.DisplayDatabaseParamExecute());
+
+            this.AllHandledBDD = new ObservableCollection<BDDType>(BDDType.generateListOfBDD());
+            this.SelectedBDD = AllHandledBDD.First();
         }
 
         protected virtual void OnLogin(EventArgs e)
@@ -146,7 +150,9 @@ namespace BMS.ViewModel
 
         private void ExecuteLogin()
         {
-            IEnumerable<User> res = _api.Orm.ObjectQuery<User>("select * from user where login=@login and pwd=@password", new { login = this.Login, password = _api.CalculateMD5Hash(this._realPassword) });
+            IEnumerable<User> res = _api.Orm.ObjectQuery<User>("select * from user where login=@login", new { login = this.Login});
+
+            //IEnumerable<User> res = _api.Orm.ObjectQuery<User>("select * from user where login=@login and pwd=@password", new { login = this.Login, password = _api.CalculateMD5Hash(this._realPassword) });
             if (res != null)
             {
                 int count = 0;
@@ -154,11 +160,30 @@ namespace BMS.ViewModel
                     count++;
                 if (count > 0)
                 {
-                    this.DisplayConnexionErrMsg = false;
-                    this.DisplayDatabaseErrMsg = false;
-                    this.DisplayConnexionSuccMsg = true;
-                    this._api.LoggedUser = res.First();
-                    this.OnLogin(EventArgs.Empty);
+                    User user = res.First();
+                    byte[] salt = Convert.FromBase64String(user.salt);
+
+
+                    string hashedPwd = _api.ComputeSaltHashSHA256(this._realPassword, Convert.FromBase64String(user.salt));
+
+
+                    if (user.pwd == hashedPwd)
+                    {
+                        this.DisplayConnexionErrMsg = false;
+                        this.DisplayDatabaseErrMsg = false;
+                        this.DisplayConnexionSuccMsg = true;
+                        this._api.LoggedUser = res.First();
+                        this.OnLogin(EventArgs.Empty);
+
+                    }
+                    else
+                    {
+                        this.DisplayDatabaseErrMsg = false;
+                        this.DisplayConnexionSuccMsg = false;
+                        this.DisplayConnexionErrMsg = true;
+                        this.Password = "";
+
+                    }
                 }
                 else
                 {
@@ -189,12 +214,12 @@ namespace BMS.ViewModel
         private void ConnectDatabase()
         {
             System.Console.Error.WriteLine("Change setting de la bdd plz");
-            _api.Orm.Initialize(this.Host, this.Database, this.Port, this.DbLogin, this._realDbPassword);
+            _api.Orm.Initialize(this.Host, this.Database, this.Port, this.DbLogin, this._realDbPassword, this._selectedBDD);
         }
 
         private void DisplayDatabaseParamExecute()
         {
-            this.DisplayDatabaseParameter = true;
+            this.DisplayDatabaseParameter = !this.DisplayDatabaseParameter;
         }
 
         public ICommand ConnectDatabaseCommand { get; set; }
@@ -310,5 +335,35 @@ namespace BMS.ViewModel
             }
         }
 
+
+        ObservableCollection<BDDType> _allHandledBDD;
+        public ObservableCollection<BDDType> AllHandledBDD
+        {
+            get
+            {
+                return _allHandledBDD;
+            }
+            set
+            {
+                if (_allHandledBDD == value) return;
+                _allHandledBDD = value;
+                this.OnPropertyChanged("AllHandledBDD");
+            }
+        }
+
+        BDDType _selectedBDD;
+        public BDDType SelectedBDD
+        {
+            get
+            {
+                return _selectedBDD;
+            }
+            set
+            {
+                if (_selectedBDD == value) return;
+                _selectedBDD = value;
+                OnPropertyChanged("SelectedBDD");
+            }
+        }
    }
 }

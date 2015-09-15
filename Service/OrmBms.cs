@@ -7,18 +7,26 @@ using MySql.Data.MySqlClient;
 using Dapper;
 using System.Data;
 using System.Reflection;
+using Service.Model;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Data.Odbc;
+using System.Data.OleDb;
+using System.Data.OracleClient;
+using System.Data.SQLite;
 
 namespace Service
 {
     public class OrmBms
     {
-        private MySqlConnection connection;
+        private DbConnection connection;
         public string Server { get; private set; }
         public string Database { get; private set; }
         public int Port { get; private set; }
         public string Uid { get; private set; }
         public string Password { get; private set; }
         public string ConnectionString { get; private set; }
+        public BDDType BddType { get; private set; }
 
         public OrmBms()
         {
@@ -26,7 +34,7 @@ namespace Service
         }
 
         // Appelé par l'API a l'initialisation, cette methode n'est pas censé etre appelé ailleurs
-        public bool Initialize(string server, string database, int port, string uid, string password)
+        public bool Initialize(string server, string database, int port, string uid, string password, BDDType bddType)
         {
             Server = server;
             Database = database;
@@ -36,7 +44,29 @@ namespace Service
             ConnectionString = "SERVER=" + server + ";" + "PORT=" + port + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
-            connection = new MySqlConnection(ConnectionString);
+            switch (bddType.Type)
+            {
+                case BDDTypeEnum.MySQL:
+                    this.connection = new MySqlConnection(ConnectionString);
+                    break;
+                case BDDTypeEnum.MicrosoftSQL:
+                    this.connection = new SqlConnection(ConnectionString);
+                    break;
+                case BDDTypeEnum.ODBC:
+                    this.connection = new OdbcConnection(ConnectionString);
+                    break;
+                case BDDTypeEnum.OLEDB:
+                    this.connection = new OleDbConnection(ConnectionString);
+                    break;
+                case BDDTypeEnum.SQLite:
+                    this.connection = new SQLiteConnection(ConnectionString);
+                    break;
+                case BDDTypeEnum.Oracle:
+                    this.connection = new OracleConnection(ConnectionString);
+                    break;
+            }
+           
+
             return true;
         }
 
