@@ -157,7 +157,7 @@ namespace BMS.ViewModel
                     this.DisplayConnexionErrMsg = false;
                     this.DisplayDatabaseErrMsg = false;
                     this.DisplayConnexionSuccMsg = true;
-                    this.LoggedUser = res.First();
+                    this._api.LoggedUser = res.First();
                     this.OnLogin(EventArgs.Empty);
                 }
                 else
