@@ -31,6 +31,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Ordered :" />
@@ -59,8 +60,9 @@
                  <Hyperlink Command="{Binding Path=AddClientCommand}">New</Hyperlink> <Hyperlink Command="{Binding Path=DeleteClientCommand}">Delete</Hyperlink>
             </TextBlock>
         </StackPanel>
+        <TextBlock Grid.Row="5" Grid.Column="1" Visibility="{Binding Path=DisplayDeleteClientErrMsg}" Width="190" Foreground="Red" TextAlignment="Center" TextWrapping="Wrap" Text="You can't delete a Receiver if there is an other Order associated with it" Height="42"/>
 
-        <Border Style="{StaticResource DetailBorder}"  Margin="3" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Visibility="{Binding Path=NewReceiverVisibility}">
+        <Border Style="{StaticResource DetailBorder}"  Margin="3" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Visibility="{Binding Path=NewReceiverVisibility}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -79,23 +81,9 @@
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Address :"/>
                 <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=newClientAddress}" Width="240" Height="30" TextWrapping="Wrap" AcceptsReturn="True" Margin="2" />
                 <Button Content="Confirm New Receiver" Command="{Binding ConfirmClientCommand}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" Width="150"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" Width="190" Foreground="Red" TextAlignment="Center" TextWrapping="Wrap" Text="You can't delete a Receiver if there is an other Order associated with it" Height="42">
-                    <TextBlock.Style>
-                        <Style>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding DisplayDeleteClientErrMsg}" Value="true">
-                                    <Setter Property="UIElement.Visibility" Value="Visible"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding DisplayDeleteClientErrMsg}" Value="false">
-                                    <Setter Property="UIElement.Visibility" Value="Collapsed"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
             </Grid>
         </Border>
         
-        <Button Content="Validate" Command="{Binding ValidateOrderCommand}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="6" Width="150" Margin="18,0,73,0"/>
+        <Button Content="Validate" Command="{Binding ValidateOrderCommand}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="7" Width="150" Margin="18,0,73,0"/>
     </Grid>
 </UserControl>

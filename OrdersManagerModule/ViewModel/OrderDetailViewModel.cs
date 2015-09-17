@@ -27,7 +27,7 @@ namespace OrdersManagerModule.ViewModel
 
         System.Windows.Visibility _newReceiverVisibility = Visibility.Collapsed;
 
-        bool _displayDeleteClientErrMsg;
+        System.Windows.Visibility _displayDeleteClientErrMsg;
 
         public Orders Model { get; private set; }
         
@@ -64,10 +64,10 @@ namespace OrdersManagerModule.ViewModel
             this.OnPropertyChanged("newReceiverVisibility");
             var enum_names = Enum.GetValues(typeof(OrderStatus));
             EnumCol = enum_names;
-            this.DisplayDeleteClientErrMsg = false;
+            this.DisplayDeleteClientErrMsg = Visibility.Collapsed;
         }
 
-        public bool DisplayDeleteClientErrMsg
+        public System.Windows.Visibility DisplayDeleteClientErrMsg
         {
             get
             {
@@ -118,7 +118,7 @@ namespace OrdersManagerModule.ViewModel
             set
             {
                 this.Model.id = value;
-                this.OnPropertyChanged("id");
+                this.OnPropertyChanged("Id");
             }
         }
 
@@ -204,7 +204,8 @@ namespace OrdersManagerModule.ViewModel
 
         private void AddClient()
         {
-            NewReceiverVisibility = Visibility.Visible;        }
+            NewReceiverVisibility = Visibility.Visible;        
+        }
 
         private void ConfirmClient()
         {
@@ -232,8 +233,8 @@ namespace OrdersManagerModule.ViewModel
 
         private void DeleteClient()
         {
-            if (this.DisplayDeleteClientErrMsg)
-                this.DisplayDeleteClientErrMsg = false;
+            if (this.DisplayDeleteClientErrMsg == Visibility.Visible)
+                this.DisplayDeleteClientErrMsg = Visibility.Collapsed;
 
             int count = 0;
             foreach (Orders elem in this._listOrder)
@@ -242,7 +243,7 @@ namespace OrdersManagerModule.ViewModel
                     ++count;
                 if (count >= 2)
                 {
-                    this.DisplayDeleteClientErrMsg = true;
+                    this.DisplayDeleteClientErrMsg = Visibility.Visible;
                     return;
                 }
             }
