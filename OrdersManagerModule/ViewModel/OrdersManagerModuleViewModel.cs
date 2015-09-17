@@ -114,15 +114,18 @@ namespace OrdersManagerModule.ViewModel
         private void AddOrder()
         {
             Orders order = new Orders();
-            _api.Orm.InsertObject(order);
+            _api.Orm.Insert("insert into orders(id_client) values (@id_client)", new { id_client = this._listAllClients.First().id});
             IEnumerable<dynamic> res = _api.Orm.Query("select max(id) as maxId from orders");
-            order.id = (int)res.First().maxId;
-            order.dateordered = DateTime.Now;
-
-            _listAllOrders.Add(order);
-            OrderDetailViewModel vm = new OrderDetailViewModel(order, _listAllOrders, _api, _container);
-            this.ListAllOrders.Add(vm);
-            this.CurrentOrder = vm;
+            if (res != null)
+            {
+                order.id = (int)res.First().maxId;
+                order.dateordered = DateTime.Now;
+                order.receiver = this._listAllClients.First();
+                _listAllOrders.Add(order);
+                OrderDetailViewModel vm = new OrderDetailViewModel(order, _listAllOrders, _api, _container);
+                this.ListAllOrders.Add(vm);
+                this.CurrentOrder = vm;
+            }
         }
 
         private void DeleteOrder()
