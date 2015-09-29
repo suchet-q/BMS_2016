@@ -43,6 +43,7 @@ namespace Service
             Port = port;
             ConnectionString = "SERVER=" + server + ";" + "PORT=" + port + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            BddType = bddType;
 
             switch (bddType.Type)
             {
