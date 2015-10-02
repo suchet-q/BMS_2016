@@ -46,7 +46,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -54,33 +54,56 @@
         </Grid.ColumnDefinitions>
 
 
-        <StackPanel Grid.Column="1" Margin="0" VerticalAlignment="Top" Grid.RowSpan="2">
-            <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="1"  Margin="0,3,3,0">
-                <HeaderedContentControl.Header>
-                    Calendar
-                </HeaderedContentControl.Header>
-                <HeaderedContentControl>
-                    <Calendar SelectedDate="{Binding CurrentDate}" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top"/>
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="0" VerticalAlignment="Top" Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Row="0" Margin="0,3,3,0">
+                    <HeaderedContentControl.Header>
+                        Mini Calendar
+                    </HeaderedContentControl.Header>
+                    <HeaderedContentControl Margin="5">
+                        <Calendar SelectedDate="{Binding CurrentDate}" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top"/>
+                    </HeaderedContentControl>
                 </HeaderedContentControl>
-            </HeaderedContentControl>
+                <HeaderedContentControl Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource SubDisplayArea}" Margin="0,3,3,0">
+                    <HeaderedContentControl.Header>
+                        My Calendar
+                    </HeaderedContentControl.Header>
+                    <HeaderedContentControl Margin="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Text="Display :" Grid.Column="0" Grid.Row="0"/>
+                            
+                            <!-- HorizontalAlignment="Left" SelectedItem="{Binding Path=Receiver, Mode=TwoWay}" Width="175" Margin="0"-->
+
+                            <ComboBox Grid.Column="1" Grid.Row="0" Width="137" SelectedItem="{Binding Path=CurrentCalendar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListAgendaName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </HeaderedContentControl>
+                </HeaderedContentControl>
+            </Grid>
         </StackPanel>
-        <Border Style="{StaticResource DetailBorder}"  Margin="5">
-            <ContentControl HorizontalAlignment="Stretch" Content="{Binding Path=_viewAddEvent}">
-                <ContentControl.Resources>
-                    <DataTemplate DataType="{x:Type vm:AddEventViewModel}">
-                        <v:AddEventView />
-                    </DataTemplate>
-                </ContentControl.Resources>
-            </ContentControl>
-        </Border>
-        <Border Style="{StaticResource DetailBorder}"  Margin="5,10,4.6,258" Grid.Row="1" >
-            <ContentControl HorizontalAlignment="Stretch" Content="{Binding Path=_viewEvent}" Grid.Column="0" Grid.Row="1" Margin="0,5,3,0">
-                <ContentControl.Resources>
-                    <DataTemplate DataType="{x:Type vm:DetailsEventsViewModel}">
-                        <v:DetailsEventsView />
-                    </DataTemplate>
-                </ContentControl.Resources>
-            </ContentControl>
-        </Border>
+        <ContentControl HorizontalAlignment="Stretch" Content="{Binding Path=_viewEvent}" Grid.Column="0" Grid.Row="0" Margin="0,5,3,0">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type vm:DetailsEventsViewModel}">
+                    <v:DetailsEventsView />
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
     </Grid>
 </UserControl>
