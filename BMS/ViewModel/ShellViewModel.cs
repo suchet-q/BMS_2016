@@ -51,8 +51,8 @@ namespace BMS.ViewModel
             //On le met en comentaire pour les tests pour eviter de ce log a chaque test
             this.WindowHeight = 600;
             this.WindowWidth = 800;
-            //var viewModel = new LoginViewModel(api, _container);
-            //viewModel.EventLogin += this.NavigateToModuleWorkBench;
+            var viewModel = new LoginViewModel(api, _container);
+            viewModel.EventLogin += this.NavigateToModuleWorkBench;
 
             // Test pour le form de database
             //var viewModel = new DatabaseParametersViewModel(api);
@@ -62,40 +62,9 @@ namespace BMS.ViewModel
             //NavigateToModuleWorkBenchAsync();
             //this.LoginMenu.Add(new BasicMenuViewModel());
             //this.NavigateToModuleWorkBenchAsync();
-            //this.ViewModels.Add(viewModel);
-            this.NavigateToModuleWorkBenchAsync();
+            this.ViewModels.Add(viewModel);
         }
 
-        //public ObservableCollection<ViewModelBase> MenuModule
-        //{
-        //    get
-        //    {
-        //        if (_viewModels == null)
-        //        {
-        //            _viewModels = new ObservableCollection<ViewModelBase>();
-        //        }
-        //        return _viewModels;
-        //    }
-        //}
-
-        //private ObservableCollection<BasicMenuViewModel> _loginMenu;
-        //public ObservableCollection<BasicMenuViewModel> LoginMenu
-        //{
-        //    get
-        //    {
-        //        if (_loginMenu == null)
-        //        {
-        //            _loginMenu = new ObservableCollection<BasicMenuViewModel>();
-        //        }
-        //        return _loginMenu;
-        //    }
-        //    set
-        //    {
-        //        if (_loginMenu == value) return;
-        //        _loginMenu = value;
-        //        OnPropertyChanged("LoginMenu");
-        //    }
-        //}
 
         private ObservableCollection<CoreMenuViewModel> _coreMenu;
         public ObservableCollection<CoreMenuViewModel> CoreMenu
@@ -140,7 +109,6 @@ namespace BMS.ViewModel
         {
             var catalog = _catalog as DynamicDirectoryModuleCatalog;
             await Task.Run(() => { catalog.LoadAllModulesInTheDirectory(); });
-//            this.LoginMenu.Clear();
             this.WindowHeight = 900;
             this.WindowWidth = 1500;
             this.CoreMenu.Add(new CoreMenuViewModel());
@@ -235,7 +203,7 @@ namespace BMS.ViewModel
                             if (deleteThisTable == true)
                             {
                                 System.Console.Error.WriteLine("On supprime la table : " + tableUsedByElem);
-                                // on est censé drop la table la mais on le fais pas pendant le dev' histoire de pas faire chier ceux qui dev' sur leur modules
+                                // on est censé drop la table la mais on le fait pas pendant le dev' histoire de pas faire chier ceux qui dev' sur leur modules
                             }
                         }
                     }
