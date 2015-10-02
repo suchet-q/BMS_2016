@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             Height="Auto" Width="Auto">
     <UserControl.Resources>
         <Style x:Key="SubDisplayArea" TargetType="{x:Type HeaderedContentControl}">
             <Setter Property="Template">
@@ -34,7 +34,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -83,7 +83,7 @@
                                 </Style.Triggers>
                             </Style>
                         </StackPanel.Style>
-                        <Button Content="Activate" Command="{Binding ActivateCommand}"/>
+                        <Button Content="Activate" Command="{Binding ActivateCommand}" Height="20" Width="50" Margin="0,7,10,3" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel>
                         <StackPanel.Style>
@@ -98,8 +98,19 @@
                                 </Style.Triggers>
                             </Style>
                         </StackPanel.Style>
-                        <Button Content="Delete" Command="{Binding ToBeDeletedCommand}"/>
+                        
+                        
+                        <Grid Height="Auto">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="165" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Foreground="Red" TextWrapping="Wrap" Width="Auto" Margin="0,7,0,0">Your Module and his Data will be deleted at the closure of the Software, if you want to keep the Datas, check the "Keep Datas" box</TextBlock>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding KeepDatas}" Content="Keep Datas" Margin="0,10,60,0" Width="85" HorizontalAlignment="Right"></CheckBox>
+                            <Button Grid.Column="1" Content="Delete" Command="{Binding ToBeDeletedCommand}" Height="20" Width="50" Margin="0,7,10,3" HorizontalAlignment="Right"/>
+                        </Grid>
 
+                        
                     </StackPanel>
                 </Grid>
                 </Border>

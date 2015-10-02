@@ -21,7 +21,8 @@ namespace UserManagerModule
             _api = api;
 
             //La tu mets les tables que tu utilse maggle
-            //BDDTableUsed.Add("tatable");
+            BDDTableUsed.Add("user");
+            BDDTableUsed.Add("stock_categorie");
 
             metadataCatalog.Add(new ModuleMetadata("User Manager", "UserManagerModule", "1.0", "This module allow to manage the list of User", "BMS", BDDTableUsed));
         }

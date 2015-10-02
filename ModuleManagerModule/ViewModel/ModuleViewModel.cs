@@ -68,8 +68,10 @@ namespace ModuleManagerModule.ViewModel
             {
                 if (_metadata.State == ModuleStatus.Activated)
                     return "Activated";
-                else if (_metadata.State == ModuleStatus.ToBeDeleted)
-                    return "Will be deleted";
+                else if (_metadata.State == ModuleStatus.ToBeDeletedNotKeepingData)
+                    return "Will be deleted with Data";
+                else if (_metadata.State == ModuleStatus.ToBeDeletedKeepingData)
+                    return "Will be deleted keeping Data";
                 return "Unknown state";
             }
         }

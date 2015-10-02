@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public enum ModuleStatus { Activated = 1, ToBeDeleted = 2 };
+    public enum ModuleStatus { Activated = 1, ToBeDeletedKeepingData = 2, ToBeDeletedNotKeepingData = 3 };
     
     public class ModuleMetadata
     {

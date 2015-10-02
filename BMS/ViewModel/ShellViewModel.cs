@@ -17,6 +17,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using mscoree;
+using Service;
 
 
 
@@ -189,15 +190,59 @@ namespace BMS.ViewModel
         public void WindowIsClosing(object sender, EventArgs args)
         {
             List<ModuleMetadata> toBeDeleted = _container.Resolve(typeof(object), "toBeDeleted") as List<ModuleMetadata>;
+            IMetadataModuleCatalog metadataCatalog = _container.Resolve<IMetadataModuleCatalog>();
+
 
             foreach (ModuleMetadata elem in toBeDeleted)
             {
                 if (File.Exists("./Modules/" + elem.ModuleName + ".dll"))
                 {
+                    if (elem.State == ModuleStatus.ToBeDeletedNotKeepingData)
+                    {
+                        bool deleteThisTable = true;
+
+                        foreach (string tableUsedByElem in elem.BDDTableUsed)
+                        {
+                            deleteThisTable = true;
+
+                            foreach (ModuleMetadata module in metadataCatalog.ModuleMetadata)
+                            {
+                                if (module != elem)
+                                {
+                                    foreach (string table in module.BDDTableUsed)
+                                    {
+                                        if (table == tableUsedByElem)
+                                            deleteThisTable = false;
+                                    }
+                                }
+                            }
+
+                            if (deleteThisTable == true)
+                            {
+                                foreach (ModuleMetadata module in toBeDeleted)
+                                {
+                                    if (module != elem && module.State == ModuleStatus.ToBeDeletedKeepingData)
+                                    {
+                                        foreach (string table in module.BDDTableUsed)
+                                        {
+                                            if (table == tableUsedByElem)
+                                                deleteThisTable = false;
+                                        }
+                                    }
+                                }
+                            }
+                            if (deleteThisTable == true)
+                            {
+                                System.Console.Error.WriteLine("On supprime la table : " + tableUsedByElem);
+                                // on est censé drop la table la mais on le fais pas pendant le dev' histoire de pas faire chier ceux qui dev' sur leur modules
+                            }
+                        }
+                    }
                     System.Console.Error.WriteLine("Et BIM JE SUPPRIME LE MODULE " + elem.ModuleName + ".dll");
                     File.Delete("./Modules/" + elem.ModuleName + ".dll");
                 }
-            }            
+            }
+            System.Console.Error.WriteLine("Et c'est la fin");
         }
     }
 }

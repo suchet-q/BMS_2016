@@ -52,7 +52,7 @@ namespace ModuleManagerModule.ViewModel
                 {
                     if (module == elem.Metadata)
                     {
-                        elem.State = ModuleStatus.ToBeDeleted;
+                        elem.State = module.State;
                     }
                 }
             }
@@ -93,7 +93,7 @@ namespace ModuleManagerModule.ViewModel
                 {
                     this.IsCurrentModuleActivate = true;
                 }
-                else if (_currentModule.State == ModuleStatus.ToBeDeleted)
+                else if (_currentModule.State == ModuleStatus.ToBeDeletedNotKeepingData || _currentModule.State == ModuleStatus.ToBeDeletedKeepingData)
                 {
                     this.IsCurrentModuleActivate = false;
                 }
@@ -115,6 +115,21 @@ namespace ModuleManagerModule.ViewModel
             }
         }
 
+        bool _keepDatas;
+        public bool KeepDatas
+        {
+            get
+            {
+                return _keepDatas;
+            }
+            set
+            {
+                if (_keepDatas == value) return;
+                _keepDatas = value;
+                this.OnPropertyChanged("KeepDatas");
+            }
+        }
+        
 
         public ICommand ActivateCommand { get; set; }
         public ICommand ToBeDeletedCommand { get; set; }
@@ -146,7 +161,12 @@ namespace ModuleManagerModule.ViewModel
         {
             ModuleViewModel tmp = this.CurrentModule;
 
-            this.CurrentModule.State = ModuleStatus.ToBeDeleted;
+            // ON fait if si checkbox check on met tobedeletedkeepingdata sinon l'autre
+            if (_keepDatas == true)
+                this.CurrentModule.State = ModuleStatus.ToBeDeletedKeepingData;
+            else
+                this.CurrentModule.State = ModuleStatus.ToBeDeletedNotKeepingData;
+
             foreach (ModuleMetadata elem in _metadataCatalog.ModuleMetadata)
             {
                 if (elem.Name == CurrentModule.Metadata.Name)
