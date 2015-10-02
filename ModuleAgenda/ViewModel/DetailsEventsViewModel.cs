@@ -74,6 +74,7 @@ namespace ModuleAgenda.ViewModel
                 if (this._amPmSelected == value)
                     return;
                 this._amPmSelected = value;
+                System.Console.WriteLine("jai selectionne ampm= " + this._amPmSelected);
                 this.OnPropertyChanged("AmPmSelected");
 
             }
