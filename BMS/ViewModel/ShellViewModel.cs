@@ -51,8 +51,8 @@ namespace BMS.ViewModel
             //On le met en comentaire pour les tests pour eviter de ce log a chaque test
             this.WindowHeight = 600;
             this.WindowWidth = 800;
-            var viewModel = new LoginViewModel(api, _container);
-            viewModel.EventLogin += this.NavigateToModuleWorkBench;
+            //var viewModel = new LoginViewModel(api, _container);
+            //viewModel.EventLogin += this.NavigateToModuleWorkBench;
 
             // Test pour le form de database
             //var viewModel = new DatabaseParametersViewModel(api);
@@ -62,7 +62,8 @@ namespace BMS.ViewModel
             //NavigateToModuleWorkBenchAsync();
             //this.LoginMenu.Add(new BasicMenuViewModel());
             //this.NavigateToModuleWorkBenchAsync();
-            this.ViewModels.Add(viewModel);
+            //this.ViewModels.Add(viewModel);
+            this.NavigateToModuleWorkBenchAsync();
         }
 
         //public ObservableCollection<ViewModelBase> MenuModule

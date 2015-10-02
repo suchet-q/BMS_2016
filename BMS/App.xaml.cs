@@ -20,7 +20,7 @@ namespace BMS
             AppDomain.CurrentDomain.SetShadowCopyPath(AppDomain.CurrentDomain.BaseDirectory);
             AppDomain.CurrentDomain.SetShadowCopyFiles();
 
-            ConsoleManager.Show();
+            //ConsoleManager.Show();
             base.OnStartup(e);
             if (Environment.GetEnvironmentVariable(myVar) == null)
             {
