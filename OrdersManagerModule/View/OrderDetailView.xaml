@@ -32,6 +32,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Ordered :" />
@@ -44,10 +45,13 @@
         <DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding Path=DateReceived}" Width="240" Margin="0,0,1,0" />
 
         <TextBlock Grid.Column="0" Grid.Row="3" Text="Status :" />
-        <ComboBox Grid.Column="1" Grid.Row="3" SelectedValue="{Binding Path=Status}" ItemsSource="{Binding EnumCol}" Width="240" Margin="0,0,0,0"/>
+        <ComboBox Grid.Column="1" Grid.Row="3" SelectedValue="{Binding Path=Status}" ItemsSource="{Binding EnumStatusCol}" Width="240" Margin="0,0,0,0"/>
 
-        <TextBlock Grid.Column="0" Grid.Row="4" Text="Receiver :" />
-        <ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding AllClient, Mode=TwoWay}" HorizontalAlignment="Left" SelectedItem="{Binding Path=Receiver, Mode=TwoWay}" Width="175" Margin="0">
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Type :" />
+        <ComboBox Grid.Column="1" Grid.Row="4" SelectedValue="{Binding Path=Type}" ItemsSource="{Binding EnumTypeCol}" Width="240" Margin="0,0,0,0"/>
+        
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="Receiver :" />
+        <ComboBox Grid.Column="1" Grid.Row="5" ItemsSource="{Binding AllClient, Mode=TwoWay}" HorizontalAlignment="Left" SelectedItem="{Binding Path=Client, Mode=TwoWay}" Width="175" Margin="0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding name}"/>
@@ -55,14 +59,14 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <StackPanel Grid.Column="1" HorizontalAlignment="Right" Grid.Row="4" Orientation="Horizontal">
+        <StackPanel Grid.Column="1" HorizontalAlignment="Right" Grid.Row="5" Orientation="Horizontal">
             <TextBlock Margin="2,2,4,2">
                  <Hyperlink Command="{Binding Path=AddClientCommand}">New</Hyperlink> <Hyperlink Command="{Binding Path=DeleteClientCommand}">Delete</Hyperlink>
             </TextBlock>
         </StackPanel>
-        <TextBlock Grid.Row="5" Grid.Column="1" Visibility="{Binding Path=DisplayDeleteClientErrMsg}" Width="190" Foreground="Red" TextAlignment="Center" TextWrapping="Wrap" Text="You can't delete a Receiver if there is an other Order associated with it" Height="42"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" Visibility="{Binding Path=DisplayDeleteClientErrMsg}" Width="190" Foreground="Red" TextAlignment="Center" TextWrapping="Wrap" Text="You can't delete a Receiver if there is an other Order associated with it" Height="42"/>
 
-        <Border Style="{StaticResource DetailBorder}"  Margin="3" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Visibility="{Binding Path=NewReceiverVisibility}">
+        <Border Style="{StaticResource DetailBorder}"  Margin="3" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Visibility="{Binding Path=NewReceiverVisibility}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -84,6 +88,6 @@
             </Grid>
         </Border>
         
-        <Button Content="Validate" Command="{Binding ValidateOrderCommand}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="7" Width="150" Margin="18,0,73,0"/>
+        <Button Content="Validate" Command="{Binding ValidateOrderCommand}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="8" Width="150" Margin="18,0,73,0"/>
     </Grid>
 </UserControl>

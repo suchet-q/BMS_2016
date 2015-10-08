@@ -4,9 +4,12 @@ using Service.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace OrdersManagerModule.ViewModel
@@ -24,9 +27,15 @@ namespace OrdersManagerModule.ViewModel
 
         public ObservableCollection<OrderDetailViewModel> ListAllOrders { get; private set; }
 
+        internal CollectionViewSource RestockOrders { get; set; }
+
+        internal CollectionViewSource DispatchOrders { get; set; }
+
         public ICommand AddOrderCommand { get; private set; }
         
         public ICommand DeleteOrderCommand { get; private set; }
+
+        public ICommand RefreshOrderCommand { get; private set; }
 
 
         public OrderDetailViewModel CurrentOrder
@@ -41,6 +50,24 @@ namespace OrdersManagerModule.ViewModel
                 _currentOrder = value;
                 this.OnPropertyChanged("CurrentOrder");
             }
+        }
+
+        private void RestockFilter(object sender, FilterEventArgs e)
+        {
+            OrderDetailViewModel vm = (OrderDetailViewModel)e.Item;
+            if (vm.Type == OrderType.RESTOCKING)
+                e.Accepted = true;
+            else
+                e.Accepted = false;
+        }
+
+        private void DispatchFilter(object sender, FilterEventArgs e)
+        {
+            OrderDetailViewModel vm = (OrderDetailViewModel)e.Item;
+            if (vm.Type == OrderType.DISPATCH)
+                e.Accepted = true;
+            else
+                e.Accepted = false;
         }
 
         public OrdersManagerModuleViewModel(IAPI api, IUnityContainer container)
@@ -70,6 +97,23 @@ namespace OrdersManagerModule.ViewModel
             };
             AddOrderCommand = new DelegateCommand((o) => this.AddOrder());
             DeleteOrderCommand = new DelegateCommand((o) => this.DeleteOrder());
+            RefreshOrderCommand = new DelegateCommand((o) => this.RefreshLists());
+            RestockOrders = new CollectionViewSource();
+            RestockOrders.Source = this.ListAllOrders;
+            RestockOrders.Filter += RestockFilter;
+            DispatchOrders = new CollectionViewSource();
+            DispatchOrders.Source = this.ListAllOrders;
+            DispatchOrders.Filter += DispatchFilter;
+        }
+
+        public ICollectionView ListRestockOrders
+        {
+            get { return RestockOrders.View; }
+        }
+
+        public ICollectionView ListDispatchOrders
+        {
+            get { return DispatchOrders.View; }
         }
 
         private ObservableCollection<Orders> buildOrderList()
@@ -90,17 +134,24 @@ namespace OrdersManagerModule.ViewModel
                 newElem.dateordered = stockBrut.dateordered;
                 newElem.datereceived = stockBrut.datereceived;
                 newElem.status = stockBrut.status;
+                newElem.type = stockBrut.type;
                 foreach (Client client in _listAllClients)
                 {
                     if (client.id == stockBrut.id_client)
                     {
-                        newElem.receiver = client;
+                        newElem.client = client;
                         break;
                     }
                 }
                 res.Add(newElem);
             }
             return res;
+        }
+
+        private void RefreshLists()
+        {
+            ListDispatchOrders.Refresh();
+            ListRestockOrders.Refresh();
         }
 
         private ObservableCollection<Client> buildClientList()
@@ -120,7 +171,7 @@ namespace OrdersManagerModule.ViewModel
             {
                 order.id = (int)res.First().maxId;
                 order.dateordered = DateTime.Now;
-                order.receiver = this._listAllClients.First();
+                order.client = this._listAllClients.First();
                 _listAllOrders.Add(order);
                 OrderDetailViewModel vm = new OrderDetailViewModel(order, _listAllOrders, _api, _container);
                 this.ListAllOrders.Add(vm);

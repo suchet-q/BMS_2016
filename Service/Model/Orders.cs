@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Service.Model
 {
-    public enum OrderStatus { SHIPPING, RECEIVED, CANCELED, RETURNED}
+    public enum OrderStatus { SHIPPING=0, RECEIVED, CANCELED, RETURNED}
+
+    public enum OrderType { DISPATCH=0, RESTOCKING}
 
     public class Orders
     {
@@ -14,7 +16,8 @@ namespace Service.Model
         public DateTime dateordered { get; set; }
         public string content { get; set; }
         public int status { get; set; }
-        public Client receiver { get; set; }
+        public int type { get; set; }
+        public Client client { get; set; }
         public DateTime datereceived { get; set; }
     }
 }

@@ -39,7 +39,9 @@ namespace OrdersManagerModule.ViewModel
         
         public ICommand DeleteClientCommand { get; private set; }
         
-        public Array EnumCol { get; set; }
+        public Array EnumStatusCol { get; set; }
+
+        public Array EnumTypeCol { get; set; }
 
         public string newClientName { get; set; }
 
@@ -63,7 +65,9 @@ namespace OrdersManagerModule.ViewModel
             DeleteClientCommand = new DelegateCommand((o) => this.DeleteClient());
             this.OnPropertyChanged("newReceiverVisibility");
             var enum_names = Enum.GetValues(typeof(OrderStatus));
-            EnumCol = enum_names;
+            EnumStatusCol = enum_names;
+            enum_names = Enum.GetValues(typeof(OrderType));
+            EnumTypeCol = enum_names;
             this.DisplayDeleteClientErrMsg = Visibility.Collapsed;
         }
 
@@ -161,17 +165,30 @@ namespace OrdersManagerModule.ViewModel
             }
         }
 
-        public Client Receiver
+        public OrderType Type
         {
             get
             {
-                return this.Model.receiver;
+                return (OrderType)this.Model.type;
             }
 
             set
             {
-                if (this.Model.receiver == value) return;
-                this.Model.receiver = value;
+                this.Model.type = (int)value;
+            }
+        }
+
+        public Client Client
+        {
+            get
+            {
+                return this.Model.client;
+            }
+
+            set
+            {
+                if (this.Model.client == value) return;
+                this.Model.client = value;
             }
         }
 
@@ -196,8 +213,10 @@ namespace OrdersManagerModule.ViewModel
             _api.Orm.UpdateObject<Orders>(@"update orders set content = @content where Id = @Id", Model);
             this.OnPropertyChanged("Status");
             _api.Orm.UpdateObject<Orders>(@"update orders set status = @status where Id = @Id", Model);
+            this.OnPropertyChanged("Type");
+            _api.Orm.UpdateObject<Orders>(@"update orders set type = @type where Id = @Id", Model);
             this.OnPropertyChanged("Receiver");
-            _api.Orm.Update(@"update orders set id_client = @client where id = @Id", new { client = this.Model.receiver.id, Id = this.Model.id });
+            _api.Orm.Update(@"update orders set id_client = @client where id = @Id", new { client = this.Model.client.id, Id = this.Model.id });
             this.OnPropertyChanged("DateReceived");
             _api.Orm.UpdateObject<Orders>(@"update orders set datereceived = @datereceived where Id = @Id", Model);
         }
@@ -221,7 +240,7 @@ namespace OrdersManagerModule.ViewModel
             {
                 toInsert.id = res.First().maxId;
                 this.AllClient.Add(toInsert);
-                this.Receiver = toInsert;
+                this.Client = toInsert;
                 this.OnPropertyChanged("Receiver");
             }
             else
@@ -239,7 +258,7 @@ namespace OrdersManagerModule.ViewModel
             int count = 0;
             foreach (Orders elem in this._listOrder)
             {
-                if (elem.receiver.id == this.Receiver.id)
+                if (elem.client.id == this.Client.id)
                     ++count;
                 if (count >= 2)
                 {
@@ -247,11 +266,11 @@ namespace OrdersManagerModule.ViewModel
                     return;
                 }
             }
-            _api.Orm.Delete("delete from client where id = @Id", new { Id = this.Receiver.id });
-            var tmp = this.Receiver;
+            _api.Orm.Delete("delete from client where id = @Id", new { Id = this.Client.id });
+            var tmp = this.Client;
             this.AllClient.Remove(tmp);
             this._allClient.Remove(tmp);
-            this.Receiver = this.AllClient.Count() > 0 ? this.AllClient.First() : null;
+            this.Client = this.AllClient.Count() > 0 ? this.AllClient.First() : null;
         }
 
     }
