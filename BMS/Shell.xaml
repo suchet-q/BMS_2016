@@ -1,4 +1,4 @@
-﻿<Window x:Class="BMS.Shell"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:BMS.ViewModel"
@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:BMS"
         xmlns:cal="http://www.codeplex.com/prism"
         xmlns:prism="http://www.codeplex.com/prism"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="BMS.Shell"
         Title="Business Managment Software" 
         WindowState="Normal"
         Background="#FFEDEDED"
@@ -30,7 +31,7 @@
             </ItemsControl.Resources>
         </ItemsControl>
         <StackPanel Width="Auto" Height="Auto">
-<!--         <ContentControl Name="MainWindowRegion" prism:RegionManager.RegionName="" -->
+            <!--         <ContentControl Name="MainWindowRegion" prism:RegionManager.RegionName="" -->
             <ItemsControl ItemsSource="{Binding ViewModels}">
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type vm:ModuleWorkBenchViewModel}">
@@ -41,6 +42,7 @@
                     </DataTemplate>
                 </ItemsControl.Resources>
             </ItemsControl>
+            <local:Banner d:LayoutOverrides="Height"/>
         </StackPanel>
 
 

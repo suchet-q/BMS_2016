@@ -47,17 +47,12 @@ namespace BMS.ViewModel
                 if (resultEnv != null)
                 {
                     UnzipModuleEnv(dlg, resultEnv);
-                // ZipFile.ExtractToDirectory(dlg.FileName, resultEnv);
                 }
                 else
-                {
-
-                }
                 {
                     FolderBrowserDialog fbd = new FolderBrowserDialog();
                     DialogResult resultFBD = fbd.ShowDialog();
                     UnzipModule(dlg, fbd);
-                // ZipFile.ExtractToDirectory(dlg.FileName, fbd.SelectedPath);
                 }
             }
         }
