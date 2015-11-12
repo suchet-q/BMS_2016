@@ -139,7 +139,9 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist "$(SolutionDir)BMS\bin\Release\Modules" mkdir "$(SolutionDir)BMS\bin\Release\Modules"
-xcopy "$(TargetDir)ModuleManagerModule.dll"  "$(SolutionDir)BMS\bin\Release\Modules" /Y</PostBuildEvent>
+xcopy "$(TargetDir)ModuleManagerModule.dll"  "$(SolutionDir)BMS\bin\Release\Modules" /Y
+if not exist "$(SolutionDir)BMS\bin\Debug\Modules" mkdir "$(SolutionDir)BMS\bin\Debug\Modules"
+xcopy "$(TargetDir)ModuleManagerModule.dll"  "$(SolutionDir)BMS\bin\Debug\Modules" /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
