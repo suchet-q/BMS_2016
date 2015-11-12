@@ -219,6 +219,27 @@ namespace OrdersManagerModule.ViewModel
             _api.Orm.Update(@"update orders set id_client = @client where id = @Id", new { client = this.Model.client.id, Id = this.Model.id });
             this.OnPropertyChanged("DateReceived");
             _api.Orm.UpdateObject<Orders>(@"update orders set datereceived = @datereceived where Id = @Id", Model);
+            if (Model.type == (int)OrderType.RESTOCKING)
+            {
+                Stock stock = new Stock();
+                stock.achat = 0;
+                stock.info = Model.content;
+                stock.nom = Model.content;
+                stock.quantite = Int32.Parse(Model.content.Split(" ".ToCharArray()).First());
+                stock.reference = "ORDER15";
+                stock.emplacement = "Stockage C";
+                _api.Orm.Insert("insert into stock(id_categorie, id_tva) values (@id_categorie, @id_tva)", new { id_categorie = 1, id_tva = 1 });
+                IEnumerable<dynamic> res = _api.Orm.Query("select max(id) as maxId from stock");
+                if (res != null)
+                {
+                    stock.id = (int)res.First().maxId;
+                    _api.Orm.Update(@"update stock set info = @info where id = @Id", stock);
+                    _api.Orm.Update(@"update stock set nom = @nom where id = @Id", stock);
+                    _api.Orm.Update(@"update stock set reference = @reference where id = @Id", stock);
+                    _api.Orm.Update(@"update stock set emplacement = @emplacement where id = @Id", stock);
+                    _api.Orm.Update(@"update stock set quantite = @quantite where id = @Id", stock);
+                }
+            }
         }
 
         private void AddClient()
