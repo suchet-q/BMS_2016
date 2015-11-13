@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="UserManagerModule.View.UserManagerModuleView"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:v="clr-namespace:UserManagerModule.View"
+             xmlns:vm="clr-namespace:UserManagerModule.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="0,0,-0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <ScrollViewer>
+            <HeaderedContentControl>
+                <HeaderedContentControl.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="37" Width="58" Source="/UserManagerModule;component/Resources/group2 (4).png"/>
+                        <Label Content="USER LIST" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
+                    </StackPanel>
+                </HeaderedContentControl.Header>
+                <ScrollViewer>
+                    <HeaderedContentControl>
+                        <HeaderedContentControl.Header>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock Foreground="Green" TextWrapping="Wrap" Text=".csv file successfuly generated" TextAlignment="Center" Margin="2" Width="168">
+                                    <TextBlock.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding DisplayGeneratedMsg}" Value="true">
+                                                    <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding DisplayGeneratedMsg}" Value="false">
+                                                    <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Margin="2"><Hyperlink Command="{Binding GenerateCsvCommand}"><Run Text="Generate .csv"/></Hyperlink><Run Text=" | "/><Hyperlink Command="{Binding AddUserCommand}"><Run Text="Add User"/></Hyperlink><Run Text=" | "/><Hyperlink Command="{Binding DeleteUserCommand}"><Run Text="Delete User"/></Hyperlink></TextBlock>
+                            </StackPanel>
+                        </HeaderedContentControl.Header>
+                        <DataGrid Name="dataGrid1" AlternationCount="2" SelectedItem="{Binding CurrentUser, Mode=TwoWay}" ItemsSource="{Binding AllUsers}" AutoGenerateColumns="False" MaxHeight="500" MinColumnWidth="100">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding name}" />
+                                <DataGridTextColumn Header="Last Name" Binding="{Binding last_name}" />
+                                <DataGridTextColumn Header="Login" Binding="{Binding login}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </HeaderedContentControl>
+                </ScrollViewer>
+            </HeaderedContentControl>
+        </ScrollViewer>
+        <HeaderedContentControl  Margin="10,0,0,0" Grid.Column="1" >
+            <HeaderedContentControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Image  Height="37" Width="58" Source="/UserManagerModule;component/Resources/business12.png"/>
+                    <Label Content="PROPERTIES" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
+                </StackPanel>
+            </HeaderedContentControl.Header>
+            <ScrollViewer>
+                <StackPanel>
+                    <Border  Margin="5">
+                        <ContentControl HorizontalAlignment="Right" Content="{Binding CurrentUser}">
+                            <ContentControl.Resources>
+                                <DataTemplate DataType="{x:Type vm:UserViewModel}">
+                                    <v:UserDetailView />
+                                </DataTemplate>
+                            </ContentControl.Resources>
+                        </ContentControl>
+                    </Border>
+                    <!--
+                    <Border Style="{StaticResource DetailBorder}" Margin="5,0,5,5">
+                        <ContentControl Content="{Binding Path=CurrentUser}" >
+                            <ContentControl.Resources>
+                                <DataTemplate DataType="{x:Type vm:UserViewModel}">
+                                    <v:UserContactsDetailView />
+                                </DataTemplate>
+                            </ContentControl.Resources>
+                        </ContentControl>
+                    </Border>
+-->
+                </StackPanel>
+            </ScrollViewer>
+        </HeaderedContentControl>
+    </Grid>
+</UserControl>
