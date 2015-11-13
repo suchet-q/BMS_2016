@@ -7,13 +7,13 @@
              mc:Ignorable="d" 
              Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="300" Width="400">
-        <TextBlock Text="Password:" Margin="71,117,2,167"/>
+        <TextBlock Text="Password :" Margin="71,119,270,165"/>
         <TextBox Margin="159,72,91,203" Width="150" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" AllowDrop="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25">
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
             </TextBox.InputBindings>
         </TextBox>
-        <TextBlock Text="Login:" Width="40" Margin="71,81,289,203"/>
+        <TextBlock Text="Login :" Width="40" Margin="71,77,289,207"/>
         <TextBox Margin="159,114,91,161" Width="150" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}">
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
@@ -99,14 +99,14 @@
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
-            <TextBlock Text="Host: " RenderTransformOrigin="0.645,1.688" Margin="10,20,345,255" FontSize="14" Height="20" />
+            <TextBlock Text="Host : " RenderTransformOrigin="0.645,1.688" Margin="59,22,296,258" FontSize="14" Height="20" />
             <TextBox Text="{Binding Host}" Margin="102,20,150,255" RenderTransformOrigin="0.5,0.5" Width="148"/>
 
-            <TextBlock Text="Database: " Height="20" Margin="13,50,327,231" Width="60" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
+            <TextBlock Text="Database : " Height="20" Margin="31,53,300,227" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
             <TextBox Text="{Binding Database}" Margin="102,50,150,225" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" />
-            <TextBlock Text="Port :" Height="20" Margin="61,85,303,195" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
-            <TextBlock Text="Login:" Height="20" Margin="59,115,299,165" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
-            <TextBlock Text="Password:" Height="20" Margin="35,145,305,135" Width="60" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
+            <TextBlock Text="Port :" Height="20" Margin="64,83,300,197" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
+            <TextBlock Text="Login :" Height="20" Margin="55,113,303,167" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
+            <TextBlock Text="Password :" Height="20" Margin="31,143,303,137" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
             <TextBox Text="{Binding Port}" Margin="102,80,150,195" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" />
             <TextBox Text="{Binding DbLogin}" Margin="102,110,150,165" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" />
             <TextBox Text="{Binding DbPassword, UpdateSourceTrigger=PropertyChanged}" Margin="102,140,150,135" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" />
@@ -120,7 +120,7 @@
             </ComboBox>
 
             <Button Command="{Binding ConnectDatabaseCommand}" Content="Connect" Margin="210,227,114,49"/>
-            <TextBlock Text="Type de BDD: " Height="19" Margin="13,170,303,111" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
+            <TextBlock Text="Type de BDD : " Height="19" Margin="9,172,304,109" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
         </Grid>
     </Grid>
 </UserControl>
