@@ -44,39 +44,24 @@ namespace ModuleAgenda.ViewModel
             this._model.startevent = "00:00";
             this._model.endevent = "00:00";
             this._model.color = "green";
+            _hoursListEnd = _hoursList;
         }
         
-        private List<string> _amPm = new List<string>(new string[] { "Am", "Pm" });
-        public List<string> AmPm
+        // selection hours, start and end event
+        private string _hourEndSelected;
+        public string HourEndSelected
         {
             get
             {
-                return this._amPm;
+                return this._hourEndSelected;
             }
             set
             {
-                if (this._amPm == value)
+                if (this._hourEndSelected == value)
                     return;
-                this._amPm = value;
-                this.OnPropertyChanged("AmPm");
-            }
-        }
-
-        private string _amPmSelected;
-        public string AmPmSelected
-        {
-            get
-            {
-                return this._amPmSelected;
-            }
-            set
-            {
-                if (this._amPmSelected == value)
-                    return;
-                this._amPmSelected = value;
-                System.Console.WriteLine("jai selectionne ampm= " + this._amPmSelected);
-                this.OnPropertyChanged("AmPmSelected");
-
+                this._hourEndSelected = value;
+                System.Console.WriteLine("jai selectionne = " + this._hourStartSelected);
+                this.OnPropertyChanged("HourEndSelected");
             }
         }
         private string _hourStartSelected;
@@ -91,30 +76,53 @@ namespace ModuleAgenda.ViewModel
                 if (this._hourStartSelected == value)
                     return;
                 this._hourStartSelected = value;
+                this._hoursListEnd = this._hoursList.GetRange(this._hoursList.IndexOf(value), this._hoursList.Count);
                 System.Console.WriteLine("jai selectionne = " + this._hourStartSelected);
                 this.OnPropertyChanged("HourStartSelected");
+                this.OnPropertyChanged("HoursListEnd");
             }
         }
-        private List<string> _hoursStart = new List<string>(new string[] 
-                                        { "12:00", "12:30", "01:00", "01:30", "02:00", "02:30", "03:00", 
-                                          "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", 
-                                          "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", 
-                                          "10:30", "11:00", "11:30"});
-        public List<string> HoursStart
+        private List<string> _hoursList = new List<string>(new string[] 
+                                        { "12:00 am", "12:30 am", "01:00 am", "01:30 am", "02:00 am", "02:30 am", "03:00 am", 
+                                          "03:30 am", "04:00 am", "04:30 am", "05:00 am", "05:30 am", "06:00 am", "06:30 am", 
+                                          "07:00 am", "07:30 am", "08:00 am", "08:30 am", "09:00 am", "09:30 am", "10:00 am", 
+                                          "10:30 am", "11:00 am", "11:30 am", "12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm",
+                                          "02:00 pm", "02:30 pm", "03:00 pm", "03:30 pm", "04:00 pm", "04:30 pm", "05:00 pm",
+                                          "05:30 pm", "06:00 pm", "06:30 pm", "07:00 pm", "07:30 pm", "08:00 pm", "08:30 pm",
+                                          "09:00 pm", "09:30 pm", "10:00 pm", "10:30 pm", "11:00 pm", "11:30 pm"});
+        public List<string> HoursList
         {
             get 
             {
-                return this._hoursStart;
+                return this._hoursList;
             }
             set 
             {
-                if (this._hoursStart == value)
+                if (this._hoursList == value)
                     return;
-                this._hoursStart = value;
-                System.Console.WriteLine("ma list dheure = " + this._hoursStart);
-                this.OnPropertyChanged("HoursStart");
+                this._hoursList = value;
+                System.Console.WriteLine("ma list dheure = " + this._hoursList);
+                this.OnPropertyChanged("HoursList");
             }
         }
+
+        private List<string> _hoursListEnd;
+        public List<string> HoursListEnd
+        {
+            get
+            {
+                return this._hoursListEnd;
+            }
+            set
+            {
+                if (this._hoursListEnd == value)
+                    return;
+                this._hoursListEnd = value;
+                System.Console.WriteLine("ma list dheure = " + this._hoursListEnd);
+                this.OnPropertyChanged("HoursListENd");
+            }
+        }
+
         //Current event selected
         public AgendaListEvent CurrentEvent
         {
@@ -238,7 +246,7 @@ namespace ModuleAgenda.ViewModel
             }
             set
             {
-                this._model.date = this._currentDate;
+                this._model.date = value; //this._currentDate
                 this.OnPropertyChanged("DateAdd");
             }
         }
