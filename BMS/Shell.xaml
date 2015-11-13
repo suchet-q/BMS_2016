@@ -8,7 +8,7 @@
         xmlns:prism="http://www.codeplex.com/prism"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="BMS.Shell"
-        Title="Business Managment Software" 
+        Title="Business Management Software" 
         WindowState="Normal"
         Background="#FFFFFF"
         Height="{Binding WindowHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="{Binding WindowWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Icon="Resources/screen.png">
