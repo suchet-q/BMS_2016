@@ -59,10 +59,10 @@ namespace BMS.ViewModel
 
             //Bypass du login
 
-            //NavigateToModuleWorkBenchAsync();
+            NavigateToModuleWorkBenchAsync();
             //this.LoginMenu.Add(new BasicMenuViewModel());
             //this.NavigateToModuleWorkBenchAsync();
-            this.ViewModels.Add(viewModel);
+            //this.ViewModels.Add(viewModel);
         }
 
 
