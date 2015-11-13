@@ -52,6 +52,20 @@ namespace BMS.ViewModel
                 EventLogin(this, e);
         }
 
+        private bool _displayTryingToConnect;
+        public bool DisplayTryingToConnect
+        {
+            get
+            {
+                return _displayTryingToConnect;
+            }
+            set
+            {
+                if (_displayTryingToConnect == value) return;
+                _displayTryingToConnect = value;
+                this.OnPropertyChanged("DisplayTryingToConnect");
+            }
+        }
 
         private bool _displayDatabaseErrMsg;
         public bool DisplayDatabaseErrMsg
@@ -148,11 +162,11 @@ namespace BMS.ViewModel
             }
         }
 
-        private void ExecuteLogin()
+        private bool ExecuteLoginAsync()
         {
-            IEnumerable<User> res = _api.Orm.ObjectQuery<User>("select * from user where login=@login", new { login = this.Login});
-
-            //IEnumerable<User> res = _api.Orm.ObjectQuery<User>("select * from user where login=@login and pwd=@password", new { login = this.Login, password = _api.CalculateMD5Hash(this._realPassword) });
+            this.DisplayTryingToConnect = true;
+            IEnumerable<User> res = _api.Orm.ObjectQuery<User>("select * from user where login=@login", new { login = this.Login });
+            this.DisplayTryingToConnect = false;
             if (res != null)
             {
                 int count = 0;
@@ -173,8 +187,7 @@ namespace BMS.ViewModel
                         this.DisplayDatabaseErrMsg = false;
                         this.DisplayConnexionSuccMsg = true;
                         this._api.LoggedUser = res.First();
-                        this.OnLogin(EventArgs.Empty);
-
+                        return true;
                     }
                     else
                     {
@@ -199,6 +212,15 @@ namespace BMS.ViewModel
                 this.DisplayConnexionSuccMsg = false;
                 this.DisplayDatabaseErrMsg = true;
             }
+            return false;
+        }
+
+        private async void ExecuteLogin()
+        {
+            bool logged = await Task.Run<bool>(() => this.ExecuteLoginAsync());
+
+            if (logged)
+                this.OnLogin(EventArgs.Empty);
         }
 
         private bool CanExecuteLogin()

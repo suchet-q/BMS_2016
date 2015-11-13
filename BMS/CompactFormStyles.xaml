@@ -3,7 +3,7 @@
     
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Padding" Value="0" />
-        <Setter Property="Height" Value="18" />
+        <Setter Property="Height" Value="15" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="Margin" Value="2" />
         <Setter Property="VerticalAlignment" Value="Center" />

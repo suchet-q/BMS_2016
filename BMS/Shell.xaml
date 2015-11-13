@@ -9,20 +9,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="BMS.Shell"
         Title="Business Managment Software" 
         WindowState="Normal"
-        Background="#FFEDEDED"
+        Background="#FFFFFF"
         Height="{Binding WindowHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="{Binding WindowWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
 
 
     <Grid>
         <local:Banner VerticalAlignment="Top" />
-        <!--<ItemsControl ItemsSource="{Binding LoginMenu}" Margin="0,50,0,0" >
-            <ItemsControl.Resources>
-                <DataTemplate DataType="{x:Type vm:BasicMenuViewModel}">
-                    <v:BasicMenuView />
-                </DataTemplate>
-            </ItemsControl.Resources>
-        </ItemsControl>-->
         <ItemsControl ItemsSource="{Binding CoreMenu}" Margin="0,50,0,0" >
             <ItemsControl.Resources>
                 <DataTemplate DataType="{x:Type vm:CoreMenuViewModel}">
@@ -31,7 +24,6 @@
             </ItemsControl.Resources>
         </ItemsControl>
         <StackPanel Width="Auto" Height="Auto">
-            <!--         <ContentControl Name="MainWindowRegion" prism:RegionManager.RegionName="" -->
             <ItemsControl ItemsSource="{Binding ViewModels}">
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type vm:ModuleWorkBenchViewModel}">
@@ -42,7 +34,6 @@
                     </DataTemplate>
                 </ItemsControl.Resources>
             </ItemsControl>
-            <local:Banner d:LayoutOverrides="Height"/>
         </StackPanel>
 
 
