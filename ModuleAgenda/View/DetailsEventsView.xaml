@@ -7,8 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <Grid>
-
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}">
+        <HeaderedContentControl >
             <HeaderedContentControl.Header>
                 Event
             </HeaderedContentControl.Header>
@@ -19,7 +18,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Border Style="{StaticResource DetailBorder}" Grid.Row="0" Padding="5" Margin="5">
+                    <Border  Grid.Row="0" Padding="5" Margin="5">
                         <ScrollViewer >
                             <StackPanel >
                                 <Button Content="Delete selection" Command="{Binding DeleteEventCommand}" Width="100" Margin="0,3"  />
@@ -40,7 +39,7 @@
                             </StackPanel>
                         </ScrollViewer>
                     </Border>
-                    <Border Style="{StaticResource DetailBorder}" Grid.Row="1" Margin="5" Padding="5">
+                    <Border  Grid.Row="1" Margin="5" Padding="5">
                         <ScrollViewer >
                             <StackPanel>
                                 <Grid>
