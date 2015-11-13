@@ -4,23 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:gif="http://wpfanimatedgif.codeplex.com"
-             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Class="BMS.View.LoginView"
-             mc:Ignorable="d" 
-             Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="300" Width="400">
-        <TextBlock Text="Password :" Margin="71,119,270,165"/>
-        <TextBox Margin="159,72,91,203" Width="150" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" AllowDrop="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25">
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" xmlns:local="clr-namespace:BMS.View" x:Class="BMS.View.LoginView"
+             mc:Ignorable="d"
+             Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Margin="116,174,315,410" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Password :"/></TextBlock>
+        <TextBox Margin="202,127,134,448" Width="150" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" AllowDrop="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" FontSize="12">
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
             </TextBox.InputBindings>
         </TextBox>
-        <TextBlock Text="Login :" Width="40" Margin="71,77,289,207"/>
-        <TextBox Margin="159,114,91,161" Width="150" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}">
+        <TextBlock Text="Login :" Width="40" Margin="114,132,332,452" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Margin="202,169,134,406" Width="150" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" FontSize="12">
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
             </TextBox.InputBindings>
         </TextBox>
-        <StackPanel Orientation="Horizontal" Margin="159,147,82,124">
+        <StackPanel Orientation="Horizontal" Margin="202,202,125,369" Height="29" Width="159" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.Style>
                 <Style>
                     <Style.Triggers>
@@ -34,10 +41,10 @@
                 </Style>
             </StackPanel.Style>
             <Image gif:ImageBehavior.AnimatedSource="../Resources/ajax-loader.gif" Width="18" Margin="0,6" Source="../Resources/ajax-loader.gif"/>
-            <Label Content="Logging... Please wait" Width="137"/>
+            <Label Content="Logging... Please wait" Width="137" Height="29" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
 
-        <TextBlock Foreground="Red" TextWrapping="Wrap" Text="Invalid Login or Password" TextAlignment="Center" Margin="167,154,86,130" d:IsHidden="True">
+        <TextBlock Foreground="Red" TextWrapping="Wrap" Text="Invalid Login or Password" TextAlignment="Center" Margin="212,208,128,373" d:IsHidden="True" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock.Style>
                 <Style>
                     <Style.Triggers>
@@ -51,7 +58,7 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TextBlock Foreground="Red" TextWrapping="Wrap" Text="The Database is not reachable" TextAlignment="Center" Margin="149,154,85,130" d:IsHidden="True">
+        <TextBlock Foreground="Red" TextWrapping="Wrap" Text="The Database is not reachable" TextAlignment="Center" Margin="191,208,128,373" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True">
             <TextBlock.Style>
                 <Style>
                     <Style.Triggers>
@@ -65,7 +72,7 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TextBlock Foreground="Green" TextWrapping="Wrap" Text="Authentification successful. Please wait while the Modules are loaded..." TextAlignment="Center" Margin="71,153,42,109" d:IsHidden="True">
+        <TextBlock Foreground="Green" TextWrapping="Wrap" Text="Authentification successful. Please wait while the Modules are loaded..." TextAlignment="Center" Margin="116,209,74,350" HorizontalAlignment="Center" VerticalAlignment="Center" Height="42" Width="296" d:IsHidden="True">
             <TextBlock.Style>
                 <Style>
                     <Style.Triggers>
@@ -80,48 +87,39 @@
             </TextBlock.Style>
         </TextBlock>
 
-        <Button Margin="271,224,56,54" Command="{Binding LoginCommand}" FontSize="12">
+        <Button Margin="314,279,99,299" Command="{Binding LoginCommand}" FontSize="12" Width="73" Height="22">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Login" VerticalAlignment="Center" Margin="0,0,-10,0" />
+                <TextBlock Text="Login" VerticalAlignment="Center" Margin="0,0,-10,0" HorizontalAlignment="Center" />
                 <Image Width="21" Height="14" HorizontalAlignment="Right" Margin="10,2,0,0" Source="../Resources/login17 (1).png"/>
             </StackPanel>
         </Button>
-        <TextBlock Margin="122,266,100,15" Height="19" Width="178"><Hyperlink Command="{Binding DisplayDatabaseParamCommand}"><Run Text="Change Database Parameters..."/></Hyperlink></TextBlock>
-        <Grid Margin="33,300,-33,-300">
-            <Grid.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding DisplayDatabaseParameter}" Value="true">
-                            <Setter Property="UIElement.Visibility" Value="Visible"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding DisplayDatabaseParameter}" Value="false">
-                            <Setter Property="UIElement.Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
-            <TextBlock Text="Host : " RenderTransformOrigin="0.645,1.688" Margin="59,22,296,258" FontSize="14" Height="20" />
-            <TextBox Text="{Binding Host}" Margin="102,20,150,255" RenderTransformOrigin="0.5,0.5" Width="148"/>
+        <TextBlock Margin="165,321,143,260" Height="19" Width="178" HorizontalAlignment="Center" VerticalAlignment="Center"><Hyperlink Command="{Binding DisplayDatabaseParamCommand}"><Run Text="Change Database Parameters..."/></Hyperlink></TextBlock>
+        <!-- FLyout sur le coté -->
+        <Controls:Flyout Header="Database Parameter" Position="Right" IsOpen="{Binding DisplayDatabaseParameter}" VerticalAlignment="Stretch" d:IsHidden="True">
+            <Grid>
+                <TextBlock Text="Host : " FontSize="14" Height="20" Margin="0,112,203,394" RenderTransformOrigin="0.978,0.3" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox Text="{Binding Host}"  Width="148" Height="25" Margin="106,107,50,394" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
 
-            <TextBlock Text="Database : " Height="20" Margin="31,53,300,227" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
-            <TextBox Text="{Binding Database}" Margin="102,50,150,225" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" />
-            <TextBlock Text="Port :" Height="20" Margin="64,83,300,197" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
-            <TextBlock Text="Login :" Height="20" Margin="55,113,303,167" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
-            <TextBlock Text="Password :" Height="20" Margin="31,143,303,137" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
-            <TextBox Text="{Binding Port}" Margin="102,80,150,195" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" />
-            <TextBox Text="{Binding DbLogin}" Margin="102,110,150,165" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" />
-            <TextBox Text="{Binding DbPassword, UpdateSourceTrigger=PropertyChanged}" Margin="102,140,150,135" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" />
+                <TextBlock Text="Database : " Height="20" FontSize="14" Margin="0,145,203,361" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding Database}" Margin="0,140,50,361" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12" />
+                <TextBlock Text="Port :" Height="20" Margin="0,178,207,328" RenderTransformOrigin="0.6,-0.947" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBlock Text="Login :" Height="20" Margin="0,210,207,296" RenderTransformOrigin="0.6,-0.947" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBlock Text="Password :" Height="20" Margin="0,243,207,263" RenderTransformOrigin="0.6,-0.947" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding Port}" Margin="104,173,50,328" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12" />
+                <TextBox Text="{Binding DbLogin}" Margin="104,205,50,296" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12" />
+                <TextBox Text="{Binding DbPassword, UpdateSourceTrigger=PropertyChanged}" Margin="104,238,50,263" RenderTransformOrigin="0.5,0.5" Width="148" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12" />
 
-            <ComboBox ItemsSource="{Binding AllHandledBDD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedBDD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="24" VerticalAlignment="Top" Margin="102,170,150,0" Width="148" Background="Transparent" Padding="6,3" Foreground="#FF3F3F3F">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+                <ComboBox ItemsSource="{Binding AllHandledBDD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedBDD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="24" VerticalAlignment="Center" Margin="106,272,50,230" Width="148" Background="Transparent" Padding="6,3" Foreground="#FF3F3F3F" HorizontalAlignment="Right" FontSize="12">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-            <Button Command="{Binding ConnectDatabaseCommand}" Content="Connect" Margin="210,227,114,49"/>
-            <TextBlock Text="Type de BDD : " Height="19" Margin="9,172,304,109" RenderTransformOrigin="0.6,-0.947" FontSize="14"/>
-        </Grid>
+                <Button Command="{Binding ConnectDatabaseCommand}" Content="Connect" Margin="0,333,10,169" Width="76" Height="24" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBlock Text="Type de BDD : " Height="19" Margin="0,277,203,230" RenderTransformOrigin="0.6,-0.947" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            </Grid>
+        </Controls:Flyout>
     </Grid>
 </UserControl>
