@@ -271,6 +271,9 @@
     <Content Include="Resources\login17 %281%29.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\screen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\user168.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

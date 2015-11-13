@@ -11,12 +11,11 @@
         Title="Business Managment Software" 
         WindowState="Normal"
         Background="#FFFFFF"
-        Height="{Binding WindowHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="{Binding WindowWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        Height="{Binding WindowHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="{Binding WindowWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Icon="Resources/screen.png">
 
 
 
     <Grid>
-        <local:Banner VerticalAlignment="Top" />
         <ItemsControl ItemsSource="{Binding CoreMenu}" Margin="0,50,0,0" >
             <ItemsControl.Resources>
                 <DataTemplate DataType="{x:Type vm:CoreMenuViewModel}">
