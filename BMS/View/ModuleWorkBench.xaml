@@ -18,7 +18,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <HeaderedContentControl Style="{StaticResource DisplayArea}" Margin="30,80,30,30" HorizontalAlignment="Left" Width="250" Height="Auto" VerticalAlignment="Top">
+        <HeaderedContentControl Margin="30,80,30,30" HorizontalAlignment="Left" Width="250" Height="Auto" VerticalAlignment="Top">
             <HeaderedContentControl.Header>
                 Menu
             </HeaderedContentControl.Header>
