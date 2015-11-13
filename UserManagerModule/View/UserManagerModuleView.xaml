@@ -58,7 +58,7 @@
         <HeaderedContentControl  Margin="10,0,0,0" Grid.Column="1" >
             <HeaderedContentControl.Header>
                 <StackPanel Orientation="Horizontal">
-                    <Image  Height="37" Width="58" Source="/UserManagerModule;component/Resources/business12.png"/>
+                    <Image Source="/UserManagerModule;component/Resources/business12.png" Height="37" Width="58"/>
                     <Label Content="PROPERTIES" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
                 </StackPanel>
             </HeaderedContentControl.Header>
