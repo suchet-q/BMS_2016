@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
+    
     <UserControl.Resources>
         <Style x:Key="DetailBorder" TargetType="{x:Type Border}">
             <Setter Property="Height" Value="Auto" />
@@ -41,6 +42,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
     </UserControl.Resources>
 
     <Grid>

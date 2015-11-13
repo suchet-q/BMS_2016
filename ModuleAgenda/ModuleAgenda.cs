@@ -23,7 +23,7 @@ namespace ModuleAgenda
             //La tu mets les tables que tu utilse maggle
             //BDDTableUsed.Add("tatable");
 
-            metadataCatalog.Add(new ModuleMetadata("Agenda", "ModuleAgenda", "1.0", "This Module allow you to manage yours event", "BMS", BDDTableUsed));
+            metadataCatalog.Add(new ModuleMetadata("Agenda", "ModuleAgenda", "1.0", "This Module allow you to manage yours event.", "BMS", BDDTableUsed));
         }
 
         public void Initialize()
