@@ -73,6 +73,16 @@ namespace BMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bddparam_ico {
+            get {
+                object obj = ResourceManager.GetObject("bddparam_ico", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap login_ico {
             get {
                 object obj = ResourceManager.GetObject("login_ico", resourceCulture);
@@ -86,6 +96,16 @@ namespace BMS.Properties {
         internal static System.Drawing.Bitmap screen {
             get {
                 object obj = ResourceManager.GetObject("screen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user_blue_ico {
+            get {
+                object obj = ResourceManager.GetObject("user_blue_ico", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -15,13 +15,18 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="275" VerticalAlignment="Center" Width="330" Margin="88,77,88,255" CornerRadius="7" Opacity="0.4"/>
+        <StackPanel Margin="156,52,160,519" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Background="White">
+            <Image HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="32" Source="../Resources/user168 (1).png" Margin="5,0,0,0"/>
+            <TextBlock Text="Authentification" FontSize="22" Margin="5,7,0,0" FontWeight="Light" Foreground="#FF00AADE"/>
+        </StackPanel>
         <TextBlock Margin="116,174,315,410" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Password :"/></TextBlock>
         <TextBox Margin="202,127,134,448" Width="150" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" AllowDrop="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" FontSize="12">
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
             </TextBox.InputBindings>
         </TextBox>
-        <TextBlock Text="Login :" Width="40" Margin="114,132,332,452" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Width="40" Margin="147,140,319,451" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Login :"/></TextBlock>
         <TextBox Margin="202,169,134,406" Width="150" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" FontSize="12">
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
@@ -93,9 +98,14 @@
                 <Image Width="21" Height="14" HorizontalAlignment="Right" Margin="10,2,0,0" Source="../Resources/login17 (1).png"/>
             </StackPanel>
         </Button>
-        <TextBlock Margin="165,321,143,260" Height="19" Width="178" HorizontalAlignment="Center" VerticalAlignment="Center"><Hyperlink Command="{Binding DisplayDatabaseParamCommand}"><Run Text="Change Database Parameters..."/></Hyperlink></TextBlock>
+        <Button Command="{Binding DisplayDatabaseParamCommand}" Margin="200,310,109,272" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12">
+            <StackPanel Orientation="Horizontal">
+                <Image Width="21" Height="14" Source="../Resources/data112.png" Margin="0,3,0,0"/>
+                <TextBlock Text="Change Database Parameters" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,3,0,0"/>
+            </StackPanel>
+        </Button>
         <!-- FLyout sur le coté -->
-        <Controls:Flyout Header="Database Parameter" Position="Right" IsOpen="{Binding DisplayDatabaseParameter}" VerticalAlignment="Stretch" d:IsHidden="True">
+        <Custom:Flyout Header="Database Parameter" Position="Right" IsOpen="{Binding DisplayDatabaseParameter}" d:IsHidden="True">
             <Grid>
                 <TextBlock Text="Host : " FontSize="14" Height="20" Margin="0,112,203,394" RenderTransformOrigin="0.978,0.3" HorizontalAlignment="Right" VerticalAlignment="Center" />
                 <TextBox Text="{Binding Host}"  Width="148" Height="25" Margin="106,107,50,394" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
@@ -120,6 +130,6 @@
                 <Button Command="{Binding ConnectDatabaseCommand}" Content="Connect" Margin="0,333,10,169" Width="76" Height="24" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <TextBlock Text="Type de BDD : " Height="19" Margin="0,277,203,230" RenderTransformOrigin="0.6,-0.947" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             </Grid>
-        </Controls:Flyout>
+        </Custom:Flyout>
     </Grid>
 </UserControl>
