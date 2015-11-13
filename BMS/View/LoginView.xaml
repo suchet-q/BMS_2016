@@ -32,7 +32,7 @@
                     </Style.Triggers>
                 </Style>
             </StackPanel.Style>
-            <Image gif:ImageBehavior.AnimatedSource="../Resources/ajax-loader.gif" Width="18" Margin="0,6"/>
+            <Image gif:ImageBehavior.AnimatedSource="../Resources/ajax-loader.gif" Width="18" Margin="0,6" Source="../Resources/ajax-loader.gif"/>
             <Label Content="Logging... Please wait" Width="137"/>
         </StackPanel>
 
