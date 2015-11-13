@@ -10,8 +10,6 @@
     ***********************************************************************************************************************************************************************    -->
   <!-- *********************************  ScrollBarButton Style  ********************************* -->
   <Style x:Key="ScrollBarButtonStyle" TargetType="{x:Type RepeatButton}">
-    <Setter Property="MinWidth" Value="30" />
-    <Setter Property="MinHeight" Value="30" />
     <Setter Property="Padding" Value="0" />
     <Setter Property="OverridesDefaultStyle" Value="true" />
     <Setter Property="Focusable" Value="false" />
@@ -81,7 +79,6 @@
   <!-- *********************************  Horizontal ScrollBarThumb Style  ********************************* -->
   <Style x:Key="HScrollBarThumbStyle" TargetType="{x:Type Thumb}">
     <Setter Property="MinWidth" Value="20" />
-    <Setter Property="MinHeight" Value="30" />
     <Setter Property="OverridesDefaultStyle" Value="true" />
     <Setter Property="IsTabStop" Value="false" />
     <Setter Property="Template">
@@ -125,8 +122,6 @@
   <!-- *********************************  Vertical ScrollbarThumb Style  ********************************* -->
   <Style x:Key="VScrollBarThumbStyle" TargetType="{x:Type Thumb}">
     <Setter Property="OverridesDefaultStyle" Value="true" />
-    <Setter Property="MinWidth" Value="30" />
-    <Setter Property="MinHeight" Value="20" />
     <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
     <Setter Property="Template">
       <Setter.Value>
@@ -240,7 +235,6 @@
         <Setter Property="Width" Value="Auto" />
         <Setter Property="MinWidth" Value="0" />
         <Setter Property="Height" Value="30" />
-        <Setter Property="MinHeight" Value="30" />
         <Setter Property="Template">
           <Setter.Value>
             <ControlTemplate TargetType="{x:Type ScrollBar}">
@@ -395,8 +389,6 @@
     <Setter Property="FontFamily" Value="Segoe UI" />
     <Setter Property="OverridesDefaultStyle" Value="true" />
     <Setter Property="AllowDrop" Value="true" />
-    <Setter Property="MinWidth" Value="0" />
-    <Setter Property="MinHeight" Value="30" />
     <Setter Property="Padding" Value="6,4" />
     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     <Setter Property="SelectionBrush" Value="{StaticResource TextBoxFocusedBrush}" />
@@ -516,7 +508,6 @@
     <Setter Property="Margin" Value="0" />
     <Setter Property="FontSize" Value="14.667" />
     <Setter Property="FontFamily" Value="Segoe UI" />
-    <Setter Property="MinHeight" Value="30" />
     <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
     <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
     <Setter Property="BorderBrush" Value="{StaticResource ComboBoxBorderBrush}" />
@@ -641,7 +632,6 @@
     <Setter Property="FontFamily" Value="Segoe UI" />
     <Setter Property="Background" Value="{StaticResource TextBoxBackgroundBrush}" />
     <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorderBrush}" />
-    <Setter Property="MinHeight" Value="30" />
     <Setter Property="Padding" Value="6,3" />
     <Setter Property="SelectionBrush" Value="{StaticResource TextBoxFocusedBrush}" />
     <Setter Property="Validation.ErrorTemplate" Value="{StaticResource TextBoxValidationToolTipTemplate}"/>

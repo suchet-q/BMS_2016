@@ -624,8 +624,8 @@
     <Setter Property="FontSize" Value="14.667" />
     <Setter Property="FontFamily" Value="Segoe UI" />
     <Setter Property="Padding" Value="10,0,10,2" />
-    <Setter Property="MinHeight" Value="30" />
-    <Setter Property="MinWidth" Value="30" />
+    <Setter Property="MinHeight" Value="0" />
+    <Setter Property="MinWidth" Value="0" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="Button">
