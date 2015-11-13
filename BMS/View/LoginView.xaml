@@ -32,7 +32,7 @@
                     </Style.Triggers>
                 </Style>
             </StackPanel.Style>
-            <Image gif:ImageBehavior.AnimatedSource="{DynamicResource loading_gif}" Width="18" Margin="0,6"/>
+            <Image gif:ImageBehavior.AnimatedSource="../Resources/ajax-loader.gif" Width="18" Margin="0,6"/>
             <Label Content="Logging... Please wait" Width="137"/>
         </StackPanel>
 
@@ -82,7 +82,7 @@
         <Button Margin="271,224,56,54" Command="{Binding LoginCommand}" FontSize="12">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Login" VerticalAlignment="Center" Margin="0,0,-10,0" />
-                <Image Width="21" Height="14" HorizontalAlignment="Right" Margin="10,2,0,0" Source="{DynamicResource login_ico}"/>
+                <Image Width="21" Height="14" HorizontalAlignment="Right" Margin="10,2,0,0" Source="../Resources/login17 (1).png"/>
             </StackPanel>
         </Button>
         <TextBlock Margin="122,266,100,15" Height="19" Width="178"><Hyperlink Command="{Binding DisplayDatabaseParamCommand}"><Run Text="Change Database Parameters..."/></Hyperlink></TextBlock>
