@@ -16,10 +16,10 @@
         <ScrollViewer>
             <HeaderedContentControl>
                 <HeaderedContentControl.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Height="37" Width="58" Source="/UserManagerModule;component/Resources/group2 (4).png"/>
-                        <Label Content="USER LIST" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
-                    </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Height="37" Width="58" Source="/UserManagerModule;component/Resources/group2 (4).png"/>
+                            <Label Content="USER LIST" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
+                        </StackPanel>
                 </HeaderedContentControl.Header>
                 <ScrollViewer>
                     <HeaderedContentControl>
@@ -42,13 +42,15 @@
                                 <TextBlock Margin="2"><Hyperlink Command="{Binding GenerateCsvCommand}"><Run Text="Generate .csv"/></Hyperlink><Run Text=" | "/><Hyperlink Command="{Binding AddUserCommand}"><Run Text="Add User"/></Hyperlink><Run Text=" | "/><Hyperlink Command="{Binding DeleteUserCommand}"><Run Text="Delete User"/></Hyperlink></TextBlock>
                             </StackPanel>
                         </HeaderedContentControl.Header>
-                        <DataGrid Name="dataGrid1" AlternationCount="2" SelectedItem="{Binding CurrentUser, Mode=TwoWay}" ItemsSource="{Binding AllUsers}" AutoGenerateColumns="False" MaxHeight="500" MinColumnWidth="100">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Name" Binding="{Binding name}" />
-                                <DataGridTextColumn Header="Last Name" Binding="{Binding last_name}" />
-                                <DataGridTextColumn Header="Login" Binding="{Binding login}" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <Border BorderBrush="#41B1E1" BorderThickness="2">
+                            <DataGrid Name="dataGrid1" AlternationCount="2" SelectedItem="{Binding CurrentUser, Mode=TwoWay}" ItemsSource="{Binding AllUsers}" AutoGenerateColumns="False" MaxHeight="500" MinColumnWidth="100">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding name}" />
+                                    <DataGridTextColumn Header="Last Name" Binding="{Binding last_name}" />
+                                    <DataGridTextColumn Header="Login" Binding="{Binding login}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
                     </HeaderedContentControl>
                 </ScrollViewer>
             </HeaderedContentControl>
