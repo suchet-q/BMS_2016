@@ -246,8 +246,6 @@
                 <ResourceDictionary Source="Themes/Metro/Metro.MSControls.Core.Implicit.xaml" />
                 <ResourceDictionary Source="Themes/Metro/Metro.MSControls.Toolkit.Implicit.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <BitmapImage x:Key="login_ico" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="F:\BMS Depot git\Dev-Merge-CoreOrm\BMS\Resources\login17 (1).png"/>
-            <BitmapImage x:Key="loading_gif" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="F:\BMS Depot git\Dev-Merge-CoreOrm\BMS\Resources\ajax-loader.gif"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
