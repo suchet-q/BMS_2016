@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="BMS.View.LoginView"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Class="BMS.View.LoginView"
              mc:Ignorable="d" 
              Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="300" Width="400">
