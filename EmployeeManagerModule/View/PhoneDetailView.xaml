@@ -7,7 +7,7 @@
              Width="300">
     
     <Grid>
-        <Border Style="{StaticResource DetailBorder}">
+        <Border>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />

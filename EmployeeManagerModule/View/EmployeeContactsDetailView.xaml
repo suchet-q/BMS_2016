@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:EmployeeManagerModule.ViewModel"
              mc:Ignorable="d"
              d:DesignWidth="300"
-             d:DesignHeight="200">
+             d:DesignHeight="200" Width="342">
 
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type vm:PhoneViewModel}">
@@ -21,17 +21,43 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Margin="0,10,0,0">
         <HeaderedContentControl>
             <HeaderedContentControl.Header>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button  Command="{Binding Path=AddPhoneNumberCommand}" FontSize="10" Margin="0,0,2,0" Width="86" Height="24">
+                        <StackPanel Orientation="Horizontal" Width="128">
+                            <Image Width="23" Height="14" HorizontalAlignment="Right" Source="../Resources/add182.png" Margin="-9,0,0,0"/>
+                            <TextBlock Text=" Add Phone" VerticalAlignment="Center" Margin="0,0,15,0" Width="95" />
+                        </StackPanel>
+                    </Button>
+                    <Button  Command="{Binding Path=AddEmailAddressCommand}" FontSize="10" Margin="0,0,2,0" Width="88">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="21" Height="14" HorizontalAlignment="Right" Source="../Resources/add182.png" Margin="-7,0,0,0"/>
+                            <TextBlock Text=" Add Email" VerticalAlignment="Center" Margin="0,0,15,0" Width="95" />
+                        </StackPanel>
+                    </Button>
+                    <Button  Command="{Binding Path=AddAddressCommand}" FontSize="10" Margin="0,0,2,0" Width="94" Height="24">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="21" Height="14" HorizontalAlignment="Right" Source="../Resources/add182.png" Margin="-7,0,0,0"/>
+                            <TextBlock Text=" Add Address" VerticalAlignment="Center" Margin="0,0,15,0" Width="95" />
+                        </StackPanel>
+                    </Button>
+                    <Button  Command="{Binding Path=DeleteContactDetailCommand}" FontSize="10" Margin="0" Width="68">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="21" Height="14" HorizontalAlignment="Right" Source="../Resources/garbage21.png" Margin="-8,0,0,0"/>
+                            <TextBlock Text=" Delete" VerticalAlignment="Center" Margin="0,0,15,0" Width="95" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Margin="2">
                         <Hyperlink Command="{Binding Path=AddPhoneNumberCommand}">Add Phone</Hyperlink>
                         | <Hyperlink Command="{Binding Path=AddEmailAddressCommand}">Add Email</Hyperlink>
                         | <Hyperlink Command="{Binding Path=AddAddressCommand}">Add Address</Hyperlink>
                         | <Hyperlink Command="{Binding Path=DeleteContactDetailCommand}">Delete</Hyperlink>
                     </TextBlock>
-                </StackPanel>
+                </StackPanel>-->
             </HeaderedContentControl.Header>
 
             <ListBox BorderThickness="0" SelectedItem="{Binding Path=CurrentContactDetail, Mode=TwoWay}" ItemsSource="{Binding Path=ContactDetails}" />

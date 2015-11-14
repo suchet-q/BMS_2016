@@ -48,19 +48,36 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0">
+        <HeaderedContentControl Grid.Column="0">
             <HeaderedContentControl.Header>
-                Employees
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="37" Width="58" Source="/EmployeeManagerModule;component/Resources/office-worker2.png"/>
+                    <Label Content="EMPLOYEE LIST" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
+                </StackPanel>
             </HeaderedContentControl.Header>
             <ScrollViewer>
                 <HeaderedContentControl>
                     <HeaderedContentControl.Header>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button  Command="{Binding AddEmployeeCommand}" FontSize="12" Margin="0,0,10,0" Width="140" Height="24">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Width="21" Height="14" HorizontalAlignment="Right" Source="../Resources/add182.png"/>
+                                    <TextBlock Text=" Add employee" VerticalAlignment="Center" Margin="0,0,15,0" Width="95" />
+                                </StackPanel>
+                            </Button>
+                            <Button  Command="{Binding DeleteEmployeeCommand}" FontSize="12" Margin="0,0,10,0" Width="140">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Width="21" Height="14" HorizontalAlignment="Right" Source="../Resources/garbage21.png"/>
+                                    <TextBlock Text=" Delete employee" VerticalAlignment="Center" Margin="0,0,15,0" Width="95" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Margin="2">
                             <Hyperlink Command="{Binding Path=AddEmployeeCommand}">Add Employee</Hyperlink>
                             | <Hyperlink Command="{Binding Path=DeleteEmployeeCommand}">Delete Employee</Hyperlink>
                             </TextBlock>
-                        </StackPanel>
+                        </StackPanel>-->
                     </HeaderedContentControl.Header>
 
                     <DataGrid SelectedItem="{Binding Path=CurrentEmployee, Mode=TwoWay}" ItemsSource="{Binding Path=AllEmployees}" AutoGenerateColumns="False" >
@@ -74,13 +91,16 @@
             </ScrollViewer>
         </HeaderedContentControl>
 
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Margin="10,0,0,0" Grid.Column="1" >
+        <HeaderedContentControl Margin="10,0,0,0" Grid.Column="1" >
             <HeaderedContentControl.Header>
-                Properties
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="37" Width="58" Source="/EmployeeManagerModule;component/Resources/work17.png"/>
+                    <Label Content="PROPERTIES" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
+                </StackPanel>
             </HeaderedContentControl.Header>
             <ScrollViewer>
                 <StackPanel>
-                    <Border Style="{StaticResource DetailBorder}"  Margin="5">
+                    <Border>
                         <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentEmployee}">
                             <ContentControl.Resources>
                                 <DataTemplate DataType="{x:Type vm:EmployeeViewModel}">
@@ -90,15 +110,15 @@
                         </ContentControl>
                     </Border>
 
-                    <Border Style="{StaticResource DetailBorder}" Margin="5,0,5,5">
+                    <Border>
                         <ScrollViewer>
-                        <ContentControl Content="{Binding Path=CurrentEmployee}" >
-                            <ContentControl.Resources>
-                                <DataTemplate DataType="{x:Type vm:EmployeeViewModel}">
-                                    <v:EmployeeContactsDetailView />
-                                </DataTemplate>
-                            </ContentControl.Resources>
-                        </ContentControl>
+                            <ContentControl Content="{Binding Path=CurrentEmployee}" >
+                                <ContentControl.Resources>
+                                    <DataTemplate DataType="{x:Type vm:EmployeeViewModel}">
+                                        <v:EmployeeContactsDetailView />
+                                    </DataTemplate>
+                                </ContentControl.Resources>
+                            </ContentControl>
                         </ScrollViewer>
                     </Border>
                 </StackPanel>
