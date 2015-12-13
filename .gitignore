@@ -1,11 +1,7 @@
-BMS/bin
-BMS/obj
-BMSModule/bin
-BMSModule/obj
-ModuleList/bin
-ModuleList/obj
-Service/bin
-Service/obj
+
 BMS.v12.suo
+
 */bin
+
 */obj
+.vs/
