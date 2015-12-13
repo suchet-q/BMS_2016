@@ -9,8 +9,8 @@
         <!--Subtle border used to seperate areas of a pane-->
         <Style x:Key="DetailBorder" TargetType="{x:Type Border}">
             <Setter Property="Height" Value="Auto" />
-            <Setter Property="BorderBrush" Value="LightGray" />
-            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#41B1E1" />
+            <Setter Property="BorderThickness" Value="2" />
             <Setter Property="CornerRadius" Value="6" />
             <Setter Property="Padding" Value="2" />
         </Style>

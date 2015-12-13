@@ -46,7 +46,7 @@
 
 
         <ContentControl Grid.Row="1">
-            <Border Margin="5">
+            <Border BorderBrush="#41B1E1" BorderThickness="2" Margin="5">
                 <Grid>
                     <StackPanel>
                         <StackPanel.Style>
