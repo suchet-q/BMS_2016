@@ -10,7 +10,7 @@
         <ListBox ItemsSource="{Binding ListModule, Mode=TwoWay}" SelectedItem="{Binding SelectedModuleInTheList}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="2,2,2,0">
+                    <Border Margin="2,5,2,0">
                         <StackPanel>
                             <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" />
                         </StackPanel>

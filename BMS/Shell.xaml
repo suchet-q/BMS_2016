@@ -16,7 +16,7 @@
 
 
     <Grid>
-        <ItemsControl ItemsSource="{Binding CoreMenu}" Margin="0,50,0,0" >
+        <ItemsControl ItemsSource="{Binding CoreMenu}" Margin="0,0,0,0" >
             <ItemsControl.Resources>
                 <DataTemplate DataType="{x:Type vm:CoreMenuViewModel}">
                     <v:CoreMenuView />

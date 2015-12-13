@@ -30,6 +30,8 @@ namespace BMS.View
             regionManager.Regions.Remove("MainModuleRegion");
             RegionManager.SetRegionManager(this, regionManager);
             RegionManager.SetRegionName(this.MainModuleRegion, "MainModuleRegion");
+
         }
+
     }
 }
