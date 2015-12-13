@@ -14,6 +14,7 @@ using mscoree;
 using System.Runtime.InteropServices;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using EventBrokerExtension;
 
 namespace BMS
 {
@@ -42,6 +43,7 @@ namespace BMS
         protected override void ConfigureContainer()
         {
  	        base.ConfigureContainer();
+            this.Container.AddNewExtension<SimpleEventBrokerExtension>();
             this.Container.RegisterInstance(this.ModuleCatalog);
             this.CreateMetadataModuleCatalog();
             this.InitializeAPI();
