@@ -65,11 +65,6 @@ namespace BMS
         {
             base.InitializeModules();
             this.InitializeShellContext();
-            
-            /*           this.Container.RegisterType<ViewModel.ILoginViewModel, ViewModel.LoginViewModel>(); // METTRE MON ILOGIN
-            this.Container.RegisterType<ViewModel.IMainViewModel, ViewModel.MainViewModel>(); // METTRE MON IMAIN*/
-  /*          var view = this.Container.Resolve(typeof(object), "MainGModulesView");
-            manager.Regions["MainContentRegion"].Add(view);*/
         }
 
         private void InitializeShellContext()
