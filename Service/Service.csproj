@@ -108,6 +108,7 @@
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="IAPI.cs" />
     <Compile Include="IMetadataModuleCatalog.cs" />
+    <Compile Include="IModuleMainViewModel.cs" />
     <Compile Include="MetadataModuleCatalog.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\AgendaEvent.cs" />

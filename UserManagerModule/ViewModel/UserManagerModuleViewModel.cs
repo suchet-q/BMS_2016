@@ -3,15 +3,17 @@ using Service.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace UserManagerModule.ViewModel
 {
-    public class UserManagerModuleViewModel : ViewModelBase
+    public class UserManagerModuleViewModel : ViewModelBase, IModuleMainViewModel
     {
         IAPI                                        _api;
 
@@ -69,6 +71,26 @@ namespace UserManagerModule.ViewModel
             System.Console.Error.WriteLine("End UserManagerModuleViewModel");
         }
 
+        public void Refresh()
+        {
+            IEnumerable<User> listUser = _api.Orm.ObjectQuery<User>("select * from user");
+            if (listUser == null)
+            {
+                listUser = new Collection<User>();
+            }
+            Application.Current.Dispatcher.Invoke((Action)delegate
+            {
+                _listAllUsers = new ObservableCollection<User>(listUser);
+                this.AllUsers.Clear();
+                foreach (User user in listUser)
+                {
+                    this.AllUsers.Add(new UserViewModel(user, _listAllUsers, _api));
+                    System.Console.Error.WriteLine(user.name);
+                }
+                _currentUser = AllUsers.Count > 0 ? AllUsers[0] : null;
+            });
+        }
+    
         async private void showAndHideGeneratedMsg()
         {
             this.DisplayGeneratedMsg = true;

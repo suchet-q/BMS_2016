@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using Service.DataAccess;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Unity;
 
 namespace BMS.ViewModel
 {
@@ -16,6 +17,7 @@ namespace BMS.ViewModel
     {
         IRegionManager _manager;
         IModuleRepository _moduleRepository;
+        IUnityContainer _container;
 
         private ModuleMetadata _selectedModuleInTheList;
 
@@ -29,10 +31,16 @@ namespace BMS.ViewModel
                     return;
                 _selectedModuleInTheList = value;
                 string moduleHomeView = value.ModuleName + "View";
-                if (value.ModuleName == "BMSModule") // Sera retiré par la suite, on met ca en attendant car le nom de sa "home" view n'est pas composé comme ceci : NomDuModuleView
-                    moduleHomeView = "MainGModulesView";
+
                 Uri destination = new Uri(moduleHomeView, UriKind.Relative);
                 IRegion regionToNavigate = this._manager.Regions["MainModuleRegion"];
+
+                if (_container.IsRegistered<IModuleMainViewModel>(value.ModuleName + "ViewModel"))
+                {
+                    IModuleMainViewModel viewModelToNavigate = _container.Resolve<IModuleMainViewModel>(value.ModuleName + "ViewModel");
+                    Task.Factory.StartNew(() => viewModelToNavigate.Refresh());
+                }
+
                 regionToNavigate.RequestNavigate(destination, MenuModuleViewModel.CheckForNavigationError); // TODO pour le futur : Implementer le IConfirmNavigation et ce genre de bordel
             }
         }
@@ -62,8 +70,9 @@ namespace BMS.ViewModel
             }
         }
 
-        public MenuModuleViewModel(IModuleRepository moduleRepository, IRegionManager manager, IModuleCatalog catalog)
+        public MenuModuleViewModel(IModuleRepository moduleRepository, IRegionManager manager, IModuleCatalog catalog, IUnityContainer container)
         {
+            _container = container;
             _manager = manager;
             _moduleRepository = moduleRepository;
             var tmp = catalog as DynamicDirectoryModuleCatalog;

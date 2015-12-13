@@ -30,7 +30,7 @@ namespace BMS.ViewModel
             _container = container;
             _manager = manager;
             _moduleRepository = new ModuleRepository(metadataCatalog);
-            var viewModel = new MenuModuleViewModel(_moduleRepository, _manager, _catalog);
+            var viewModel = new MenuModuleViewModel(_moduleRepository, _manager, _catalog, container);
             MenuModule.Add(viewModel);
         }
 

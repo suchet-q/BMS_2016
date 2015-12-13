@@ -42,6 +42,7 @@ namespace UserManagerModule
             System.Console.Error.WriteLine("Initialize");
             TransientLifetimeManager tlm = new TransientLifetimeManager();
             _container.RegisterInstance(typeof(object), "UserManagerModuleView", view);
+            _container.RegisterInstance<IModuleMainViewModel>("UserManagerModuleViewModel", viewModel);
 
             //Trigger l'event "UserManagerModuleInitialize"
             EventHandler initializedHandler = UserManagerModuleInitialized;
