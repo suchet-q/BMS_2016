@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BMS.ViewModel.CoreMenuViewModel" Collapsed="true">
+    <Position X="4.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAABAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAQA=</HashCode>
+      <FileName>ViewModel\CoreMenuViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMS.ViewModel.MenuModuleViewModel">
+    <Position X="7" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAACAABCAAAAAAAQAAAAAAAACAAAAAAAAASgA=</HashCode>
+      <FileName>ViewModel\MenuModuleViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMS.ViewModel.ModuleWorkBenchViewModel">
+    <Position X="4.5" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACaIAAAAAAAAAAAAQAAAAAgA=</HashCode>
+      <FileName>ViewModel\ModuleWorkBenchViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMS.ViewModel.ShellViewModel">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAoAAAAAACAAAAAAACCaIAAACAIAAAQAAAAABAAwQ=</HashCode>
+      <FileName>ViewModel\ShellViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="BMS.AddedModuleHandler" Collapsed="true">
+    <Position X="7" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DynamicDirectoryModuleCatalog.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

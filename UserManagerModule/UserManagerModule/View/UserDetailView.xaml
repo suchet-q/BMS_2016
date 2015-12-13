@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="UserManagerModule.View.UserDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:v="clr-namespace:UserManagerModule.View"
+             xmlns:vm="clr-namespace:UserManagerModule.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="132" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Name:" />
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=name}" Width="150" />
+
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Last Name:" />
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=last_name}" Width="150" />
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Login:" />
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=login}" Width="150" />
+
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Password:" />
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=pwd}" Width="150" />
+    </Grid>
+</UserControl>

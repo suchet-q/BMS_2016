@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="BMS.View.ModuleWorkBench"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:BMS.ViewModel"
+             xmlns:v="clr-namespace:BMS.View"
+             xmlns:local="clr-namespace:BMS"
+             xmlns:prism="http://www.codeplex.com/prism"
+             mc:Ignorable="d" 
+             Height="850" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:MenuModuleViewModel}">
+            <v:MenuModuleView />
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <HeaderedContentControl Margin="30,80,30,30" HorizontalAlignment="Left" Width="250" Height="Auto" VerticalAlignment="Top">
+            <HeaderedContentControl.Header>
+                Menu
+            </HeaderedContentControl.Header>
+            <ItemsControl ItemsSource="{Binding ViewModels}"  />
+        </HeaderedContentControl>
+        <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Stretch" Margin="295,80,10,10" VerticalAlignment="Stretch" CornerRadius="5">
+            <StackPanel Background="White">
+                <ContentControl x:Name="MainModuleRegion" Margin="4" prism:RegionManager.RegionName="MainModuleRegion"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

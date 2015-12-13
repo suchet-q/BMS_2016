@@ -13,10 +13,15 @@ using System.Windows.Threading;
 
 namespace BMS
 {
-    class DynamicDirectoryModuleCatalog : ModuleCatalog
+
+    public delegate void AddedModuleHandler(object sender, EventArgs e);
+
+    public class DynamicDirectoryModuleCatalog : ModuleCatalog
     {
 
         SynchronizationContext _context;
+
+        public event AddedModuleHandler Added;
 
         // Path to the directory where the modules are
         public String ModulePath { get; set; }
@@ -33,6 +38,13 @@ namespace BMS
             fileWatcher.EnableRaisingEvents = true;
         }
 
+        protected virtual void OnAdded(EventArgs e)
+        {
+            if (Added != null)
+                Added(this, e);
+        }
+
+
         // Call when a new file is added to the ModulePath directory
         void fileWatcher_Created(object sender, FileSystemEventArgs e)
         {
@@ -44,7 +56,13 @@ namespace BMS
 
         protected override void InnerLoad()
         {
+            //this.LoadModuleCatalog(this.ModulePath);
+        }
+
+        public void LoadAllModulesInTheDirectory()
+        {
             this.LoadModuleCatalog(this.ModulePath);
+            this.LoadModules(this.Modules.ToArray());
         }
 
         void LoadModuleCatalog(string path, bool isFile = false)
@@ -94,6 +112,7 @@ namespace BMS
                     //we are dealing with a file from our file watcher, so let's notify it needs to be loaded
                     if (isFile)
                     {
+                         // La on est censé load les modules mais on va pas le faire
                         LoadModules(modules);
                     }
 
@@ -106,7 +125,7 @@ namespace BMS
         }
 
         // Uses the IModuleManager to load the modules into memory
-        private void LoadModules(ModuleInfo[] modules)
+        public void LoadModules(ModuleInfo[] modules)
         {
             if (this._context == null)
                 return;
@@ -118,7 +137,7 @@ namespace BMS
                 foreach (var module in modules)
                 {
                      manager.LoadModule(module.ModuleName);
-                     System.Console.Error.WriteLine("AJOUT MODULE MAGGLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                     this.OnAdded(EventArgs.Empty);
                 }
             }), null);
         }

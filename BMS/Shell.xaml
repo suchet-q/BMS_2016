@@ -1,23 +1,41 @@
-﻿<Window x:Class="BMS.Shell"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:cal="http://www.codeplex.com/prism"
-    xmlns:prism="http://www.codeplex.com/prism"
-    Title="BMS" Height="435" Width="795">
-    <Grid x:Name="LayoutRoot">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Grid.Row="2" Background="LightGray" MinWidth="250" Margin="5,0,0,5">
-            <ItemsControl x:Name="NavigationItemsControl" prism:RegionManager.RegionName="MainNavigationRegion" Grid.Column="0" Margin="5" Padding="5" />
-        </Border>
-        <ContentControl prism:RegionManager.RegionName="MainContentRegion" 
-                        Grid.Column="1" Grid.Row="2" Margin="5,0,5,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+﻿<Controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:BMS.ViewModel"
+        xmlns:v="clr-namespace:BMS.View"
+        xmlns:local="clr-namespace:BMS"
+        xmlns:cal="http://www.codeplex.com/prism"
+        xmlns:prism="http://www.codeplex.com/prism"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="BMS.Shell"
+        Title="Business Management Software" 
+        WindowState="Normal"
+        Background="#FFFFFF"
+        Height="{Binding WindowHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="{Binding WindowWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Icon="Resources/screen.png">
+
+
+
+    <Grid>
+        <ItemsControl ItemsSource="{Binding CoreMenu}" Margin="0,50,0,0" >
+            <ItemsControl.Resources>
+                <DataTemplate DataType="{x:Type vm:CoreMenuViewModel}">
+                    <v:CoreMenuView />
+                </DataTemplate>
+            </ItemsControl.Resources>
+        </ItemsControl>
+        <StackPanel Width="Auto" Height="Auto">
+            <ItemsControl ItemsSource="{Binding ViewModels}">
+                <ItemsControl.Resources>
+                    <DataTemplate DataType="{x:Type vm:ModuleWorkBenchViewModel}">
+                        <v:ModuleWorkBench />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+                        <v:LoginView />
+                    </DataTemplate>
+                </ItemsControl.Resources>
+            </ItemsControl>
+        </StackPanel>
+
 
     </Grid>
-</Window>
+</Controls:MetroWindow>
