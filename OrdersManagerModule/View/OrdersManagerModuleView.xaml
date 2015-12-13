@@ -15,7 +15,10 @@
         
         <HeaderedContentControl Grid.Column="0" Margin="0,0,3,0">
             <HeaderedContentControl.Header>
-                Orders
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="37" Width="58" Source="../Resources/shopping232.png"/>
+                    <Label Content="ORDERS" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
+                </StackPanel>
             </HeaderedContentControl.Header>
             <HeaderedContentControl>
                 <HeaderedContentControl.Header>
@@ -62,7 +65,10 @@
 
         <HeaderedContentControl Grid.Column="1">
             <HeaderedContentControl.Header>
-                Details
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="37" Width="58" Source="../Resources/magnifying-glass14 (1).png"/>
+                    <Label Content="DETAILS" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
+                </StackPanel>
             </HeaderedContentControl.Header>
             <HeaderedContentControl>
                 <Border Margin="5">
