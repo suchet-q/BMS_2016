@@ -13,6 +13,6 @@ namespace Service.Model
         public User assignee { get; set; }
         public string title { get; set; }
         public string description { get; set; }
-        public IssueColor color { get; set; }
+        public IssueType type { get; set; }
     }
 }

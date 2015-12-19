@@ -119,7 +119,7 @@
     <Compile Include="Model\ContactDetail.cs" />
     <Compile Include="Model\Email.cs" />
     <Compile Include="Model\Issue.cs" />
-    <Compile Include="Model\IssueColor.cs" />
+    <Compile Include="Model\IssueType.cs" />
     <Compile Include="Model\Module.cs" />
     <Compile Include="Model\Orders.cs" />
     <Compile Include="Model\Phone.cs" />

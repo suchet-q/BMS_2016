@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.Model
 {
-    public class IssueColor
+    public class IssueType
     {
         public int id { get; set; }
         public string color { get; set; }
