@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="MarketModule.View.MarketModuleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MarketModule.View"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="900">
+        <WebBrowser HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="900" Source="http://163.5.84.245/bms/index.php"/>
+    </StackPanel>
+</UserControl>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UserManagerModule.Properties
+namespace MarketModule.Properties
 {
 
 

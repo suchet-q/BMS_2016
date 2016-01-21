@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace UserManagerModule.View
 {
     /// <summary>
-    /// Interaction logic for UserManagerModuleView.xaml
+    /// Interaction logic for MarketModuleView.xaml
     /// </summary>
     public partial class UserManagerModuleView : UserControl
     {
