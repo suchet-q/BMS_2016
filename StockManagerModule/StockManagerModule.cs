@@ -12,7 +12,7 @@ namespace StockManagerModule
     public class StockManagerModule : IModule
     {
 
-        IAPI        _api;
+        IAPI            _api;
         IUnityContainer _container;
 
         public StockManagerModule(IAPI api, IUnityContainer container, IMetadataModuleCatalog metadataCatalog)
@@ -34,7 +34,6 @@ namespace StockManagerModule
             view.DataContext = viewModel;
 
             _container.RegisterInstance(typeof(object), "StockManagerModuleView", view);
-
         }
     }
 }

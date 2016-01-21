@@ -73,17 +73,6 @@
                             </ContentControl.Resources>
                         </ContentControl>
                     </Border>
-                    <!--
-                    <Border Style="{StaticResource DetailBorder}" Margin="5,0,5,5">
-                        <ContentControl Content="{Binding Path=CurrentUser}" >
-                            <ContentControl.Resources>
-                                <DataTemplate DataType="{x:Type vm:UserViewModel}">
-                                    <v:UserContactsDetailView />
-                                </DataTemplate>
-                            </ContentControl.Resources>
-                        </ContentControl>
-                    </Border>
--->
                 </StackPanel>
             </ScrollViewer>
         </HeaderedContentControl>
