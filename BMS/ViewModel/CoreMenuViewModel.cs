@@ -43,7 +43,7 @@ namespace BMS.ViewModel
             if (result == true)
             {
                 string resultEnv = null;
-                resultEnv = Environment.GetEnvironmentVariable("MODULE_PATH");
+                resultEnv = Environment.GetEnvironmentVariable("MODULE_PATH", EnvironmentVariableTarget.Machine);
                 if (resultEnv != null)
                 {
                     UnzipModuleEnv(dlg, resultEnv);

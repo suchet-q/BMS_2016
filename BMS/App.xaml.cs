@@ -22,10 +22,10 @@ namespace BMS
 
             //ConsoleManager.Show();
             base.OnStartup(e);
-            if (Environment.GetEnvironmentVariable(myVar) == null)
-            {
+            //if (Environment.GetEnvironmentVariable(myVar) == null)
+            //{
                 Environment.SetEnvironmentVariable(myVar, value, EnvironmentVariableTarget.Machine);
-            }
+            //}
             Bootstrapper bootstrapper = new Bootstrapper();
             bootstrapper.Run();
         }

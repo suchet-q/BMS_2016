@@ -7,6 +7,7 @@
              xmlns:v="clr-namespace:BMS.View"
              xmlns:local="clr-namespace:BMS"
              xmlns:prism="http://www.codeplex.com/prism"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              mc:Ignorable="d" 
              Height="850" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
@@ -21,17 +22,20 @@
         <HeaderedContentControl Margin="30,50,30,30" HorizontalAlignment="Left" Width="250" Height="Auto" VerticalAlignment="Top">
             <HeaderedContentControl.Header>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0.4,0">
-                    <Image Height="37" Width="58" Source="../Resources/menu48.png"/>
-                    <Label Content="Liste des modules" Grid.Column="0" FontSize="16" FontWeight="Bold" Height="48"/>
+                    <Image Height="20" Width="24" Source="../Resources/menu48.png"/>
+                    <Label Content="Modules" FontSize="21.333" FontWeight="Bold" Height="38" Width="96" Margin="0,0,10,0"/>
                 </StackPanel>
 
             </HeaderedContentControl.Header>
             <ItemsControl ItemsSource="{Binding ViewModels}"  />
         </HeaderedContentControl>
-        <Border BorderBrush="#41B1E1" BorderThickness="3" HorizontalAlignment="Stretch" Margin="295,80,10,10" VerticalAlignment="Stretch" CornerRadius="5">
+        <Border BorderBrush="#FFA0A0A0" BorderThickness="1" HorizontalAlignment="Stretch" Margin="295,87,10,10" VerticalAlignment="Stretch" CornerRadius="5">
             <StackPanel Background="White">
                 <ContentControl x:Name="MainModuleRegion" Margin="4" prism:RegionManager.RegionName="MainModuleRegion"/>
             </StackPanel>
         </Border>
+        <Controls:CustomValidationPopup>
+            <Grid Background="#FFE5E5E5" Height="100" Width="100"/>
+        </Controls:CustomValidationPopup>
     </Grid>
 </UserControl>
