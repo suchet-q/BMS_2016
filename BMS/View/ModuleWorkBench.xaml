@@ -29,9 +29,9 @@
             </HeaderedContentControl.Header>
             <ItemsControl ItemsSource="{Binding ViewModels}"  />
         </HeaderedContentControl>
-        <Border BorderBrush="#FFA0A0A0" BorderThickness="1" HorizontalAlignment="Stretch" Margin="295,87,10,10" VerticalAlignment="Stretch" CornerRadius="5">
-            <StackPanel Background="White">
-                <ContentControl x:Name="MainModuleRegion" Margin="4" prism:RegionManager.RegionName="MainModuleRegion"/>
+        <Border BorderBrush="#FFA0A0A0" BorderThickness="1" Margin="295,87,10,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="5">
+            <StackPanel Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <ContentControl x:Name="MainModuleRegion" Margin="8" prism:RegionManager.RegionName="MainModuleRegion" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
             </StackPanel>
         </Border>
         <Controls:CustomValidationPopup>
