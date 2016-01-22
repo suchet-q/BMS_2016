@@ -8,19 +8,19 @@
     <StackPanel>
         <Menu IsMainMenu="True" BorderThickness="1" BorderBrush="LightGray">
             <MenuItem Header="_Account">
-                <MenuItem Header="Log out" Command="{Binding LogoutCommand}">
-                    <!--<MenuItem.Icon>
+                <!--<MenuItem Header="Log out" Command="{Binding LogoutCommand}">
+                    --><!--<MenuItem.Icon>
                     <Image Source="" />
-                </MenuItem.Icon>-->
-                </MenuItem>
+                </MenuItem.Icon>--><!--
+                </MenuItem>-->
             </MenuItem>
             <MenuItem Header="_Modules">
-                <MenuItem Header="Module Explorer" Command="{Binding NavigateToModuleExplorerCommand}">
-                </MenuItem>
-                <MenuItem Header="Add a Module" Command="{Binding AddModuleByPathCommand}">
+                <!--<MenuItem Header="Module Explorer" Command="{Binding NavigateToModuleExplorerCommand}">
+                </MenuItem>-->
+                <!--<MenuItem Header="Add a Module" Command="{Binding AddModuleByPathCommand}">
                 </MenuItem>
                 <MenuItem Header="Manage my Modules..." Command="{Binding NavigateToModuleManager}">                    
-                </MenuItem>
+                </MenuItem>-->
             </MenuItem>
             <!--<MenuItem Header="_Tools" />-->
             <MenuItem Header="_Parameters">

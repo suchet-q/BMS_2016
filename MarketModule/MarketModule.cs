@@ -34,7 +34,7 @@ namespace MarketModule
             // le new ParameterOverride permet de spécifier que MarketModuleViewModel sera instancié avec l'object _api donné pour le parametre "api" de son constructeur
             var viewModel = _container.Resolve<ViewModel.MarketModuleViewModel>(new ParameterOverride("api", _api));
             var view = _container.Resolve<View.MarketModuleView>();
-            view.DataContext = viewModel;
+//            view.DataContext = viewModel;
             System.Console.Error.WriteLine("Initialize");
             TransientLifetimeManager tlm = new TransientLifetimeManager();
             _container.RegisterInstance(typeof(object), "MarketModuleView", view);

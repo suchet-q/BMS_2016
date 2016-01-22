@@ -82,6 +82,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Controls.Input.Toolkit">
       <HintPath>..\packages\Infragistics.Themes.MetroLight.Wpf.1.0.0\lib\net40\System.Windows.Controls.Input.Toolkit.dll</HintPath>
     </Reference>
@@ -143,18 +144,35 @@
       <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\right133.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <ItemGroup>
     <Page Include="View\MarketModuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\previous.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\orientation73.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist "$(SolutionDir)BMS\bin\Release\Modules" mkdir "$(SolutionDir)BMS\bin\Release\Modules"
 
-xcopy "$(TargetDir)MarketModule.dll"  "$(SolutionDir)BMS\bin\Release\Modules" /Y</PostBuildEvent>
+xcopy "$(TargetDir)MarketModule.dll"  "$(SolutionDir)BMS\bin\Release\Modules" /Y
+if not exist "$(SolutionDir)BMS\bin\Debug\Modules" mkdir "$(SolutionDir)BMS\bin\Debug\Modules"
+
+xcopy "$(TargetDir)MarketModule.dll"  "$(SolutionDir)BMS\bin\Debug\Modules" /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
