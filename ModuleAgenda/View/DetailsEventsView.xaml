@@ -1,143 +1,108 @@
-﻿<UserControl x:Class="ModuleAgenda.View.DetailsEventsView"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Class="ModuleAgenda.View.DetailsEventsView" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <Style x:Key="DetailBorder" TargetType="{x:Type Border}">
-            <Setter Property="Height" Value="Auto" />
-            <Setter Property="BorderBrush" Value="LightGray" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="6" />
-            <Setter Property="Padding" Value="2" />
-        </Style>
-        <Style x:Key="SubDisplayArea" TargetType="{x:Type HeaderedContentControl}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Border Grid.Row="0" Background="LightGray" BorderBrush="LightGray"  Padding="8,2,8,6" CornerRadius="6,6,0,0" BorderThickness="2,2,2,0">
-                                <TextBlock Foreground="#FF282828" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                    <ContentPresenter ContentSource="Header"/>
-                                </TextBlock>
-                            </Border>
-                            <Border Grid.Row="1" Background="White" BorderBrush="LightGray" CornerRadius="0,0,6,6" BorderThickness="2,0,2,2">
-                                <ContentPresenter/>
-                                <Border.RenderTransform>
-                                    <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1" />
-                                </Border.RenderTransform>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
+
     <Grid>
 
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}">
-            <HeaderedContentControl.Header>
-                Event
-            </HeaderedContentControl.Header>
-
-            <HeaderedContentControl>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Border Style="{StaticResource DetailBorder}" Grid.Row="0" Padding="5" Margin="5">
-                        <ScrollViewer >
-                            <StackPanel >
-                                <Button Content="Delete selection" Command="{Binding DeleteEventCommand}" Width="100" Margin="0,3"  />
-                                <ContentControl>
-                                    <DataGrid SelectedItem="{Binding Path=CurrentEvent}" ItemsSource="{Binding Path=CurrentListEvent}" AutoGenerateColumns="False" MaxHeight="500">
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}" />
-                                            <DataGridTextColumn IsReadOnly="True" Header="Date" Binding="{Binding Path=Date, StringFormat={}{0:MM/dd/yyyy}}" />
-                                            <DataGridTextColumn Header="Start" Binding="{Binding Path=StartEvent}" />
-                                            <DataGridTextColumn Header="End" Binding="{Binding Path=EndEvent}" />
-                                            <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" />
-                                            <DataGridTextColumn Header="Location" Binding="{Binding Path=Location}" />
-                                            <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}" />
-                                            <DataGridTextColumn Header="Color" Binding="{Binding Path=Color}" />
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </ContentControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Image Height="37" Width="58" Source="/ModuleAgenda;component/Resources/my_event.png"/>
+            <Label Content="EVENT" FontSize="16" FontWeight="Bold"/>
+        </StackPanel>
+        <TabControl Grid.Row="1" Margin="0,2,0,0">
+            <TabItem Header="List Event">
+                <ScrollViewer Margin="0,2,0,0">
+                    <StackPanel>
+                        <Button Command="{Binding DeleteEventCommand}" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="21" Height="14" Source="/ModuleAgenda;component/my_trash.png" />
+                                <TextBlock Text="Delete selection" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,3,5,0"/>
                             </StackPanel>
-                        </ScrollViewer>
-                    </Border>
-                    <Border Style="{StaticResource DetailBorder}" Grid.Row="1" Margin="5" Padding="5">
-                        <ScrollViewer >
-                            <StackPanel>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-
-                                    </Grid.ColumnDefinitions>
+                        </Button>
+                        <Border BorderBrush="#41B1E1" BorderThickness="2" Margin="0,2,0,0">
+                            <ContentControl>
+                                <DataGrid SelectedItem="{Binding CurrentEvent}" ItemsSource="{Binding CurrentListEvent}" AutoGenerateColumns="False" MaxHeight="300">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Title" Binding="{Binding Title}" />
+                                        <DataGridTextColumn IsReadOnly="True" Header="Date" Binding="{Binding Date, StringFormat=\{0:MM/dd/yyyy\}}" />
+                                        <DataGridTextColumn Header="Start" Binding="{Binding StartEvent}" />
+                                        <DataGridTextColumn Header="End" Binding="{Binding EndEvent}" />
+                                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                                        <DataGridTextColumn Header="Location" Binding="{Binding Location}" />
+                                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+                                        <DataGridTextColumn Header="Color" Binding="{Binding Color}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </ContentControl>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Create Event">
+                <ScrollViewer Margin="0,2,0,0">
+                    <StackPanel Orientation="Vertical">
 
 
-                                    <TextBlock Text="Title : " Grid.Column="0" Grid.Row="0" Margin="5,0,0,0" Height="24"/>
-                                    <TextBox Text="{Binding Path=TitleAdd}" Grid.Column="1" Grid.Row="0" Width="240">
-                                        <TextBox.Style>
-                                            <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                                <Style.Resources>
-                                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                                        <VisualBrush.Visual>
-                                                            <Label Content="Untitled event" Foreground="DarkGray" />
-                                                        </VisualBrush.Visual>
-                                                    </VisualBrush>
-                                                </Style.Resources>
-                                                <Style.Triggers>
-                                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                                    </Trigger>
-                                                    <Trigger Property="Text" Value="{x:Null}">
-                                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                                    </Trigger>
-                                                    <Trigger Property="IsKeyboardFocused" Value="True">
-                                                        <Setter Property="Background" Value="White" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBox.Style>
-                                    </TextBox>
 
-                                    <TextBlock Text="Date : " Grid.Column="0" Grid.Row="1" Margin="5,0,0,0"/>
-                                    <DatePicker Grid.Column="1" Grid.Row="1" SelectedDate="{Binding Path=DateAdd, StringFormat={}{0:MM/dd/yyyy}}" Width="240" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Title : " Grid.Column="0" Grid.Row="0" Margin="5,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Width="80" Height="20"/>
+                            <TextBox Text="{Binding TitleAdd}" Width="300" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
 
-                                    <TextBlock Text="Start : " Grid.Column="2" Grid.Row="1" Margin="5,0,0,0" />
-                                    <ComboBox Grid.Column="3" Grid.Row="1" SelectedValue="{Binding Path=HourStartSelected}" ItemsSource="{Binding Path=HoursStart}" Width="70" />
-                                    <ComboBox Grid.Column="4" Grid.Row="1" SelectedValue="{Binding Path=AmPmSelected}" ItemsSource="{Binding Path=AmPm}" Width="50" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
 
-                                    <!-- <TextBox Text="{Binding Path=StartAdd}" Grid.Column="3" Grid.Row="1" Width="150"/>-->
+                            <TextBlock Text="Date : " Margin="5,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" Height="20" Width="80"/>
+                            <DatePicker x:Name="Test" SelectedDate="{Binding DateAdd}" Width="240" Margin="40,10,0,0" HorizontalAlignment="Left" FontSize="14" Height="30"/>
 
-                                    <TextBlock Text="End : " Grid.Column="5" Grid.Row="1" Margin="5,0,0,0"/>
-                                    <TextBox Text="{Binding Path=EndAdd}" Grid.Column="6" Grid.Row="1" Width="150"/>
-                                    
-                                    <!-- <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Start : " Margin="20,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" />
+                            <ComboBox SelectedValue="{Binding HourStartSelected}" ItemsSource="{Binding HoursStart}" Width="70" Margin="0,10,0,0" HorizontalAlignment="Left" FontSize="14"/>
+                            <ComboBox SelectedValue="{Binding AmPmSelectedStart}" ItemsSource="{Binding AmPm}" Width="50" Margin="0,10,0,0" HorizontalAlignment="Left" FontSize="14"/>
+
+                            <!-- <TextBox Text="{Binding Path=StartAdd}" Grid.Column="3" Grid.Row="1" Width="150"/>-->
+
+                            <TextBlock Text="To" Margin="5,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14"/>
+                            <ComboBox SelectedValue="{Binding HourStartSelected}" ItemsSource="{Binding HoursStart}" Width="70" Margin="0,10,0,0" HorizontalAlignment="Left" FontSize="14"/>
+                            <ComboBox SelectedValue="{Binding AmPmSelectedEnd}" ItemsSource="{Binding AmPm}" Width="50" Margin="0,10,0,0" HorizontalAlignment="Left" FontSize="14"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Color : " Margin="5,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" Width="80" Height="20"/>
+                            <TextBox Text="{Binding ColorAdd}" Width="150" HorizontalAlignment="Left" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Location : " Margin="5,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" Width="80" Height="20"/>
+                            <TextBox Text="{Binding LocationAdd}" Width="150" HorizontalAlignment="Left" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Status : " Margin="5,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" Width="80" Height="20"/>
+                            <TextBox Text="{Binding StatusAdd}" Width="150" HorizontalAlignment="Left" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Description : " Margin="5,10,0,-0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" Width="80" Height="20"/>
+                            <TextBox Text="{Binding DescriptionAdd}" Width="200" HorizontalAlignment="Left" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom"/>
+                        </StackPanel>
+                        <!-- <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center">
                                         <Button Content="Confirm" Command="{Binding AddEventCommand}" Width="80" Margin="0,3"  />
                                     </StackPanel> 
                                     <TextBlock Text="Title : " Grid.Column="0" Grid.Row="1" Margin="5,0,0,0"/>
@@ -164,12 +129,11 @@
                                     <TextBlock Text="Description : " Grid.Column="2" Grid.Row="4" Margin="10.2,0.4,0.4,-0.2"/>
                                     <TextBox Text="{Binding Path=DescriptionAdd}" Grid.Column="3" Margin="29,0,0,0" Grid.Row="4" Width="200"/>-->
 
-                                </Grid>
-                            </StackPanel>
-                        </ScrollViewer>
-                    </Border>
-                </Grid>
-            </HeaderedContentControl>
-        </HeaderedContentControl>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </UserControl>

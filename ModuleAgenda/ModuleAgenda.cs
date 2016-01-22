@@ -11,8 +11,8 @@ namespace ModuleAgenda
 {
     public class ModuleAgenda : IModule
     {
-         IUnityContainer _container;
-        IAPI            _api;
+        IUnityContainer _container;
+        IAPI _api;
 
         public ModuleAgenda(IUnityContainer container, IAPI api, IMetadataModuleCatalog metadataCatalog)
         {

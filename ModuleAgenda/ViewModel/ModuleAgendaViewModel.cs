@@ -69,12 +69,12 @@ namespace ModuleAgenda.ViewModel
                 foreach (AgendaName elem in getValidAgendaName)
                 {
                     if (elem.participants == null) /*.IndexOf(this._api.LoggedUser.id) != -1*/
-                        _listAgendaName.Add(elem); 
+                        _listAgendaName.Add(elem);
                     else if (this.DataBaseStringToList(elem.participants).IndexOf(this._api.LoggedUser.id) != -1)
                     {
                         _listAgendaName.Add(elem);
                     }
-                }     
+                }
             }
             else
                 _listAgendaName = null;
@@ -84,9 +84,9 @@ namespace ModuleAgenda.ViewModel
             {
                 foreach (AgendaName elem in _listAgendaName)
                 {
-                    if (elem.idgroupe == 1)// 1 = agenda Firm
+                    if (evt.idgroupe == 0)// 1 = agenda Firm
                     {
-                        System.Console.WriteLine(" je regqrde dans firm = " + evt.title);
+                        System.Console.WriteLine(" je regqrde dans firm = " + evt.title + "  ___  " + evt.idgroupe);
                         _listEventToDisplay.Add(evt);
                         break;
                     }
@@ -142,7 +142,7 @@ namespace ModuleAgenda.ViewModel
         public ObservableCollection<User> ListUsers
         {
             get { return this._listUsers; }
-            set 
+            set
             {
                 if (this._listUsers == value)
                     return;
@@ -171,7 +171,7 @@ namespace ModuleAgenda.ViewModel
         public AgendaName CurrentCalendar
         {
             get { return this._currentCalendar; }
-            set 
+            set
             {
                 if (this._currentCalendar == value)
                     return;
@@ -179,6 +179,7 @@ namespace ModuleAgenda.ViewModel
                 this._listEventToDisplay.Clear();
                 foreach (AgendaEvent evt in _listEvent)
                 {
+                    System.Console.WriteLine("ajout de + " + evt.idgroupe + " ------" + evt.title + " idgroup = " + this._currentCalendar.idgroupe);
                     if (evt.idgroupe == this._currentCalendar.idgroupe)
                     {
                         System.Console.WriteLine("ajout de + " + evt.title);
@@ -208,7 +209,7 @@ namespace ModuleAgenda.ViewModel
                 this._viewEvent.CurrentDate = value;
                 this.OnPropertyChanged("_viewEvent");
                 this.OnPropertyChanged("CurrentDate");
-                
+
             }
         }
     }

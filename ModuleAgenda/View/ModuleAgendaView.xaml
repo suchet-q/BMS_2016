@@ -8,94 +8,60 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <UserControl.Resources>
-        <Style x:Key="DetailBorder" TargetType="{x:Type Border}">
-            <Setter Property="Height" Value="Auto" />
-            <Setter Property="BorderBrush" Value="LightGray" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="6" />
-            <Setter Property="Padding" Value="2" />
-        </Style>
-        <Style x:Key="SubDisplayArea" TargetType="{x:Type HeaderedContentControl}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Border Grid.Row="0" Background="LightGray" BorderBrush="LightGray"  Padding="8,2,8,6" CornerRadius="6,6,0,0" BorderThickness="2,2,2,0">
-                                <TextBlock Foreground="#FF282828" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                    <ContentPresenter ContentSource="Header"/>
-                                </TextBlock>
-                            </Border>
-                            <Border Grid.Row="1" Background="White" BorderBrush="LightGray" CornerRadius="0,0,6,6" BorderThickness="2,0,2,2">
-                                <ContentPresenter/>
-                                <Border.RenderTransform>
-                                    <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1" />
-                                </Border.RenderTransform>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
-
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-
-
-        <StackPanel Grid.Column="1" Grid.Row="0" Margin="0" VerticalAlignment="Top" Grid.RowSpan="2">
+        <StackPanel HorizontalAlignment="Right" Grid.Column="1" Width="300">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Row="0" Margin="0,3,3,0">
-                    <HeaderedContentControl.Header>
-                        Mini Calendar
-                    </HeaderedContentControl.Header>
-                    <HeaderedContentControl Margin="5">
-                        <Calendar SelectedDate="{Binding CurrentDate}" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top"/>
-                    </HeaderedContentControl>
-                </HeaderedContentControl>
-                <HeaderedContentControl Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource SubDisplayArea}" Margin="0,3,3,0">
-                    <HeaderedContentControl.Header>
-                        My Calendar
-                    </HeaderedContentControl.Header>
-                    <HeaderedContentControl Margin="5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            
-                            <TextBlock Text="Display :" Grid.Column="0" Grid.Row="0"/>
-                            
-                            <!-- HorizontalAlignment="Left" SelectedItem="{Binding Path=Receiver, Mode=TwoWay}" Width="175" Margin="0"-->
 
-                            <ComboBox Grid.Column="1" Grid.Row="0" Width="137" SelectedItem="{Binding Path=CurrentCalendar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListAgendaName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding name}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </Grid>
-                    </HeaderedContentControl>
-                </HeaderedContentControl>
+
+                <StackPanel Grid.Row="0">
+                    <Border BorderBrush="Gray" BorderThickness="0,0,0,1">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,2" >
+                            <Image Height="37" Width="58" Source="/ModuleAgenda;component/Resources/mini_calendar.png"/>
+                            <Label Content="MINI CALENDAR" FontSize="16" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                    <Calendar BorderBrush="Gray" SelectedDate="{Binding CurrentDate}" VerticalAlignment="Top" Grid.Row="1" Margin="0,20,0,0"/>
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="1" Margin="0,2">
+                    <Border BorderBrush="Gray" BorderThickness="0,0,0,1" Margin="0,2">
+                        <StackPanel  Orientation="Horizontal" Margin="0,20,0,0">
+                            <Image  Height="37" Width="58" Source="/ModuleAgenda;component/my_calendar.jpg"/>
+                            <Label Content="MY CALENDAR" FontSize="16" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                    <Grid Margin="0,20,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" FontSize="13" Grid.ColumnSpan="2" Margin="9,5,167,-5"><Run Text="Display :"/></TextBlock>
+
+                        <!--HorizontalAlignment="Left" SelectedItem="{Binding Path=Receiver, Mode=TwoWay}" Width="175" Margin="0"/-->
+                        <ComboBox Grid.Column="1" Grid.Row="0" Width="137" SelectedItem="{Binding Path=CurrentCalendar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListAgendaName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="39,0,-1,0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+
             </Grid>
         </StackPanel>
         <ContentControl HorizontalAlignment="Stretch" Content="{Binding Path=_viewEvent}" Grid.Column="0" Grid.Row="0" Margin="0,5,3,0">
@@ -105,5 +71,7 @@
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
+
     </Grid>
 </UserControl>
+

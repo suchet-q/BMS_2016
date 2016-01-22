@@ -121,7 +121,7 @@ namespace ModuleAgenda.ViewModel
             }
 
             set
-            { 
+            {
                 this._model.title = value;
                 this._model.title = this._model.title.Trim();
                 if (this._model.title.Length == 0)
@@ -217,7 +217,7 @@ namespace ModuleAgenda.ViewModel
                 }
                 this.OnPropertyChanged("status");
                 _api.Orm.UpdateObject<AgendaEvent>(@"update agenda_event set status = @status where Id = @Id", _model);
-                
+
             }
         }
 

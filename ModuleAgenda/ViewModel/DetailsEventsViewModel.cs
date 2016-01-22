@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows;
+using Microsoft.Practices.Prism.Mvvm;
 
 namespace ModuleAgenda.ViewModel
 {
@@ -45,7 +46,7 @@ namespace ModuleAgenda.ViewModel
             this._model.endevent = "00:00";
             this._model.color = "green";
         }
-        
+
         private List<string> _amPm = new List<string>(new string[] { "Am", "Pm" });
         public List<string> AmPm
         {
@@ -62,19 +63,36 @@ namespace ModuleAgenda.ViewModel
             }
         }
 
-        private string _amPmSelected;
-        public string AmPmSelected
+        private string _amPmSelectedStart;
+        public string AmPmSelectedStart
         {
             get
             {
-                return this._amPmSelected;
+                return this._amPmSelectedStart;
             }
             set
             {
-                if (this._amPmSelected == value)
+                if (this._amPmSelectedStart == value)
                     return;
-                this._amPmSelected = value;
-                System.Console.WriteLine("jai selectionne ampm= " + this._amPmSelected);
+                this._amPmSelectedStart = value;
+                System.Console.WriteLine("jai selectionne ampm= " + this._amPmSelectedStart);
+                this.OnPropertyChanged("AmPmSelected");
+
+            }
+        }
+        private string _amPmSelectedEnd;
+        public string AmPmSelectedEnd
+        {
+            get
+            {
+                return this._amPmSelectedEnd;
+            }
+            set
+            {
+                if (this._amPmSelectedEnd == value)
+                    return;
+                this._amPmSelectedEnd = value;
+                System.Console.WriteLine("jai selectionne ampm= " + this._amPmSelectedEnd);
                 this.OnPropertyChanged("AmPmSelected");
 
             }
@@ -82,11 +100,11 @@ namespace ModuleAgenda.ViewModel
         private string _hourStartSelected;
         public string HourStartSelected
         {
-            get 
+            get
             {
                 return this._hourStartSelected;
             }
-            set 
+            set
             {
                 if (this._hourStartSelected == value)
                     return;
@@ -102,11 +120,11 @@ namespace ModuleAgenda.ViewModel
                                           "10:30", "11:00", "11:30"});
         public List<string> HoursStart
         {
-            get 
+            get
             {
                 return this._hoursStart;
             }
-            set 
+            set
             {
                 if (this._hoursStart == value)
                     return;
@@ -238,7 +256,7 @@ namespace ModuleAgenda.ViewModel
             }
             set
             {
-                this._model.date = this._currentDate;
+                this._model.date = value;
                 this.OnPropertyChanged("DateAdd");
             }
         }
