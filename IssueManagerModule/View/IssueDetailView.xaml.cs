@@ -16,9 +16,9 @@ using System.Windows.Shapes;
 namespace IssueManagerModule.View
 {
     /// <summary>
-    /// Interaction logic for IssueDetailView.xaml
+    /// Logique d'interaction pour IssueDetailView.xaml
     /// </summary>
-    public partial class IssueDetailView : Page
+    public partial class IssueDetailView : UserControl
     {
         public IssueDetailView()
         {

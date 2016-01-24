@@ -111,5 +111,8 @@ namespace IssueManagerModule.ViewModel
             }
             return res;
         }
+        public void Refresh(){
+
+        }
     }
 }
