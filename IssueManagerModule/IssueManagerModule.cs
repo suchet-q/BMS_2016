@@ -36,7 +36,7 @@ namespace IssueManagerModule
             view.DataContext = viewModel;
             System.Console.Error.WriteLine("Initialize");
             TransientLifetimeManager tlm = new TransientLifetimeManager();
-            _container.RegisterInstance(typeof(object), "EmployeeManagerModuleView", view);
+            _container.RegisterInstance(typeof(object), "IssueManagerModuleView", view);
         }
     }
 }

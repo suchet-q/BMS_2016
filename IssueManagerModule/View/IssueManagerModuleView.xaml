@@ -16,8 +16,8 @@
         <HeaderedContentControl Grid.Column="0" Margin="0,0,3,0">
             <HeaderedContentControl.Header>
                 <StackPanel Orientation="Horizontal">
-                    <Image Height="37" Width="58" Source="../Resources/shopping232.png"/>
-                    <Label Content="ORDERS" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
+                    <Image Height="37" Width="58" Source="../Resources/verification5.png"/>
+                    <Label Content="ISSUES" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
                 </StackPanel>
             </HeaderedContentControl.Header>
             <HeaderedContentControl>
@@ -66,7 +66,7 @@
         <HeaderedContentControl Grid.Column="1">
             <HeaderedContentControl.Header>
                 <StackPanel Orientation="Horizontal">
-                    <Image Height="37" Width="58" Source="../Resources/magnifying-glass14 (1).png"/>
+                    <Image Height="37" Width="58" Source="../Resources/Details.png"/>
                     <Label Content="DETAILS" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
                 </StackPanel>
             </HeaderedContentControl.Header>
