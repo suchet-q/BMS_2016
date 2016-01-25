@@ -14,6 +14,8 @@ using System.Windows.Input;
 
 namespace IssueManagerModule.ViewModel
 {
+
+    //AddIssueCommand
     public class IssueManagerModuleViewModel : ViewModelBase, IModuleMainViewModel
     {
         IAPI _api;

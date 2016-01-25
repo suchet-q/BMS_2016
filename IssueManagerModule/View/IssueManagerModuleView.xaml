@@ -6,82 +6,85 @@
              xmlns:v="clr-namespace:IssueManagerModule.View"
              xmlns:vm="clr-namespace:IssueManagerModule.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <HeaderedContentControl Grid.Column="0" Margin="0,0,3,0">
+        <HeaderedContentControl Grid.Column="0">
             <HeaderedContentControl.Header>
                 <StackPanel Orientation="Horizontal">
                     <Image Height="37" Width="58" Source="../Resources/verification5.png"/>
                     <Label Content="ISSUES" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
                 </StackPanel>
             </HeaderedContentControl.Header>
-            <HeaderedContentControl>
-                <HeaderedContentControl.Header>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <TextBlock Margin="2">
-                                <Hyperlink Command="{Binding Path=AddOrderCommand}">Add Order</Hyperlink>
-                            | <Hyperlink Command="{Binding Path=DeleteOrderCommand}">Delete Order</Hyperlink>
-                            | <Hyperlink Command="{Binding Path=RefreshOrderCommand}">Refresh Order</Hyperlink>
-                        </TextBlock>
-                    </StackPanel>
-                </HeaderedContentControl.Header>
-                <TabControl>
-                    <TabItem Header="Dispatch">
-                        <ListView SelectedItem="{Binding Path=CurrentOrder, Mode=TwoWay}" ItemsSource="{Binding Path=ListDispatchOrders}">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=DateOrdered, StringFormat={}{0:dd/MM/yyyy}}"/>
-                                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Path=Content}"/>
-                                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status}"/>
-                                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Path=Type}"/>
-                                    <GridViewColumn Header="Receiver" DisplayMemberBinding="{Binding Path=Client.name}"/>
-                                    <GridViewColumn Header="Date Received" DisplayMemberBinding="{Binding Path=DateReceived, StringFormat={}{0:dd/MM/yyyy}}"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </TabItem>
-                    <TabItem Header="Restocking">
-                        <ListView SelectedItem="{Binding Path=CurrentOrder, Mode=TwoWay}" ItemsSource="{Binding Path=ListRestockOrders}">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=DateOrdered, StringFormat={}{0:dd/MM/yyyy}}"/>
-                                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Path=Content}"/>
-                                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status}"/>
-                                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Path=Type}"/>
-                                    <GridViewColumn Header="Receiver" DisplayMemberBinding="{Binding Path=Client.name}"/>
-                                    <GridViewColumn Header="Date Received" DisplayMemberBinding="{Binding Path=DateReceived, StringFormat={}{0:dd/MM/yyyy}}"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </TabItem>
-                </TabControl>
-            </HeaderedContentControl>
-        </HeaderedContentControl>
+            <ScrollViewer>
+                <HeaderedContentControl>
+                    <HeaderedContentControl.Header>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button  Command="{Binding AddIssueCommand}" FontSize="12" Margin="0,0,10,0" Width="140" Height="24">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Width="21" Height="14" HorizontalAlignment="Right" Source="../Resources/add182.png"/>
+                                    <TextBlock Text=" Add employee" VerticalAlignment="Center" Margin="0,0,15,0" Width="95" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </HeaderedContentControl.Header>
 
-        <HeaderedContentControl Grid.Column="1">
+                    <DataGrid SelectedItem="{Binding Path=CurrentIssue, Mode=TwoWay}" ItemsSource="{Binding Path=AllIssues}" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Type">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Canvas Background="{Binding Path=Type.color}"/>
+                                            <Label Content="{Binding Path=Type.label}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Assignee" Binding="{Binding Path=Assignee}" />
+                            <DataGridTextColumn Header="Creator" Binding="{Binding Path=Creator}" />
+                            <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </HeaderedContentControl>
+            </ScrollViewer>
+        </HeaderedContentControl>
+        <HeaderedContentControl Margin="10,0,0,0" Grid.Column="1" >
             <HeaderedContentControl.Header>
                 <StackPanel Orientation="Horizontal">
                     <Image Height="37" Width="58" Source="../Resources/Details.png"/>
-                    <Label Content="DETAILS" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
+                    <Label Content="PROPERTIES" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
                 </StackPanel>
             </HeaderedContentControl.Header>
-            <HeaderedContentControl>
-                <Border Margin="5">
-                    <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentOrder}">
-                        <ContentControl.Resources>
-                            <DataTemplate DataType="{x:Type vm:IssueViewModel}">
-                                <v:IssueDetailView/>
-                            </DataTemplate>
-                        </ContentControl.Resources>
-                    </ContentControl>
-                </Border>
-            </HeaderedContentControl>
-        </HeaderedContentControl>
+            <ScrollViewer>
+                <StackPanel>
+                    <Border>
+                        <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentIssue}">
+                            <ContentControl.Resources>
+                                <DataTemplate DataType="{x:Type vm:IssueViewModel}">
+                                    <v:IssueDetailView />
+                                </DataTemplate>
+                            </ContentControl.Resources>
+                        </ContentControl>
+                    </Border>
 
+                    <Border>
+                        <ScrollViewer>
+                            <ContentControl Content="{Binding Path=CurrentIssue}" >
+                                <ContentControl.Resources>
+                                    <DataTemplate DataType="{x:Type vm:IssueViewModel}">
+                                        <v:IssueDetailView />
+                                    </DataTemplate>
+                                </ContentControl.Resources>
+                            </ContentControl>
+                        </ScrollViewer>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </HeaderedContentControl>
     </Grid>
 </UserControl>

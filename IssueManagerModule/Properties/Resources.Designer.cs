@@ -63,6 +63,16 @@ namespace IssueManagerModule.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add182 {
+            get {
+                object obj = ResourceManager.GetObject("add182", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Details {
             get {
                 object obj = ResourceManager.GetObject("Details", resourceCulture);
