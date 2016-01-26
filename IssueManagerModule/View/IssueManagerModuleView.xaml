@@ -27,7 +27,7 @@
                             <Button  Command="{Binding AddIssueCommand}" FontSize="12" Margin="0,0,10,0" Width="140" Height="24">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Width="21" Height="14" HorizontalAlignment="Right" Source="../Resources/add182.png"/>
-                                    <TextBlock Text=" Add employee" VerticalAlignment="Center" Margin="0,0,15,0" Width="95" />
+                                    <TextBlock Text=" Add issue" VerticalAlignment="Center" Margin="0,0,15,0" Width="95" />
                                 </StackPanel>
                             </Button>
                         </StackPanel>
@@ -38,15 +38,19 @@
                             <DataGridTemplateColumn Header="Type">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <StackPanel>
-                                            <Canvas Background="{Binding Path=Type.color}"/>
-                                            <Label Content="{Binding Path=Type.label}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Rectangle Width="20" Height="20">
+                                                <Rectangle.Fill>
+                                                    <SolidColorBrush Color="{Binding Path=Type.color}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                            <TextBlock Text="{Binding Path=Type.label}" Margin="5,0,10,0"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Assignee" Binding="{Binding Path=Assignee}" />
-                            <DataGridTextColumn Header="Creator" Binding="{Binding Path=Creator}" />
+                            <DataGridTextColumn Header="Assignee" Binding="{Binding Path=Assignee.login}" />
+                            <DataGridTextColumn Header="Creator" Binding="{Binding Path=Creator.login}" />
                             <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}" />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -70,18 +74,6 @@
                                 </DataTemplate>
                             </ContentControl.Resources>
                         </ContentControl>
-                    </Border>
-
-                    <Border>
-                        <ScrollViewer>
-                            <ContentControl Content="{Binding Path=CurrentIssue}" >
-                                <ContentControl.Resources>
-                                    <DataTemplate DataType="{x:Type vm:IssueViewModel}">
-                                        <v:IssueDetailView />
-                                    </DataTemplate>
-                                </ContentControl.Resources>
-                            </ContentControl>
-                        </ScrollViewer>
                     </Border>
                 </StackPanel>
             </ScrollViewer>

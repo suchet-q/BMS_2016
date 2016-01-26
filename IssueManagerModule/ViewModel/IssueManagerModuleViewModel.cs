@@ -106,8 +106,8 @@ namespace IssueManagerModule.ViewModel
                 newElem.id = (int)issueBrut.id;
                 newElem.title = issueBrut.title;
                 newElem.description = issueBrut.description;
-                newElem.creator = _listAllUsers.First<User>(user => user.id == issueBrut.id_creator);
-                newElem.assignee = _listAllUsers.First<User>(user => user.id == issueBrut.id_assignee);
+                newElem.creator = _listAllUsers.FirstOrDefault<User>(user => user.id == issueBrut.id_creator);
+                newElem.assignee = _listAllUsers.FirstOrDefault<User>(user => user.id == issueBrut.id_assignee);
                 newElem.type = _listAllType.FirstOrDefault<IssueType>(type => type.id == issueBrut.id_type);
                 res.Add(newElem);
             }
