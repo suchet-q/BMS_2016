@@ -37,6 +37,8 @@ namespace IssueManagerModule.ViewModel
             }
         }
 
+        public ICommand AddIssueCommand { get; private set; }
+
         public ObservableCollection<IssueViewModel> AllIssues { get; private set; }
 
         private ObservableCollection<Issue>         _listAllIssues;
@@ -56,6 +58,8 @@ namespace IssueManagerModule.ViewModel
             _listAllType = this.buildTypeList();
             _container.RegisterInstance(typeof(object), "TypeList", _listAllType);
             _listAllIssues = this.buildIssuesList();
+
+            this.AddIssueCommand = new DelegateCommand((o) => this.AddIssue());
 
             this.AllIssues = new ObservableCollection<IssueViewModel>();
             foreach (Issue issue in this._listAllIssues)
@@ -113,6 +117,27 @@ namespace IssueManagerModule.ViewModel
             }
             return res;
         }
+
+        private void AddIssue()
+        {
+            Issue issue = new Issue();
+            _api.Orm.Insert("insert into issue(id_creator, id_assignee, id_type) values (@id_creator, @id_assignee, @id_type)", new { id_creator = this._listAllUsers.First().id, id_assignee = this._listAllUsers.First().id, id_type = this._listAllType.First().id });
+            IEnumerable<dynamic> res = _api.Orm.Query("select max(id) as maxId from issue");
+            if (res != null)
+            {
+                issue.id = (int)res.First().maxId;
+                issue.assignee = this._listAllUsers.First();
+                issue.creator = this._listAllUsers.First();
+                issue.type = this._listAllType.First();
+                IssueViewModel vm = new IssueViewModel(issue, this._listAllIssues, _api, _container);
+                this.AllIssues.Add(vm);
+                this.CurrentIssue = vm;
+            }
+            else
+            {
+            }
+        }
+
         public void Refresh(){
 
         }

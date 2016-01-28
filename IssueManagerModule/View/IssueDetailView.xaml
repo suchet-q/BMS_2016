@@ -7,7 +7,53 @@
              xmlns:vm="clr-namespace:IssueManagerModule.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <Border BorderBrush="#41B1E1" BorderThickness="2">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Assigned to :" Margin="5" />
+            <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding AllUsers, Mode=TwoWay}" HorizontalAlignment="Left" SelectedItem="{Binding Path=Assignee, Mode=TwoWay}" Width="240" Margin="5">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding login}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Type :" Margin="5"/>
+            <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding AllTypes, Mode=TwoWay}" HorizontalAlignment="Left" SelectedItem="{Binding Path=Type, Mode=TwoWay}" Width="240" Margin="5">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Width="20" Height="20">
+                                <Rectangle.Fill>
+                                    <SolidColorBrush Color="{Binding Path=color}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <TextBlock Text="{Binding Path=label}" Margin="5,0,10,0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Title :" Margin="5" />
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Title}" Width="240" Margin="5"/>
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Description :" Margin="5" />
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Description}" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Height="150" Width="240" Margin="5"/>
+
+            <Button Content="Validate" Command="{Binding ValidateIssueCommand}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="4" Width="150" Margin="18,0,73,10"/>
+        </Grid>
+    </Border>
 </UserControl>
