@@ -92,6 +92,7 @@ namespace BMS
                                      where !(assembly is System.Reflection.Emit.AssemblyBuilder)
                                         && assembly.GetType().FullName != "System.Reflection.Emit.InternalAssemblyBuilder"
                                         && !String.IsNullOrEmpty(assembly.Location)
+                                        && !this.ModulePath.Contains(assembly.Location)
                                      select assembly.Location
                                  );
 

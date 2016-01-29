@@ -79,41 +79,5 @@ namespace BMS
             App.Current.MainWindow.Show();
         }
 
-        public void LateInitializeModules()
-        {
-            base.InitializeModules();
-        }
-
-        public static IEnumerable<AppDomain> EnumAppDomains()
-        {
-            IntPtr enumHandle = IntPtr.Zero;
-            ICorRuntimeHost host = null;
-
-            try
-            {
-                host = new CorRuntimeHost();
-                host.EnumDomains(out enumHandle);
-                object domain = null;
-
-                host.NextDomain(enumHandle, out domain);
-                while (domain != null)
-                {
-                    yield return (AppDomain)domain;
-                    host.NextDomain(enumHandle, out domain);
-                }
-            }
-            finally
-            {
-                if (host != null)
-                {
-                    if (enumHandle != IntPtr.Zero)
-                    {
-                        host.CloseEnum(enumHandle);
-                    }
-
-                    Marshal.ReleaseComObject(host);
-                }
-            }
-        }
     }
 }

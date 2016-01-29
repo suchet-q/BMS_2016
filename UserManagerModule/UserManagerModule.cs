@@ -27,7 +27,6 @@ namespace UserManagerModule
             _container = container;
             _api = api;
 
-            //La tu mets les tables que tu utilse maggle
             BDDTableUsed.Add("user");
 
             metadataCatalog.Add(new ModuleMetadata("User Manager", "UserManagerModule", "1.0", "This module allow to manage the list of User", "BMS", BDDTableUsed));
@@ -39,8 +38,6 @@ namespace UserManagerModule
             var viewModel = _container.Resolve<ViewModel.UserManagerModuleViewModel>(new ParameterOverride("api", _api));
             var view =  _container.Resolve<View.UserManagerModuleView>();
             view.DataContext = viewModel;
-            System.Console.Error.WriteLine("Initialize");
-            TransientLifetimeManager tlm = new TransientLifetimeManager();
             _container.RegisterInstance(typeof(object), "UserManagerModuleView", view);
             _container.RegisterInstance<IModuleMainViewModel>("UserManagerModuleViewModel", viewModel);
 

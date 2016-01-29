@@ -17,7 +17,7 @@
             <HeaderedContentControl>
                 <HeaderedContentControl.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Height="37" Width="58" Source="/UserManagerModule;component/Resources/group2 (4).png"/>
+                        <Image Height="37" Width="58" Source="/RoleManagerModule;component/Resources/group2 (4).png"/>
                         <Label Content="ROLE LIST" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
                     </StackPanel>
                 </HeaderedContentControl.Header>
@@ -40,7 +40,7 @@
                     </StackPanel>
                 </HeaderedContentControl.Header>
 
-                 <DataGrid SelectedItem="{Binding Path=CurrentRole, Mode=TwoWay}" ItemsSource="{Binding Path=AllRoles}" AutoGenerateColumns="False" >
+                 <DataGrid SelectedItem="{Binding Path=CurrentRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=AllRoles}" AutoGenerateColumns="False" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Role" Width="350" Binding="{Binding Path=nom}" />
                     </DataGrid.Columns>

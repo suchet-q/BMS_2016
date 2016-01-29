@@ -41,8 +41,8 @@ namespace Service
             Uid = uid;
             Password = password;
             Port = port;
-            ConnectionString = "SERVER=" + server + ";" + "PORT=" + port + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            ConnectionString = "SERVER=" + server + ";" + (bddType.Type == BDDTypeEnum.MySQL ? "PORT=" + port + ";" : "") + (bddType.Type != BDDTypeEnum.Oracle ? "DATABASE=" +
+            database + ";" : "") + "UID=" + uid + ";" + "PASSWORD=" + password + ";" + (bddType.Type == BDDTypeEnum.OLEDB ?  "Provider = SQLOLEDB;" : "");
             BddType = bddType;
 
             switch (bddType.Type)

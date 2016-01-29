@@ -48,7 +48,8 @@ namespace ViewModel
             set
             {
                 _currentRole = value;
-                CurrentRightRoleModules = DicAllRightRoleModuleViewModel[value];
+                if (DicAllRightRoleModuleViewModel.Keys.Contains(value))
+                    CurrentRightRoleModules = DicAllRightRoleModuleViewModel[value];
                 OnPropertyChanged("CurrentRole");
             }
         }
@@ -79,21 +80,22 @@ namespace ViewModel
             ObservableCollection<RightRoleModuleViewModel> listRightRoleModuleViewModel = new ObservableCollection<RightRoleModuleViewModel>();
             foreach (var module in listModule)
             {
-                RightRoleModule rightRoleModule = listRightRoleModules.SingleOrDefault(x => x.nom_module == module);
+                //RightRoleModule rightRoleModule = listRightRoleModules.SingleOrDefault(x => x.nom_module == module);
                 //If module nexiste pas dans la DB crée le
-                if (rightRoleModule == null)
-                {
-                    rightRoleModule = new RightRoleModule { nom_module=module, role_id=role.id, right_create=false, right_delete=false, right_read=false, right_update=false };
-                    _api.Orm.InsertObject<RightRoleModule>(rightRoleModule);
+                //if (rightRoleModule == null)
+                //{
+                    RightRoleModule rightRoleModule = new RightRoleModule { nom_module=module, role_id=role.id, right_create=false, right_delete=false, right_read=false, right_update=false };
+                    //_api.Orm.InsertObject<RightRoleModule>(rightRoleModule);
                     //IEnumerable<dynamic> res = _api.Orm.Query("select max(id) as maxId from right_role_module");
                     //if (res != null)
                     //    rightRoleModule.id = (int)res.First().maxId;
-                }
+                //}
                 //Create ViewModel
                 RightRoleModuleViewModel vm = new RightRoleModuleViewModel(role, _api, rightRoleModule);
                 listRightRoleModuleViewModel.Add(vm);
             }
-            DicAllRightRoleModuleViewModel.Add(RVM, listRightRoleModuleViewModel);
+            if (!DicAllRightRoleModuleViewModel.Keys.Contains(RVM))
+                DicAllRightRoleModuleViewModel.Add(RVM, listRightRoleModuleViewModel);
         }
 
         private ObservableCollection<Role> buildEntryList()
@@ -127,6 +129,7 @@ namespace ViewModel
                 role.id = (int)res.First().maxId;
                 RoleViewModel vm = new RoleViewModel(role, this._listRole, _api, _container);
                 this.AllRoles.Add(vm);
+                createRoleRightAsso(vm);
                 this.CurrentRole = vm;
             }
             else
@@ -139,6 +142,7 @@ namespace ViewModel
         private void DeleteCurrentRole()
         {
             _api.Orm.Delete("delete from role where role.id=@idRole", new { idRole = this.CurrentRole.Model.id });
+            DicAllRightRoleModuleViewModel.Remove(this.CurrentRole);
             this.AllRoles.Remove(this.CurrentRole);
             this.CurrentRole = this.AllRoles.Count() > 0 ? this.AllRoles.First() : null;
         }
@@ -147,24 +151,27 @@ namespace ViewModel
         {
             _listRole = this.buildEntryList();
 
-            DicAllRightRoleModuleViewModel = new SortedDictionary<RoleViewModel, ObservableCollection<RightRoleModuleViewModel>>();
-            this.AllRoles = new ObservableCollection<RoleViewModel>();
-            foreach (Role role in _listRole)
+            Application.Current.Dispatcher.Invoke((Action)delegate
             {
-                RoleViewModel RVM = new RoleViewModel(role, _listRole, _api, _container);
-                this.AllRoles.Add(RVM);
-                createRoleRightAsso(RVM);
-            }
-
-            CurrentRole = AllRoles.Count > 0 ? AllRoles[0] : null;
-
-            this.AllRoles.CollectionChanged += (sender, e) =>
-            {
-                if (e.OldItems != null && e.OldItems.Contains(this.CurrentRole))
+                DicAllRightRoleModuleViewModel = new SortedDictionary<RoleViewModel, ObservableCollection<RightRoleModuleViewModel>>();
+                this.AllRoles = new ObservableCollection<RoleViewModel>();
+                foreach (Role role in _listRole)
                 {
-                    this.CurrentRole = null;
+                    RoleViewModel RVM = new RoleViewModel(role, _listRole, _api, _container);
+                    this.AllRoles.Add(RVM);
+                    createRoleRightAsso(RVM);
                 }
-            };
+
+                CurrentRole = AllRoles.Count > 0 ? AllRoles[0] : null;
+
+                this.AllRoles.CollectionChanged += (sender, e) =>
+                {
+                    if (e.OldItems != null && e.OldItems.Contains(this.CurrentRole))
+                    {
+                        this.CurrentRole = null;
+                    }
+                };
+            });
         }
 
         public ICommand AddRoleCommand { get; private set; }

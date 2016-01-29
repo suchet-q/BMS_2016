@@ -49,7 +49,7 @@ namespace ModuleAgenda.ViewModel
             _listLocation = listLocation;
             _listEventToDisplay = listEventToDisplay;
             _currentListEvent = new ObservableCollection<AgendaListEvent>();
-            this.DeleteEventCommand = new DelegateCommand((o) => this.DeleteEvent());
+            this.DeleteEventCommand = new DelegateCommand((o) => this.DeleteEvent()/*, (o) => this.CurrentEvent != null*/);
             AddNewLocation = new DelegateCommand((o) => this.AddLocation());
             ConfirmNewLocation = new DelegateCommand((o) => this.ConfirmLocation());
             DeleteLocation = new DelegateCommand((o) => this.ConfirmDeleteLocation());
@@ -286,11 +286,19 @@ namespace ModuleAgenda.ViewModel
         //Part delete event
         public ICommand DeleteEventCommand { get; private set; }
 
+        public bool CanDeleteEvent()
+        {
+            return this.CurrentEvent == null;
+        }
+
         public void DeleteEvent()
         {
-            _api.Orm.Delete("delete from agendaevent where id=@idevent", new { idevent = this._currentevent._model.id });
-            this._currentListEvent.Remove(this.CurrentEvent);
-            this._listEventToDisplay.Remove(this.CurrentEvent._model);
+            if (this._currentevent != null)
+            {
+                _api.Orm.Delete("delete from agendaevent where id=@idevent", new { idevent = this._currentevent._model.id });
+                this._listEventToDisplay.Remove(this.CurrentEvent._model);
+                this._currentListEvent.Remove(this.CurrentEvent);
+            }
         }
         //Part add event
         public ICommand AddEventCommand { get; private set; }

@@ -47,7 +47,7 @@ namespace RoleManagerModule.ViewModel
                 if (this.rightRoleModule.nom_module == value) return;
                 this.rightRoleModule.nom_module = value;
                 this.OnPropertyChanged("nom_module");
-                _api.Orm.Update("update right_role_module set nom_module = @nom_module where id = @id", new { nom_module = value, id = this.rightRoleModule.id });
+               // _api.Orm.Update("update right_role_module set nom_module = @nom_module where id = @id", new { nom_module = value, id = this.rightRoleModule.id });
             }
         }
 
@@ -59,7 +59,7 @@ namespace RoleManagerModule.ViewModel
                 if (this.rightRoleModule.right_read == value) return;
                 this.rightRoleModule.right_read = value;
                 this.OnPropertyChanged("RightRead");
-                _api.Orm.Update("update right_role_module set right_read = @right_read where id = @id", new { right_read = value, id = this.rightRoleModule.id });
+                //_api.Orm.Update("update right_role_module set right_read = @right_read where id = @id", new { right_read = value, id = this.rightRoleModule.id });
             }
         }
 
@@ -71,7 +71,7 @@ namespace RoleManagerModule.ViewModel
                 if (this.rightRoleModule.right_create == value) return;
                 this.rightRoleModule.right_create = value;
                 this.OnPropertyChanged("RightCreate");
-                _api.Orm.Update("update right_role_module set right_create = @right_create where id = @id", new { right_create = value, id = this.rightRoleModule.id });
+                //_api.Orm.Update("update right_role_module set right_create = @right_create where id = @id", new { right_create = value, id = this.rightRoleModule.id });
             }
         }
 
@@ -83,7 +83,7 @@ namespace RoleManagerModule.ViewModel
                 if (this.rightRoleModule.right_update == value) return;
                 this.rightRoleModule.right_update = value;
                 this.OnPropertyChanged("RightUpdate");
-                _api.Orm.Update("update right_role_module set right_update = @right_update where id = @id", new { right_update = value, id = this.rightRoleModule.id });
+                //_api.Orm.Update("update right_role_module set right_update = @right_update where id = @id", new { right_update = value, id = this.rightRoleModule.id });
             }
         }
 
@@ -95,7 +95,7 @@ namespace RoleManagerModule.ViewModel
                 if (this.rightRoleModule.right_delete == value) return;
                 this.rightRoleModule.right_delete = value;
                 this.OnPropertyChanged("RightDelete");
-                _api.Orm.Update("update right_role_module set right_delete = @right_delete where id = @id", new { right_delete = value, id = this.rightRoleModule.id });
+                //_api.Orm.Update("update right_role_module set right_delete = @right_delete where id = @id", new { right_delete = value, id = this.rightRoleModule.id });
             }
         }
     }
