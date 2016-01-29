@@ -201,7 +201,7 @@ namespace ModuleAgenda.ViewModel
             }
         }
 
-        public int Status
+        public string Status
         {
             get
             {
@@ -211,10 +211,10 @@ namespace ModuleAgenda.ViewModel
             set
             {
                 this._model.status = value;
-                if (int.TryParse("123", out value) == false)
+                /*if (int.TryParse("123", out value) == false)
                 {
                     this._model.status = 0;
-                }
+                }*/
                 this.OnPropertyChanged("status");
                 _api.Orm.UpdateObject<AgendaEvent>(@"update agenda_event set status = @status where Id = @Id", _model);
 

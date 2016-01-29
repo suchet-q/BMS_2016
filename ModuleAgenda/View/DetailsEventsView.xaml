@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Class="ModuleAgenda.View.DetailsEventsView" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" >
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -34,7 +33,7 @@
                     <StackPanel>
                         <Button Command="{Binding DeleteEventCommand}" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14">
                             <StackPanel Orientation="Horizontal">
-                                <Image Width="21" Height="14" Source="/ModuleAgenda;component/my_trash.png" />
+                                <Image Width="21" Height="14"  Source="/ModuleAgenda;component/Resources/my_trash.png"/>
                                 <TextBlock Text="Delete selection" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,3,5,0"/>
                             </StackPanel>
                         </Button>
@@ -49,7 +48,7 @@
                                         <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
                                         <DataGridTextColumn Header="Location" Binding="{Binding Location}" />
                                         <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
-                                        <DataGridTextColumn Header="Color" Binding="{Binding Color}" />
+                                        <!--<DataGridTextColumn Header="Color" Binding="{Binding Color}" />-->
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </ContentControl>
@@ -58,10 +57,8 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Create Event">
-                <ScrollViewer Margin="0,2,0,0">
-                    <StackPanel Orientation="Vertical">
-
-
+                <ScrollViewer Margin="0,2,0,0" Height="505">
+                    <StackPanel Orientation="Vertical" Width="735">
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Title : " Grid.Column="0" Grid.Row="0" Margin="5,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Width="80" Height="20"/>
@@ -74,33 +71,66 @@
                             <DatePicker x:Name="Test" SelectedDate="{Binding DateAdd}" Width="240" Margin="40,10,0,0" HorizontalAlignment="Left" FontSize="14" Height="30"/>
 
                             <TextBlock Text="Start : " Margin="20,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" />
-                            <ComboBox SelectedValue="{Binding HourStartSelected}" ItemsSource="{Binding HoursStart}" Width="70" Margin="0,10,0,0" HorizontalAlignment="Left" FontSize="14"/>
-                            <ComboBox SelectedValue="{Binding AmPmSelectedStart}" ItemsSource="{Binding AmPm}" Width="50" Margin="0,10,0,0" HorizontalAlignment="Left" FontSize="14"/>
+                            <ComboBox SelectedValue="{Binding HourStartSelected}" ItemsSource="{Binding HoursStart}" Width="70" Margin="0,10,5,0" HorizontalAlignment="Left" FontSize="14"/>
+                            <ComboBox SelectedValue="{Binding AmPmSelectedStart}" ItemsSource="{Binding AmPm}" Width="55" Margin="0,10,5,0" HorizontalAlignment="Left" FontSize="14"/>
 
                             <!-- <TextBox Text="{Binding Path=StartAdd}" Grid.Column="3" Grid.Row="1" Width="150"/>-->
 
-                            <TextBlock Text="To" Margin="5,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14"/>
-                            <ComboBox SelectedValue="{Binding HourStartSelected}" ItemsSource="{Binding HoursStart}" Width="70" Margin="0,10,0,0" HorizontalAlignment="Left" FontSize="14"/>
+                            <TextBlock Text="To" Margin="5,10,5,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14"/>
+                            <ComboBox SelectedValue="{Binding HourEndSelected}" ItemsSource="{Binding HoursStart}" Width="70" Margin="5,10,5,0" HorizontalAlignment="Left" FontSize="14"/>
                             <ComboBox SelectedValue="{Binding AmPmSelectedEnd}" ItemsSource="{Binding AmPm}" Width="50" Margin="0,10,0,0" HorizontalAlignment="Left" FontSize="14"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
+                        <!--<StackPanel Orientation="Horizontal">
                             <TextBlock Text="Color : " Margin="5,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" Width="80" Height="20"/>
                             <TextBox Text="{Binding ColorAdd}" Width="150" HorizontalAlignment="Left" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Location : " Margin="5,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" Width="80" Height="20"/>
-                            <TextBox Text="{Binding LocationAdd}" Width="150" HorizontalAlignment="Left" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom"/>
-                        </StackPanel>
+                        </StackPanel>-->
+                        
+                       
+                        
+                        
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Status : " Margin="5,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" Width="80" Height="20"/>
-                            <TextBox Text="{Binding StatusAdd}" Width="150" HorizontalAlignment="Left" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom"/>
+                            <TextBox Text="{Binding StatusAdd}" Width="150" HorizontalAlignment="Left" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Description : " Margin="5,10,0,-0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" Width="80" Height="20"/>
                             <TextBox Text="{Binding DescriptionAdd}" Width="200" HorizontalAlignment="Left" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Location : " Margin="5,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14" Width="80" Height="20"/>
+                            <ComboBox ItemsSource="{Binding AllLocation, Mode=TwoWay}" HorizontalAlignment="Left" SelectedItem="{Binding Path=SelectLocation, Mode=TwoWay}" Width="150" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding location}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <!--<TextBox Text="{Binding LocationAdd}" Width="150" HorizontalAlignment="Left" Margin="40,10,0,0" FontSize="14" Height="30" VerticalAlignment="Bottom"/>-->
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Bottom">
+                                <TextBlock Margin="10,0,0,0">
+                                    <Hyperlink Command="{Binding AddNewLocation}">New</Hyperlink> <Hyperlink Command="{Binding DeleteLocation}">Delete</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <Border BorderBrush="#41B1E1" BorderThickness="2" Margin="3" Width="400" Visibility="{Binding Path=LocationVisibility}">
+                            <StackPanel Orientation="Vertical">
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+
+                                    <TextBlock VerticalAlignment="Bottom" Text="Name location :" Margin="5"/>
+                                    <TextBox  Text="{Binding Path=newlocation}" Width="200" Grid.RowSpan="2" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="Add location" Command="{Binding ConfirmNewLocation}" HorizontalAlignment="Center" Width="100"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Border>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="Confirm" Command="{Binding AddEventCommand}" Width="80" Margin="0,3"  />
                         </StackPanel>
                         <!-- <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center">
                                         <Button Content="Confirm" Command="{Binding AddEventCommand}" Width="80" Margin="0,3"  />

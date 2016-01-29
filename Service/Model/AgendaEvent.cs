@@ -19,7 +19,7 @@ namespace Service.Model
         public string location { get; set; }
         public int userid { get; set; }
         public string color { get; set; }
-        public int status { get; set; }
+        public string status { get; set; }
         public string name { get; set; }
     }
 }

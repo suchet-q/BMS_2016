@@ -22,7 +22,7 @@ namespace ModuleAgenda.View
     {
         public DetailsEventsView()
         {
-            InitializeComponent();
+                InitializeComponent();
         }
     }
 }

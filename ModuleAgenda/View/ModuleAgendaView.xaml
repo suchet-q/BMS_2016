@@ -39,11 +39,54 @@
                             <Label Content="MY CALENDAR" FontSize="16" FontWeight="Bold"/>
                         </StackPanel>
                     </Border>
-                    <Grid Margin="0,20,0,0">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  FontSize="13"><Run Text="Display :"/></TextBlock>
+
+                            <!--HorizontalAlignment="Left" SelectedItem="{Binding Path=Receiver, Mode=TwoWay}" Width="175" Margin="0"/-->
+                            <ComboBox Width="137" SelectedItem="{Binding Path=CurrentCalendar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListAgendaName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                <TextBlock Margin="5">
+                                    <Hyperlink Command="{Binding Path=AddNewCalendar}">New</Hyperlink> <Hyperlink Command="{Binding Path=DeleteCalendar}">Delete</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <Border BorderBrush="#41B1E1" BorderThickness="2" Margin="3"  Visibility="{Binding Path=NewVisibility}">
+                            <StackPanel Orientation="Vertical">
+                           
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <TextBlock Text="Name :" Margin="5"/>
+                                    <TextBox  Text="{Binding Path=newCalendarName}" Width="200" Margin="5.2,5,5.2,31.8" Grid.RowSpan="2" />
+                                </StackPanel>
+
+                                <!--<StackPanel Orientation="Horizontal">
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Address :"/>
+                                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=newClientAddress}" Width="200" Height="30" TextWrapping="Wrap" AcceptsReturn="True" Margin="2" />
+                                </StackPanel>-->
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Confirm" Command="{Binding ConfirmNewCalendar}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" Width="100"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <!--<Grid Margin="0,20,0,0">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
@@ -51,7 +94,9 @@
 
                         <TextBlock Grid.Column="0" Grid.Row="0" FontSize="13" Grid.ColumnSpan="2" Margin="9,5,167,-5"><Run Text="Display :"/></TextBlock>
 
-                        <!--HorizontalAlignment="Left" SelectedItem="{Binding Path=Receiver, Mode=TwoWay}" Width="175" Margin="0"/-->
+                        -->
+            <!--HorizontalAlignment="Left" SelectedItem="{Binding Path=Receiver, Mode=TwoWay}" Width="175" Margin="0"/-->
+            <!--
                         <ComboBox Grid.Column="1" Grid.Row="0" Width="137" SelectedItem="{Binding Path=CurrentCalendar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListAgendaName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="39,0,-1,0">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
@@ -59,10 +104,37 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        <StackPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal">
+                            <TextBlock Margin="5">
+                                <Hyperlink Command="{Binding Path=AddClientCommand}">New</Hyperlink> <Hyperlink Command="{Binding Path=DeleteClientCommand}">Delete</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                        <Border BorderBrush="#41B1E1" BorderThickness="2" Margin="3" Grid.Row="1" Grid.Column="0" Visibility="{Binding Path=NewReceiverVisibility}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Name :" Margin="5"/>
+                                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=newClientName}" Width="200" Margin="5.2,5,5.2,31.8" Grid.RowSpan="2" />
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Address :"/>
+                                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=newClientAddress}" Width="200" Height="30" TextWrapping="Wrap" AcceptsReturn="True" Margin="2" />
+                                <Button Content="Confirm" Command="{Binding ConfirmClientCommand}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" Width="100"/>
+                            </Grid>
+                        </Border>
                     </Grid>
                 </StackPanel>
-
-            </Grid>
+                
+                
+            </Grid>-->
         </StackPanel>
         <ContentControl HorizontalAlignment="Stretch" Content="{Binding Path=_viewEvent}" Grid.Column="0" Grid.Row="0" Margin="0,5,3,0">
             <ContentControl.Resources>
