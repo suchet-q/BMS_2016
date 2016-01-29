@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="RoleManagerModule.View.RoleManagerModuleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:v="clr-namespace:RoleManagerModule.View"
+             xmlns:vm="clr-namespace:RoleManagerModule.ViewModel"
+             xmlns:local="clr-namespace:RoleManagerModule.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="0,0,-0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <ScrollViewer>
+            <HeaderedContentControl>
+                <HeaderedContentControl.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="37" Width="58" Source="/UserManagerModule;component/Resources/group2 (4).png"/>
+                        <Label Content="ROLE LIST" Grid.Column="0" FontSize="16" FontWeight="Bold"/>
+                    </StackPanel>
+                </HeaderedContentControl.Header>
+                <ScrollViewer>
+                    <HeaderedContentControl>
+                        <HeaderedContentControl.Header>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button  Command="{Binding AddRoleCommand}" FontSize="12" Margin="0,0,10,0" Width="140" Height="24">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="21" Height="14" HorizontalAlignment="Right" Source="../Resources/add182.png"/>
+                                <TextBlock Text=" Add role" VerticalAlignment="Center" Margin="0,0,15,0" Width="95" />
+                            </StackPanel>
+                        </Button>
+                        <Button  Command="{Binding DeleteRoleCommand}" FontSize="12" Margin="0,0,10,0" Width="140">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="21" Height="14" HorizontalAlignment="Right" Source="../Resources/garbage21.png"/>
+                                <TextBlock Text=" Delete role" VerticalAlignment="Center" Margin="0,0,15,0" Width="95" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </HeaderedContentControl.Header>
+
+                 <DataGrid SelectedItem="{Binding Path=CurrentRole, Mode=TwoWay}" ItemsSource="{Binding Path=AllRoles}" AutoGenerateColumns="False" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Role" Width="350" Binding="{Binding Path=nom}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </HeaderedContentControl>
+        </ScrollViewer>
+        </HeaderedContentControl>
+        </ScrollViewer>
+        <HeaderedContentControl  Margin="10,0,0,0" Grid.Column="1" >
+            <HeaderedContentControl.Header>
+                <ScrollViewer>
+                    <ListBox BorderThickness="0" ItemsSource="{Binding Path=CurrentRightRoleModules}">
+                        <ListBox.Resources>
+                            <DataTemplate DataType="{x:Type vm:RightRoleModuleViewModel}">
+                                <v:RightRoleModuleView />
+                            </DataTemplate>
+                        </ListBox.Resources>
+                    </ListBox>
+                </ScrollViewer>
+            </HeaderedContentControl.Header>
+        </HeaderedContentControl>
+    </Grid>
+</UserControl>
